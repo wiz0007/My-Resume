@@ -20,8 +20,8 @@ const Hero = () => {
       </div>
       <div className={styles.imageWrapper}>
         <img
-          src="/profile.png" 
-          alt={profilepic}
+          src={profilepic} 
+          alt="Profile"
           loading="eager"
         />
       </div>
