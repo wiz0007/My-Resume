@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Hero.module.scss";
+import profilepic from '../../assets/profilepic.jpg'
 
 const Hero = () => {
   return (
@@ -20,7 +21,7 @@ const Hero = () => {
       <div className={styles.imageWrapper}>
         <img
           src="/profile.png" 
-          alt="Profile"
+          alt={profilepic}
           loading="eager"
         />
       </div>
