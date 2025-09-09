@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+.hero {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 8%;
+  background: #f5f7fa;
+  min-height: 70vh;
+}
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+}
+.hero .content {
+  flex: 1;
+}
+.hero .content h1 {
+  font-size: 2.5rem;
+  color: #222;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+.hero .content h1 .highlight {
+  color: #43a047;
+}
+.hero .content p {
+  font-size: 1.2rem;
+  color: #555;
+  font-family: "Roboto", sans-serif;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+.hero .content .buttons {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+@media (max-width: 768px) {
+  .hero .content .buttons {
+    justify-content: center;
+  }
+}
+.hero .content .buttons .btnPrimary {
+  padding: 0.8rem 1.5rem;
+  background: #43a047;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.hero .content .buttons .btnPrimary:hover {
+  background: #2e7d32;
+}
+.hero .content .buttons .btnSecondary {
+  padding: 0.8rem 1.5rem;
+  background: transparent;
+  border: 2px solid #43a047;
+  color: #43a047;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.hero .content .buttons .btnSecondary:hover {
+  background: #43a047;
+  color: white;
+}
+.hero .imageWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.hero .imageWrapper img {
+  height: 300px;
+  width: 300px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}/*# sourceMappingURL=Hero.module.css.map */

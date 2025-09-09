@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+.skills {
+  padding: 4rem 8%;
+  background: #f9f9f9;
+}
+.skills h2 {
+  font-size: 2rem;
+  color: #222;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.skills .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.skills .grid .card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  font-weight: 500;
+  color: #333;
+  transition: 0.3s;
+}
+.skills .grid .card:hover {
+  background: #43a047;
+  color: white;
+}/*# sourceMappingURL=Skills.module.css.map */

@@ -1,0 +1,73 @@
+@use "../../styles/mixin" as *;
+
+.navbar {
+    
+  @include Flex(row, space-between, center);
+  padding: 1rem 8%;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .logo {
+    @include Text(1.5rem, #43a047);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .navLinks {
+    @include Flex(row, flex-end, center);
+    gap: 2rem;
+
+    a {
+      @include Text(1rem, #333);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #43a047;
+      }
+    }
+
+    // ✅ Mobile dropdown
+    @media (max-width: 768px) {
+      display: none; // hidden by default
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      background: white;
+      position: absolute; // 👈 relative to navbar
+      top: 100%; // below navbar
+      right: 8%;
+      width: 180px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+      &.open {
+        display: flex; // shown only when open
+      }
+    }
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+
+    span {
+      width: 25px;
+      height: 3px;
+      background: #333;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      display: flex;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@use "../../styles/mixin" as *;
+
+.about {
+  padding: 4rem 8%;
+  background: #fff;
+
+  h2 {
+    @include Text(2rem, #222);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  p {
+    @include Text(1.1rem, #444);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}

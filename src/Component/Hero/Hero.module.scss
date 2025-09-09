@@ -1,0 +1,85 @@
+@use "../../styles/mixin" as *;
+
+.hero {
+  @include Flex(row, center, center);
+  padding: 4rem 8%;
+  background: #f5f7fa;
+  min-height: 70vh;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .content {
+    flex: 1;
+
+    h1 {
+      @include Text(2.5rem, #222);
+      font-weight: 700;
+
+      .highlight {
+        color: #43a047; // green accent
+      }
+    }
+
+    p {
+      @include Text(1.2rem, #555);
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      margin-top: 2rem;
+      @include Flex(row, flex-start, center);
+      gap: 1rem;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+
+      .btnPrimary {
+        padding: 0.8rem 1.5rem;
+        background: #43a047;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+
+        &:hover {
+          background: #2e7d32;
+        }
+      }
+
+      .btnSecondary {
+        padding: 0.8rem 1.5rem;
+        background: transparent;
+        border: 2px solid #43a047;
+        color: #43a047;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+
+        &:hover {
+          background: #43a047;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .imageWrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    img {
+      @include Image(300px, 300px);
+      border-radius: 50%;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+  }
+}

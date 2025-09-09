@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 8%;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.navbar .logo {
+  font-size: 1.5rem;
+  color: #43a047;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+.navbar .navLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+}
+.navbar .navLinks a {
+  font-size: 1rem;
+  color: #333;
+  font-family: "Roboto", sans-serif;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.navbar .navLinks a:hover {
+  color: #43a047;
+}
+@media (max-width: 768px) {
+  .navbar .navLinks {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    position: absolute;
+    top: 100%;
+    right: 8%;
+    width: 180px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  .navbar .navLinks.open {
+    display: flex;
+  }
+}
+.navbar .hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+.navbar .hamburger span {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+@media (max-width: 768px) {
+  .navbar .hamburger {
+    display: flex;
+  }
+}/*# sourceMappingURL=Navbar.module.css.map */
