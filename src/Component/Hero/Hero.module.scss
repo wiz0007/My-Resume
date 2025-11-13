@@ -1,85 +1,172 @@
 @use "../../styles/mixin" as *;
 
 .hero {
-  @include Flex(row, center, center);
-  padding: 4rem 8%;
-  background: #f5f7fa;
-  min-height: 70vh;
+  // width: 100%;
+  // min-height: 100vh;
+  background: linear-gradient(135deg, #071b2f 0%, #0a223c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eaf2f8;
+  overflow: hidden;
+  padding: 3rem 1.5rem;
+  position: relative;
+}
 
-  @media (max-width: 768px) {
-    flex-direction: column;
+.container {
+  @include Flex(row, space-between, center);
+  width: 100%;
+  max-width: 1200px;
+  gap: 3rem;
+
+  @media (max-width: 992px) {
+    flex-direction: column-reverse;
     text-align: center;
-    gap: 2rem;
+    gap: 2.5rem;
+  }
+}
+
+.textContent {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+
+    span {
+      background: linear-gradient(90deg, #00b4d8, #48cae4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 2.2rem;
+    }
   }
 
-  .content {
-    flex: 1;
+  .slide {
+    h2 {
+      font-size: 1.8rem;
+      color: #48cae4;
+      margin-bottom: 1rem;
+      font-weight: 600;
 
-    h1 {
-      @include Text(2.5rem, #222);
-      font-weight: 700;
-
-      .highlight {
-        color: #43a047; // green accent
+      @media (max-width: 768px) {
+        font-size: 1.4rem;
       }
     }
 
     p {
-      @include Text(1.2rem, #555);
-      margin-top: 1rem;
+      color: #cbd5e1;
+      font-size: 1.05rem;
       line-height: 1.6;
-    }
-
-    .buttons {
-      margin-top: 2rem;
-      @include Flex(row, flex-start, center);
-      gap: 1rem;
+      max-width: 500px;
+      margin-bottom: 2rem;
 
       @media (max-width: 768px) {
-        justify-content: center;
-      }
-
-      .btnPrimary {
-        padding: 0.8rem 1.5rem;
-        background: #43a047;
-        color: white;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: 600;
-        transition: 0.3s;
-
-        &:hover {
-          background: #2e7d32;
-        }
-      }
-
-      .btnSecondary {
-        padding: 0.8rem 1.5rem;
-        background: transparent;
-        border: 2px solid #43a047;
-        color: #43a047;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: 600;
-        transition: 0.3s;
-
-        &:hover {
-          background: #43a047;
-          color: white;
-        }
+        max-width: 90%;
+        font-size: 0.95rem;
+        margin-inline: auto;
       }
     }
   }
+}
 
-  .imageWrapper {
-    flex: 1;
-    display: flex;
+.buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  @media (max-width: 992px) {
     justify-content: center;
+  }
 
-    img {
-      @include Image(300px, 300px);
-      border-radius: 50%;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  a {
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.8rem 1.6rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btnPrimary {
+    background: linear-gradient(90deg, #00b4d8, #0096c7);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
+
+    &:hover {
+      background: linear-gradient(90deg, #0096c7, #00b4d8);
+      transform: translateY(-2px);
+    }
+  }
+
+  .btnSecondary {
+    border: 2px solid #00b4d8;
+    color: #00b4d8;
+
+    &:hover {
+      background: #00b4d8;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.dots {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.8rem;
+
+  justify-content: flex-start;
+
+  @media (max-width: 992px) {
+    justify-content: center;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #2a3a4f;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+
+    &.active {
+      background: #00b4d8;
+      transform: scale(1.2);
+      box-shadow: 0 0 10px rgba(0, 180, 216, 0.6);
+    }
+  }
+}
+
+.imageWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+
+  img {
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    @media (max-width: 768px) {
+      width: 220px;
+      height: 220px;
     }
   }
 }

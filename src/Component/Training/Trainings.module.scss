@@ -1,81 +1,154 @@
 @use "../../styles/mixin" as *;
 
 .trainings {
-  padding: 3rem 8%;
-  background: #f9faf9;
+  padding: 6rem 8%;
+  background: linear-gradient(135deg, #081828, #0b1e33);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  // moving background glow
+  &::before {
+    content: "";
+    position: absolute;
+    width: 180%;
+    height: 180%;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(0, 180, 216, 0.08),
+      transparent 70%
+    );
+    top: -40%;
+    left: -40%;
+    animation: moveBg 14s ease-in-out infinite alternate;
+  }
+
+  @keyframes moveBg {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(8%, 10%);
+    }
+  }
 
   h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    @include Text(2rem, #333);
+    font-size: 2.4rem;
     font-weight: 700;
+    margin-bottom: 3rem;
     position: relative;
+    z-index: 2;
 
     &::after {
       content: "";
       display: block;
-      width: 60px;
-      height: 3px;
-      background: #43a047;
-      margin: 0.5rem auto 0;
-      border-radius: 2px;
+      width: 80px;
+      height: 4px;
+      margin: 0.8rem auto 0;
+      background: linear-gradient(90deg, #00b4d8, #0096c7);
+      border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
     }
   }
 
   .trainingList {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
     justify-items: center;
+    position: relative;
+    z-index: 2;
   }
 
   .trainingCard {
-    background: white;
-    padding: 1.2rem 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 320px;
+    min-height: 230px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
-    min-height: 180px; // ⬅️ smaller, compact
-    max-width: 320px;
-    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    // glowing border animation
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      padding: 1px;
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+
+    .iconWrapper {
+      background: rgba(0, 180, 216, 0.1);
+      border-radius: 50%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      color: #00b4d8;
+      transition: transform 0.4s ease;
+    }
+
+    &:hover .iconWrapper {
+      transform: rotate(10deg) scale(1.1);
+      color: #90e0ef;
+    }
 
     h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.4rem;
+      font-size: 1.15rem;
       font-weight: 600;
-      color: #222;
+      margin-bottom: 0.4rem;
+      color: #e0f7fa;
     }
 
     p {
-      font-size: 0.95rem;
-      color: #666;
+      font-size: 1rem;
+      color: #a0b9d9;
       margin-bottom: 1rem;
     }
 
     a {
-      margin-top: auto; // keeps button at bottom
       display: block;
       text-align: center;
-      padding: 0.6rem 1rem;
-      background: linear-gradient(135deg, #43a047, #2e7d32);
+      padding: 0.6rem 1.2rem;
+      background: linear-gradient(135deg, #00b4d8, #0096c7);
       color: white;
-      border-radius: 6px;
+      border-radius: 8px;
       text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: transform 0.2s ease, background 0.3s ease;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
 
       &:hover {
-        transform: translateY(-2px);
-        background: linear-gradient(135deg, #2e7d32, #1b5e20);
+        background: linear-gradient(135deg, #0096c7, #0077b6);
+        box-shadow: 0 4px 20px rgba(0, 150, 199, 0.5);
+        transform: translateY(-3px);
       }
-    }
-
-    &:hover {
-      transform: translateY(-5px);
     }
   }
 }
+

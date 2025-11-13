@@ -1,46 +1,130 @@
 @use "../../styles/mixin" as *;
 
-.contactSection {
-  padding: 4rem 2rem;
-  background: #f9f9f9;
+.footer {
+  position: relative;
+  padding: 5rem 2rem 3rem;
+  background: linear-gradient(135deg, #0a192f, #112240, #0b1e33);
+  color: #e0f7fa;
   text-align: center;
+  overflow: hidden;
+}
 
-  h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
+/* Animated gradient background overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, #00b4d8, transparent 25%),
+    radial-gradient(circle at 80% 40%, #0077b6, transparent 25%),
+    radial-gradient(circle at 50% 80%, #48cae4, transparent 25%);
+  animation: moveGradients 10s ease-in-out infinite alternate;
+  filter: blur(80px);
+  opacity: 0.4;
+  z-index: 0;
+}
 
-  p {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 2rem;
+@keyframes moveGradients {
+  0% {
+    background-position: 0% 0%;
   }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #00b4d8, #48cae4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #b0c4de;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .contactGrid {
-  @include Flex(row, center, center);
-  flex-wrap: wrap;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  position: relative;
+  z-index: 1;
 }
 
-.contactItem {
-  @include Flex(row, center, center);
+.contactCard {
+  display: flex;
+  align-items: center;
   gap: 0.8rem;
-  font-size: 1.1rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  text-decoration: none;
+  color: #e0f7fa;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(6px);
 
-  a {
-    color: #0077b5; // linkedin blue as default accent
-    text-decoration: none;
-    transition: color 0.3s ease;
+  .icon {
+    font-size: 1.5rem;
+    color: #48cae4;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
 
-    &:hover {
-      color: #005582;
+  .text {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  &:hover {
+    background: rgba(0, 180, 216, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 180, 216, 0.25);
+
+    .icon {
+      color: #90e0ef;
+      transform: scale(1.2);
+    }
+  }
+}
+
+.footerNote {
+  margin-top: 3rem;
+  font-size: 0.95rem;
+  color: #99b9d4;
+  z-index: 1;
+  position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .footer {
+    padding: 4rem 1.5rem 2rem;
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 1rem;
     }
   }
 
-  .icon {
-    font-size: 1.4rem;
-    color: #333;
+  .contactCard {
+    max-width: 90%;
   }
 }
+
+

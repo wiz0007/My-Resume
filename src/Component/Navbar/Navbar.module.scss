@@ -1,73 +1,150 @@
 @use "../../styles/mixin" as *;
 
+:root {
+  --primary: #4f46e5; // Indigo
+  --accent: #06b6d4; // Cyan
+  --dark: #0f172a;
+  --light: #f8fafc;
+}
+
 .navbar {
-    
   @include Flex(row, space-between, center);
   padding: 1rem 8%;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 1000;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(14px);
+  transition: all 0.4s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  &.scrolled {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.1);
+  }
 
   .logo {
-    @include Text(1.5rem, #43a047);
+    font-size: 1.7rem;
     font-weight: 700;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    color: transparent;
     cursor: pointer;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   .navLinks {
     @include Flex(row, flex-end, center);
-    gap: 2rem;
+    gap: 2.2rem;
 
     a {
-      @include Text(1rem, #333);
+      @include Text(1rem, var(--dark));
       text-decoration: none;
       font-weight: 500;
+      position: relative;
       transition: color 0.3s ease;
 
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+
       &:hover {
-        color: #43a047;
+        color: var(--primary);
+        &::after {
+          width: 100%;
+        }
       }
     }
 
-    // ✅ Mobile dropdown
-    @media (max-width: 768px) {
-      display: none; // hidden by default
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1rem;
-      background: white;
-      position: absolute; // 👈 relative to navbar
-      top: 100%; // below navbar
-      right: 8%;
-      width: 180px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-      &.open {
-        display: flex; // shown only when open
-      }
+    @media (max-width: 900px) {
+      display: none;
     }
   }
 
   .hamburger {
     display: none;
     flex-direction: column;
-    cursor: pointer;
     gap: 5px;
+    cursor: pointer;
+    z-index: 1200;
 
     span {
-      width: 25px;
+      width: 26px;
       height: 3px;
-      background: #333;
-      border-radius: 2px;
-      transition: 0.3s;
+      background: var(--dark);
+      border-radius: 3px;
+      transition: all 0.3s ease;
     }
 
-    @media (max-width: 768px) {
+    &.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 6px);
+      background: var(--primary);
+    }
+    &.active span:nth-child(2) {
+      opacity: 0;
+    }
+    &.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -6px);
+      background: var(--accent);
+    }
+
+    @media (max-width: 900px) {
       display: flex;
     }
+  }
+}
+
+/* 📱 Mobile Dropdown */
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  right: 8%;
+  width: 200px;
+  padding: 1.2rem 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+
+  a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+      color: var(--primary);
+      transform: translateX(4px);
+    }
+  }
+}
+
+/* ✨ Smooth Animation Keyframes */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
