@@ -1,7 +1,7 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Award } from "lucide-react";
+import React, { useState } from "react";
 import styles from "./Trainings.module.scss";
+import { motion } from "framer-motion";
+import { FaCertificate } from "react-icons/fa";
 
 const trainings = [
   {
@@ -31,58 +31,59 @@ const trainings = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.9 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6 } },
-};
-
 const Trainings = () => {
+  const [openPDF, setOpenPDF] = useState(null);
+
   return (
     <section className={styles.trainings} id="trainings">
       <motion.h2
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
         viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
       >
         Trainings & Certifications
       </motion.h2>
 
-      <motion.div
-        className={styles.trainingList}
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
+      <div className={styles.grid}>
         {trainings.map((t, index) => (
           <motion.div
             key={index}
-            className={styles.trainingCard}
-            variants={cardVariants}
-            whileHover={{ scale: 1.05, y: -5 }}
+            className={styles.card}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <div className={styles.iconWrapper}>
-              <Award size={36} strokeWidth={1.6} />
-            </div>
+            <FaCertificate className={styles.icon} />
+
             <h3>{t.title}</h3>
             <p>Issued by {t.issuer}</p>
-            <a href={t.file} target="_blank" rel="noopener noreferrer">
+
+            <button
+              onClick={() => setOpenPDF(t.file)}
+              className={styles.viewBtn}
+            >
               View Certificate
-            </a>
+            </button>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
+
+      {/* PDF MODAL VIEWER */}
+      {openPDF && (
+        <div className={styles.modalOverlay} onClick={() => setOpenPDF(null)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <iframe src={openPDF} title="Certificate" />
+            <button className={styles.closeBtn} onClick={() => setOpenPDF(null)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
 
 export default Trainings;
+
