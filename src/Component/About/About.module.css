@@ -1,24 +1,101 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 .about {
-  padding: 4rem 8%;
-  background: #fff;
+  position: relative;
+  padding: 6rem 8%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #eaf2f8;
+  background: #0b1e33;
 }
-.about h2 {
-  font-size: 2rem;
-  color: #222;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-align: center;
+
+/* 🌈 Animated Gradient Background Layer */
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130%;
+  background: linear-gradient(135deg, #001f3f, #003c75, #005f99, #00a8e8);
+  background-size: 300% 300%;
+  opacity: 0.3;
+  animation: gradientMove 12s ease-in-out infinite alternate;
+  z-index: 0;
+  filter: blur(40px);
 }
-.about p {
-  font-size: 1.1rem;
-  color: #444;
-  font-family: "Roboto", sans-serif;
-  line-height: 1.8;
-  margin-bottom: 1rem;
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
   text-align: center;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  background: rgba(11, 30, 51, 0.45);
+  border-radius: 18px;
+  padding: 3rem 2rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+.content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 40px rgba(0, 180, 216, 0.3);
+}
+.content h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.6rem;
+}
+@media (max-width: 768px) {
+  .content h2 {
+    font-size: 2rem;
+  }
+}
+.content .underline {
+  width: 70px;
+  height: 4px;
+  background: linear-gradient(90deg, #00b4d8, #0096c7);
+  margin: 0 auto 2rem auto;
+  border-radius: 2px;
+}
+.content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+}
+.content p strong {
+  color: #00b4d8;
+}
+@media (max-width: 768px) {
+  .content p {
+    font-size: 1rem;
+  }
+}
+.content .cta {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.9rem 2rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #00b4d8, #0096c7);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 5px 25px rgba(0, 150, 199, 0.3);
+  transition: all 0.3s ease;
+}
+.content .cta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 150, 199, 0.4);
 }/*# sourceMappingURL=About.module.css.map */

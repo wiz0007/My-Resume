@@ -17,7 +17,27 @@ const projects = [
   {
     title: "Community Chat Application",
     desc: "An community chat application with MERN where people can connect and socialize",
-    link: "we-chatt-ruby.vercel.app",
+    link: "https://we-chatt-ruby.vercel.app",
+  },
+  {
+    title: "Freelance Application",
+    desc: "A website to connect with the freelance opportunities by showcasing work and inviting customers",
+    link: "https://innovatech-puce.vercel.app",
+  },
+  {
+    title: "SkillSphere",
+    desc: "A P2P skill sharing platform where mentors and learners are connected with vast opportunities",
+    link: "https://skillsphere-weldn.vercel.app",
+  },
+  {
+    title: "Fantasy Game App",
+    desc: "A Fantasy Gaming app where player make teams and gets points as the player performs in the live match",
+    link: "https://github.com/wiz0007/Fantasy-Game-App",
+  },
+  {
+    title: "Hotel Management App",
+    desc: "An app to manage hotels, rooms and facilitate bookings and providing services to the customers",
+    link: "https://github.com/wiz0007/Hotel_management",
   },
 ];
 
