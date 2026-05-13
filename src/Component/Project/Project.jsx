@@ -10,6 +10,11 @@ const projects = [
     link: "https://my-kart-taupe.vercel.app/",
   },
   {
+    title: "SkillSphere",
+    desc: "A P2P skill sharing platform where mentors and learners are connected with vast opportunities",
+    link: "https://skillsphere.online",
+  },
+  {
     title: "Portfolio Website",
     desc: "A responsive personal portfolio built with React and SCSS to showcase my skills and projects.",
     link: "https://ayushmaan-mishra-resume.vercel.app/",
@@ -24,11 +29,7 @@ const projects = [
     desc: "A website to connect with the freelance opportunities by showcasing work and inviting customers",
     link: "https://innovatech-puce.vercel.app",
   },
-  {
-    title: "SkillSphere",
-    desc: "A P2P skill sharing platform where mentors and learners are connected with vast opportunities",
-    link: "https://skillsphere-weldn.vercel.app",
-  },
+  
   {
     title: "Fantasy Game App",
     desc: "A Fantasy Gaming app where player make teams and gets points as the player performs in the live match",
