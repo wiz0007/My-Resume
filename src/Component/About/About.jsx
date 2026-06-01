@@ -1,48 +1,82 @@
 import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+import { Code2, Database, ShieldCheck } from "lucide-react";
 import styles from "./About.module.scss";
 
-const About = () => {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+const strengths = [
+  {
+    icon: <Code2 size={24} />,
+    title: "Application Flow",
+    text: "Comfortable explaining the path from React UI to REST API, authentication checks, database operation, and response handling.",
+  },
+  {
+    icon: <Database size={24} />,
+    title: "Backend Thinking",
+    text: "Focused on API design, database-backed workflows, schema decisions, debugging, and Postman-based testing.",
+  },
+  {
+    icon: <ShieldCheck size={24} />,
+    title: "Secure Systems",
+    text: "Hands-on with JWT authentication, role-based access control, and verification-oriented blockchain concepts.",
+  },
+];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  show: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, delay: index * 0.1, ease: "easeOut" },
+  }),
+};
+
+const About = () => {
   return (
     <section className={styles.about} id="about">
-      {/* Animated Background */}
-      <motion.div className={styles.bg} style={{ y }} />
-
+      <div className={styles.accentLine} aria-hidden="true" />
       <motion.div
         className={styles.content}
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <h2>About Me</h2>
-        <div className={styles.underline}></div>
+        <div className={styles.copy}>
+          <span className={styles.kicker}>Professional Summary</span>
+          <h2>Full-stack developer with backend depth and project ownership.</h2>
+          <p>
+            I am a final-year Computer Engineering student at College of
+            Technology, Pantnagar, building production-style projects across
+            frontend, backend, databases, authentication, and deployment basics.
+          </p>
+          <p>
+            My strongest work is in MERN stack applications, TypeScript-driven
+            project structure, REST API flows, JWT authentication, MongoDB and
+            PostgreSQL workflows, and blockchain-backed verification features.
+          </p>
+          <a className={styles.cta} href="#projects">
+            Review Featured Work
+          </a>
+        </div>
 
-        <p>
-          Hi, I'm <strong>Ayushmaan Mishra</strong>, currently pursuing a{" "}
-          <strong>B.Tech in Computer Science</strong> (2022–2026) from the
-          College of Technology, Pantnagar. I completed my high school in 2019
-          and intermediate in 2021.
-        </p>
-
-        <p>
-          My journey in programming started with C, and over time I expanded
-          into <strong>Web Development, Python, C++, Java, and Ethical Hacking</strong>.
-          With hands-on projects and training, I’ve developed a strong foundation
-          in building scalable applications and securing them.
-        </p>
-
-        <motion.a
-          href="#projects"
-          className={styles.cta}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Explore My Work
-        </motion.a>
+        <div className={styles.strengthGrid}>
+          {strengths.map((item, index) => (
+            <motion.article
+              className={styles.strength}
+              key={item.title}
+              custom={index}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.4 }}
+              whileHover={{ y: -8 }}
+            >
+              <span>{item.icon}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </motion.article>
+          ))}
+        </div>
       </motion.div>
     </section>
   );

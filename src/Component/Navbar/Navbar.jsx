@@ -4,75 +4,129 @@ import styles from "./Navbar.module.scss";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+
+      const sections = document.querySelectorAll("section[id]");
+
+      sections.forEach((section) => {
+        const top = section.offsetTop - 120;
+        const height = section.offsetHeight;
+
+        if (
+          window.scrollY >= top &&
+          window.scrollY < top + height
+        ) {
+          setActive(section.id);
+        }
+      });
+    };
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const links = ["Home", "About", "Skills", "Projects", "Contact"];
+  const links = [
+    "Home",
+    "About",
+    "Projects",
+    "Skills",
+    "Education",
+    "Contact",
+  ];
 
   return (
     <motion.header
-      className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}
-      initial={{ y: -70, opacity: 0 }}
+      className={`${styles.navbar} ${
+        isScrolled ? styles.scrolled : ""
+      }`}
+      initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.7 }}
     >
-      <div className={styles.logo}>MyPortfolio</div>
+      <a href="#home" className={styles.logo}>
+        <div className={styles.logoIcon}>AM</div>
 
-      {/* Desktop Links */}
+        <div className={styles.logoText}>
+          <span>Ayushmaan Mishra</span>
+          <small>Full-Stack Developer</small>
+        </div>
+      </a>
+
+      {/* Desktop Navigation */}
       <nav className={styles.navLinks}>
-        {links.map((link, i) => (
-          <motion.a
-            key={link}
-            href={`#${link.toLowerCase()}`}
-            whileHover={{ y: -2, color: "var(--primary)" }}
-            transition={{ duration: 0.2 }}
-          >
-            {link}
-          </motion.a>
-        ))}
+        {links.map((link) => {
+          const id = link.toLowerCase();
+
+          return (
+            <a
+              key={link}
+              href={`#${id}`}
+              className={active === id ? styles.active : ""}
+            >
+              {link}
+            </a>
+          );
+        })}
+
+        <a
+          href="/Ayushmaan_Mishra-Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.resumeBtn}
+        >
+          Resume
+        </a>
       </nav>
 
-      {/* Hamburger Icon */}
-      <div
-        className={`${styles.hamburger} ${isOpen ? styles.active : ""}`}
+      {/* Hamburger */}
+      <button
+        className={`${styles.hamburger} ${
+          isOpen ? styles.open : ""
+        }`}
         onClick={toggleMenu}
-        aria-label="Toggle Menu"
       >
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+        <span />
+        <span />
+        <span />
+      </button>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
-          <motion.nav
+          <motion.div
             className={styles.mobileMenu}
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
           >
-            {links.map((link, i) => (
-              <motion.a
+            {links.map((link) => (
+              <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
                 onClick={() => setIsOpen(false)}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.08 }}
               >
                 {link}
-              </motion.a>
+              </a>
             ))}
-          </motion.nav>
+
+            <a
+              href="/Ayushmaan_Mishra-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.mobileResume}
+            >
+              Resume
+            </a>
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.header>

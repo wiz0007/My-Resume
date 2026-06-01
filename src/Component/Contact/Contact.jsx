@@ -26,6 +26,15 @@ const contacts = [
   },
 ];
 
+const contactVariants = {
+  hidden: { opacity: 0, y: 24 },
+  show: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, delay: index * 0.08 },
+  }),
+};
+
 const Contact = () => {
   return (
     <footer className={styles.footer} id="contact">
@@ -37,7 +46,7 @@ const Contact = () => {
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
       >
-        Let’s Connect
+        Let&apos;s build something useful
       </motion.h2>
 
       <motion.p
@@ -46,17 +55,23 @@ const Contact = () => {
         transition={{ delay: 0.2, duration: 0.7 }}
         viewport={{ once: true }}
       >
-        Feel free to reach out via phone, email, or connect with me on socials.
+        Open to Full-Stack Developer, MERN Stack Developer, Backend Developer,
+        and Software Developer fresher roles.
       </motion.p>
 
       <div className={styles.contactGrid}>
-        {contacts.map((item, i) => (
+        {contacts.map((item, index) => (
           <motion.a
-            key={i}
+            key={item.text}
             href={item.link}
             target={item.link.startsWith("http") ? "_blank" : "_self"}
             rel="noreferrer"
             className={styles.contactCard}
+            custom={index}
+            variants={contactVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.4 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 250 }}
@@ -74,7 +89,7 @@ const Contact = () => {
         transition={{ delay: 0.5, duration: 0.8 }}
         viewport={{ once: true }}
       >
-        © {new Date().getFullYear()} Ayushmaan Mishra — All Rights Reserved.
+        Copyright {new Date().getFullYear()} Ayushmaan Mishra - Full-Stack Developer
       </motion.div>
     </footer>
   );

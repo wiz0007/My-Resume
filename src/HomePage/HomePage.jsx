@@ -14,10 +14,10 @@ const HomePage = () => {
       <Navbar/>
       <Hero/>
       <About/>
-      <Education/>
-      <Skills/>
-      <Trainings/>
       <Projects/>
+      <Skills/>
+      <Education/>
+      <Trainings/>
       <Contact/>
       
     </div>

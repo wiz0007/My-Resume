@@ -14,8 +14,8 @@ const education = [
   {
     title: "B.Tech in Computer Engineering",
     school: "College of Technology, Pantnagar",
-    year: "2022–2026",
-    desc: "Pursuing Bachelor of Technology in Computer Engineering.",
+    year: "2022-2026",
+    desc: "Pursuing Bachelor of Technology in Computer Engineering with a full-stack and backend development focus.",
     link: "https://www.gbpuat.ac.in/",
   },
 ];
@@ -23,25 +23,31 @@ const education = [
 const Education = () => {
   return (
     <section className={styles.education} id="education">
-      <motion.h2
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        Education
-      </motion.h2>
+      <div className={styles.header}>
+        <span>Academic Base</span>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Education that supports the engineering path.
+        </motion.h2>
+      </div>
 
       <div className={styles.grid}>
         {education.map((e, idx) => (
           <motion.a
-            key={idx}
+            key={e.title}
             href={e.link}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.card}
-            whileHover={{ scale: 1.05, y: -6 }}
-            transition={{ type: "spring", stiffness: 200 }}
+            initial={{ opacity: 0, x: idx % 2 === 0 ? -30 : 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            whileHover={{ y: -8 }}
+            transition={{ type: "spring", stiffness: 190, damping: 18 }}
           >
             <div className={styles.content}>
               <h3>{e.title}</h3>
