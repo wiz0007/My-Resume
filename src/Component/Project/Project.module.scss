@@ -4,6 +4,7 @@
   padding: 6rem 8%;
   background:
     radial-gradient(circle at 12% 18%, rgba(14, 116, 144, 0.22), transparent 32%),
+    radial-gradient(circle at 88% 78%, rgba(139, 92, 246, 0.14), transparent 30%),
     #08111f;
   color: #fff;
   position: relative;
@@ -98,7 +99,7 @@
     gap: 0.5rem;
     border-radius: 8px;
     padding: 0.85rem 1.1rem;
-    background: #06b6d4;
+    background: linear-gradient(90deg, #06b6d4, #10b981);
     color: #042f3a;
     text-decoration: none;
     font-weight: 800;
@@ -159,7 +160,7 @@
     inset: auto 1.2rem 0;
     height: 3px;
     border-radius: 999px 999px 0 0;
-    background: linear-gradient(90deg, #4f46e5, #06b6d4, #67e8f9);
+    background: linear-gradient(90deg, #8b5cf6, #06b6d4, #10b981, #f59e0b);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.32s ease;

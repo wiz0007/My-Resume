@@ -6,6 +6,7 @@
   color: #eaf2f8;
   background:
     radial-gradient(circle at 85% 18%, rgba(79, 70, 229, 0.15), transparent 28%),
+    radial-gradient(circle at 12% 80%, rgba(16, 185, 129, 0.11), transparent 28%),
     linear-gradient(180deg, #08111f 0%, #0b1e33 100%);
   overflow: hidden;
 }
@@ -26,7 +27,7 @@
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: #06b6d4;
+    background: #22d3ee;
     box-shadow: 0 0 24px rgba(6, 182, 212, 0.8);
     animation: pulseDot 2.4s ease-in-out infinite;
   }
@@ -84,7 +85,7 @@
 
   &:hover {
     transform: translateY(-2px);
-    background: #06b6d4;
+    background: linear-gradient(90deg, #8b5cf6, #06b6d4, #10b981);
     color: #042f3a;
   }
 }

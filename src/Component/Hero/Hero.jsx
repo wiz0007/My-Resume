@@ -7,22 +7,22 @@ import profilepic from "../../assets/MyPic.jpeg";
 const slides = [
   {
     title: "MERN + TypeScript",
-    text: "Building full-stack applications with React, Node.js, Express, REST APIs, JWT auth, and reusable UI systems.",
+    text: "React, Node.js, Express, REST APIs, JWT auth, and reusable UI systems.",
   },
   {
     title: "Backend + Databases",
-    text: "Designing database-backed workflows with MongoDB, PostgreSQL, FastAPI concepts, API testing, and role-based access.",
+    text: "MongoDB, PostgreSQL, API testing, role-based access, and backend flow design.",
   },
   {
     title: "Blockchain Verification",
-    text: "Integrating Polygon Amoy anchored transactions for tamper-aware records and transaction verification flows.",
+    text: "Polygon Amoy anchored transactions for tamper-aware records.",
   },
 ];
 
 const stats = [
-  { value: "6+", label: "Full-stack projects" },
+  { value: "6+", label: "Projects built" },
   { value: "2026", label: "B.Tech graduation" },
-  { value: "MERN", label: "Primary stack" },
+  { value: "MERN", label: "Web stack" },
 ];
 
 const containerVariants = {
@@ -68,15 +68,14 @@ const Hero = () => {
             Full-Stack Developer | MERN | TypeScript | FastAPI | PostgreSQL
           </motion.p>
 
-          <motion.h1 variants={itemVariants}>
-            Building secure full-stack web apps.
+          <motion.h1 className={styles.srOnly} variants={itemVariants}>
+            Ayushmaan Mishra - Full Stack Developer Portfolio
           </motion.h1>
 
           <motion.p className={styles.summary} variants={itemVariants}>
-            I am Ayushmaan Mishra, a Full Stack Developer and final-year
-            Computer Engineering student specializing in React, TypeScript,
-            Node.js, Express.js, MongoDB, PostgreSQL and REST API development. I
-            build secure, scalable and modern web applications.
+            I am Ayushmaan Mishra, a final-year Computer Engineering student
+            working across MERN, TypeScript, PostgreSQL, MongoDB, Python GUI,
+            and Core Java projects.
           </motion.p>
 
           <AnimatePresence mode="wait">

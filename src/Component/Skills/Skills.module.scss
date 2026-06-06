@@ -5,6 +5,7 @@
   padding: 6rem 8%;
   background:
     radial-gradient(circle at 88% 12%, rgba(6, 182, 212, 0.13), transparent 28%),
+    radial-gradient(circle at 10% 78%, rgba(139, 92, 246, 0.12), transparent 28%),
     linear-gradient(180deg, #0b1e33 0%, #08111f 100%);
   color: #eaf2f8;
   overflow: hidden;
@@ -108,7 +109,7 @@
 .card:hover .icon {
   transform: rotate(-6deg) scale(1.08);
   color: #fff;
-  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4, #10b981);
 }
 
 .tags {

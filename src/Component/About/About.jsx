@@ -7,17 +7,17 @@ const strengths = [
   {
     icon: <Code2 size={24} />,
     title: "Application Flow",
-    text: "Comfortable explaining the path from React UI to REST API, authentication checks, database operation, and response handling.",
+    text: "I can explain how UI actions move through APIs, auth checks, data operations, and responses.",
   },
   {
     icon: <Database size={24} />,
     title: "Backend Thinking",
-    text: "Focused on API design, database-backed workflows, schema decisions, debugging, and Postman-based testing.",
+    text: "Focused on API design, database workflows, debugging, and Postman testing.",
   },
   {
     icon: <ShieldCheck size={24} />,
     title: "Secure Systems",
-    text: "Hands-on with JWT authentication, role-based access control, and verification-oriented blockchain concepts.",
+    text: "Hands-on with JWT auth, role-based access, and blockchain verification concepts.",
   },
 ];
 
@@ -43,16 +43,11 @@ const About = () => {
       >
         <div className={styles.copy}>
           <span className={styles.kicker}>Professional Summary</span>
-          <h2>Full-stack developer with backend depth and project ownership.</h2>
+          <h2>Developer with web, backend, and desktop project experience.</h2>
           <p>
-            I am a final-year Computer Engineering student at College of
-            Technology, Pantnagar, building production-style projects across
-            frontend, backend, databases, authentication, and deployment basics.
-          </p>
-          <p>
-            My strongest work is in MERN stack applications, TypeScript-driven
-            project structure, REST API flows, JWT authentication, MongoDB and
-            PostgreSQL workflows, and blockchain-backed verification features.
+            I build practical projects with React, Node.js, databases, Python
+            GUI, and Core Java. My strongest web work covers APIs,
+            authentication, database flows, and blockchain-backed verification.
           </p>
           <a className={styles.cta} href="#projects">
             Review Featured Work

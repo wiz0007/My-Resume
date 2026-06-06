@@ -4,6 +4,7 @@
   padding: 6rem 8%;
   background:
     radial-gradient(circle at 12% 18%, rgba(6, 182, 212, 0.11), transparent 28%),
+    radial-gradient(circle at 88% 72%, rgba(245, 158, 11, 0.09), transparent 26%),
     linear-gradient(180deg, #08111f 0%, #0b1e33 100%);
   color: #eaf2f8;
   position: relative;
@@ -86,7 +87,7 @@
     position: absolute;
     inset: 0 auto 0 0;
     width: 4px;
-    background: linear-gradient(#4f46e5, #06b6d4);
+    background: linear-gradient(#8b5cf6, #06b6d4, #10b981);
   }
 }
 

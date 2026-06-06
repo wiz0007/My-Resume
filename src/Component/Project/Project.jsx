@@ -6,7 +6,7 @@ import styles from "./Project.module.scss";
 const featuredProject = {
   title: "SkillSphere",
   label: "Final Year Project",
-  desc: "A skill-sharing platform with secure authentication, role-based access, scalable backend APIs, database-backed user/project workflows, and blockchain-anchored transaction verification on Polygon Amoy.",
+  desc: "Skill-sharing platform with authentication, role-based access, database-backed workflows, and Polygon Amoy transaction verification.",
   stack: ["TypeScript", "MERN", "FastAPI concepts", "PostgreSQL", "MongoDB", "Polygon Amoy"],
   live: "https://skillsphere.online",
 };
@@ -14,37 +14,37 @@ const featuredProject = {
 const projects = [
   {
     title: "E-Commerce Application",
-    desc: "Built product, cart, authentication, order, and payment-integration workflows across a React frontend and Node/Express backend.",
+    desc: "MERN shopping flow with products, cart, auth, orders, and payment integration.",
     stack: ["MERN", "REST APIs", "Authentication", "Payments"],
     live: "https://my-kart-taupe.vercel.app/",
   },
   {
     title: "Community Chat Application",
-    desc: "Created a real-time chat platform with secure user access, message workflows, and reusable frontend/backend modules.",
+    desc: "MERN chat app with user access, message workflows, and reusable modules.",
     stack: ["MERN", "Real-time", "Authentication"],
     live: "https://we-chatt-ruby.vercel.app",
   },
   {
     title: "Fantasy Game Application",
-    desc: "Implemented team selection and live score-based point calculation workflows for a fantasy gaming experience.",
-    stack: ["Full-stack", "Team management", "Live-score logic"],
+    desc: "Python desktop application for team selection and score-based fantasy game logic.",
+    stack: ["Python", "Desktop GUI", "Game logic"],
     code: "https://github.com/wiz0007/Fantasy-Game-App",
   },
   {
     title: "Hotel Management System",
-    desc: "Built room booking, customer records, and management workflows with API-oriented backend structure.",
-    stack: ["Backend workflows", "Booking logic", "Customer records"],
+    desc: "Core Java desktop application for room booking, customer records, and hotel workflows.",
+    stack: ["Core Java", "Desktop GUI", "Booking logic"],
     code: "https://github.com/wiz0007/Hotel_management",
   },
   {
     title: "Portfolio Website",
-    desc: "Designed and developed a responsive React portfolio to present projects, technical skills, certifications, and contact paths.",
+    desc: "Responsive React portfolio with animated sections, project cards, and SEO setup.",
     stack: ["React", "SCSS", "Responsive UI"],
     live: "https://ayushmaan-mishra-resume.vercel.app/",
   },
   {
     title: "Freelance Application",
-    desc: "Developed a service-oriented website for showcasing work and connecting with freelance opportunities.",
+    desc: "Service-focused React website for showcasing work and generating client interest.",
     stack: ["React", "Landing flow", "Project showcase"],
     live: "https://innovatech-puce.vercel.app",
   },
@@ -71,7 +71,7 @@ const Project = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Projects that show full-stack ownership.
+          Projects across web, backend, and desktop development.
         </motion.h2>
       </div>
 
