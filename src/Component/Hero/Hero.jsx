@@ -64,10 +64,7 @@ const Hero = () => {
           initial="hidden"
           animate="show"
         >
-          <motion.p
-            className={styles.eyebrow}
-            variants={itemVariants}
-          >
+          <motion.p className={styles.eyebrow} variants={itemVariants}>
             Full-Stack Developer | MERN | TypeScript | FastAPI | PostgreSQL
           </motion.p>
 
@@ -76,9 +73,10 @@ const Hero = () => {
           </motion.h1>
 
           <motion.p className={styles.summary} variants={itemVariants}>
-            I am Ayushmaan Mishra, a final-year Computer Engineering student
-            focused on React interfaces, REST APIs, JWT authentication,
-            PostgreSQL/MongoDB workflows, and blockchain-backed verification.
+            I am Ayushmaan Mishra, a Full Stack Developer and final-year
+            Computer Engineering student specializing in React, TypeScript,
+            Node.js, Express.js, MongoDB, PostgreSQL and REST API development. I
+            build secure, scalable and modern web applications.
           </motion.p>
 
           <AnimatePresence mode="wait">
@@ -131,11 +129,25 @@ const Hero = () => {
             </motion.a>
           </motion.div>
 
-          <motion.div className={styles.socials} aria-label="Professional links" variants={itemVariants}>
-            <a href="https://github.com/wiz0007" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <motion.div
+            className={styles.socials}
+            aria-label="Professional links"
+            variants={itemVariants}
+          >
+            <a
+              href="https://github.com/wiz0007"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
               <Github size={20} />
             </a>
-            <a href="https://in.linkedin.com/in/ayushmaan-mishra-254020257" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a
+              href="https://in.linkedin.com/in/ayushmaan-mishra-254020257"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
               <Linkedin size={20} />
             </a>
             <a href="mailto:ayush8171wiz@gmail.com" aria-label="Email">
@@ -171,7 +183,7 @@ const Hero = () => {
           </div>
           <motion.img
             src={profilepic}
-            alt="Ayushmaan Mishra"
+            alt="Ayushmaan Mishra Full Stack Developer"
             animate={{ y: [0, -10, 0] }}
             transition={{
               repeat: Infinity,
