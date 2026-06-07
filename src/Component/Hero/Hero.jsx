@@ -170,10 +170,8 @@ const Hero = () => {
 
         <motion.div
           className={styles.imageWrapper}
-          key={`image-${current}`}
           initial={{ opacity: 0, scale: 0.9, x: -50 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
-          exit={{ opacity: 0, scale: 0.9, x: 50 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
         >
           <div className={styles.profileMeta}>
@@ -183,12 +181,6 @@ const Hero = () => {
           <motion.img
             src={profilepic}
             alt="Ayushmaan Mishra Full Stack Developer"
-            animate={{ y: [0, -10, 0] }}
-            transition={{
-              repeat: Infinity,
-              duration: 4,
-              ease: "easeInOut",
-            }}
           />
         </motion.div>
       </div>
