@@ -1,99 +1,109 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { lazy, Suspense, useState } from "react";
 import { Braces, Database, GitBranch, Layers, Server, Shield } from "lucide-react";
+import SectionAtmosphere from "../SectionAtmosphere/SectionAtmosphere";
 import styles from "./Skills.module.scss";
+
+const SkillOrbitScene = lazy(() => import("../../three/SkillOrbitScene"));
 
 const skillGroups = [
   {
-    title: "Languages",
-    icon: <Braces size={24} />,
-    skills: ["C", "C++", "Java", "Python", "JavaScript", "TypeScript", "PHP"],
-  },
-  {
+    id: "frontend",
     title: "Frontend",
-    icon: <Layers size={24} />,
-    skills: ["React.js", "HTML5", "CSS3", "SCSS", "Responsive UI", "Reusable components"],
+    icon: Layers,
+    color: "#22d3ee",
+    description: "Responsive interfaces, reusable components, motion, and accessible UI structure.",
+    skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "SCSS"],
   },
   {
+    id: "backend",
     title: "Backend",
-    icon: <Server size={24} />,
-    skills: ["Node.js", "Express.js", "FastAPI", "REST APIs", "JWT auth", "RBAC"],
+    icon: Server,
+    color: "#8b5cf6",
+    description: "API design, authentication, role-based access, and backend application flow.",
+    skills: ["Node.js", "Express", "FastAPI", "REST APIs", "JWT", "RBAC"],
   },
   {
-    title: "Databases",
-    icon: <Database size={24} />,
-    skills: ["MongoDB", "PostgreSQL", "Schema design", "Database workflows"],
+    id: "languages",
+    title: "Languages",
+    icon: Braces,
+    color: "#f59e0b",
+    description: "Programming foundations across web, desktop, systems, and scripting projects.",
+    skills: ["C", "C++", "Java", "Python", "JavaScript", "TypeScript"],
   },
   {
-    title: "Blockchain",
-    icon: <Shield size={24} />,
-    skills: ["Polygon Amoy", "Anchored transactions", "Web3 basics", "Verification concepts"],
+    id: "data",
+    title: "Data + Web3",
+    icon: Database,
+    color: "#10b981",
+    description: "Database-backed workflows and blockchain-anchored verification concepts.",
+    skills: ["MongoDB", "PostgreSQL", "Schema Design", "Polygon Amoy", "Web3", "Verification"],
   },
   {
+    id: "security",
+    title: "Security",
+    icon: Shield,
+    color: "#ef4444",
+    description: "Secure access flows, authentication checks, and tamper-aware records.",
+    skills: ["JWT Auth", "RBAC", "API Validation", "Ethical Hacking", "Postman", "Debugging"],
+  },
+  {
+    id: "tools",
     title: "Tools",
-    icon: <GitBranch size={24} />,
-    skills: ["Git", "GitHub", "Postman", "API testing", "Debugging", "Deployment basics"],
+    icon: GitBranch,
+    color: "#38bdf8",
+    description: "Tools used to build, test, version, debug, and deploy applications.",
+    skills: ["Git", "GitHub", "Postman", "Vite", "Deployment", "DevTools"],
   },
 ];
 
-const skillVariants = {
-  hidden: { opacity: 0, y: 28, scale: 0.98 },
-  show: (index) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, delay: index * 0.08, ease: "easeOut" },
-  }),
-};
-
 const Skills = () => {
+  const [activeId, setActiveId] = useState("frontend");
+  const active = skillGroups.find((group) => group.id === activeId);
+
   return (
     <section className={styles.skills} id="skills">
-      <div className={styles.bgCode} aria-hidden="true">
-        {"{ }"}
-      </div>
+      <SectionAtmosphere accent="#06b6d4" secondary="#10b981" side="right" subtle />
       <div className={styles.header}>
-        <span>Technical Capability</span>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Skills organized by how I build.
-        </motion.h2>
+        <span>3D Technical System</span>
+        <h2>Explore the stack orbiting around how I build.</h2>
       </div>
 
-      <motion.div
-        className={styles.grid}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ once: true }}
-      >
-        {skillGroups.map((group, index) => (
-          <motion.article
-            className={styles.card}
-            key={group.title}
-            custom={index}
-            variants={skillVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            whileHover={{ y: -8, rotateX: 2, rotateY: -2 }}
-          >
-            <div className={styles.cardHeader}>
-              <span className={styles.icon}>{group.icon}</span>
-              <h3>{group.title}</h3>
-            </div>
-            <div className={styles.tags}>
-              {group.skills.map((skill) => (
-                <span key={skill}>{skill}</span>
-              ))}
-            </div>
-          </motion.article>
-        ))}
-      </motion.div>
+      <div className={styles.experience}>
+        <Suspense fallback={<div className={styles.sceneFallback}>Loading skill system...</div>}>
+          <SkillOrbitScene skills={active.skills} color={active.color} title={active.title} />
+        </Suspense>
+
+        <article className={styles.details} style={{ "--category-color": active.color }}>
+          <span className={styles.detailLabel}>Selected category</span>
+          <h3>{active.title}</h3>
+          <p>{active.description}</p>
+          <div className={styles.tags}>
+            {active.skills.map((skill) => (
+              <span key={skill}>{skill}</span>
+            ))}
+          </div>
+        </article>
+      </div>
+
+      <div className={styles.controls} role="tablist" aria-label="Skill categories">
+        {skillGroups.map((group) => {
+          const Icon = group.icon;
+          return (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeId === group.id}
+              className={activeId === group.id ? styles.active : ""}
+              style={{ "--control-color": group.color }}
+              key={group.id}
+              onClick={() => setActiveId(group.id)}
+            >
+              <Icon size={18} />
+              {group.title}
+            </button>
+          );
+        })}
+      </div>
     </section>
   );
 };

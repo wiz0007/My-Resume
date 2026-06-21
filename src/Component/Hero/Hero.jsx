@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
 import styles from "./Hero.module.scss";
 import profilepic from "../../assets/MyPic.jpeg";
+import HeroBackground from "../../three/HeroBackground";
 
 const slides = [
   {
@@ -50,13 +51,7 @@ const Hero = () => {
 
   return (
     <section className={styles.hero} id="home">
-      <div className={styles.gridBg} aria-hidden="true" />
-      <motion.div
-        className={styles.orbit}
-        aria-hidden="true"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-      />
+      <HeroBackground />
       <div className={styles.container}>
         <motion.div
           className={styles.textContent}

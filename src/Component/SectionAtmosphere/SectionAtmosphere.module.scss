@@ -1,0 +1,115 @@
+.atmosphere {
+  --ambient-accent: #22d3ee;
+  --ambient-secondary: #8b5cf6;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 900px;
+  isolation: isolate;
+}
+
+.particles { position: absolute; inset: 0; }
+
+.particles i {
+  position: absolute;
+  left: var(--particle-x);
+  top: var(--particle-y);
+  width: var(--particle-size);
+  height: var(--particle-size);
+  border-radius: 50%;
+  background: var(--ambient-accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--ambient-accent) 82%, transparent);
+  opacity: 0.42;
+  animation: particleFloat var(--particle-duration) ease-in-out var(--particle-delay) infinite alternate;
+}
+
+.particles i:nth-child(3n) { background: var(--ambient-secondary); opacity: 0.28; }
+.particles i:nth-child(4n) { filter: blur(1px); }
+
+.perspectiveGrid {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: -42%;
+  height: 86%;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ambient-accent) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ambient-accent) 14%, transparent) 1px, transparent 1px);
+  background-size: 52px 52px;
+  transform: rotateX(64deg) rotateZ(-2deg);
+  transform-origin: center top;
+  mask-image: linear-gradient(to bottom, transparent 3%, #000 38%, transparent 92%);
+  opacity: 0.68;
+}
+
+.left .perspectiveGrid { transform: rotateX(64deg) rotateZ(2deg); }
+
+.orbit {
+  position: absolute;
+  right: -8rem;
+  top: 9%;
+  width: min(36vw, 480px);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--ambient-accent) 24%, transparent);
+  border-radius: 50%;
+  transform: rotateX(62deg) rotateZ(-18deg);
+  animation: orbitTurn 24s linear infinite;
+}
+
+.left .orbit { right: auto; left: -8rem; transform: rotateX(62deg) rotateZ(18deg); }
+
+.orbit span {
+  position: absolute;
+  inset: 18%;
+  border: 1px dashed color-mix(in srgb, var(--ambient-secondary) 26%, transparent);
+  border-radius: inherit;
+}
+
+.orbit span:nth-child(2) { inset: 36%; border-style: solid; border-color: color-mix(in srgb, var(--ambient-accent) 22%, transparent); }
+.orbit span:nth-child(3) { inset: 47%; background: color-mix(in srgb, var(--ambient-accent) 12%, transparent); border: 0; box-shadow: 0 0 46px color-mix(in srgb, var(--ambient-accent) 16%, transparent); }
+
+.orbit b {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ambient-accent);
+  box-shadow: 0 0 20px var(--ambient-accent);
+}
+
+.orbit b:nth-of-type(1) { top: 8%; left: 23%; }
+.orbit b:nth-of-type(2) { right: 5%; bottom: 28%; background: var(--ambient-secondary); box-shadow: 0 0 20px var(--ambient-secondary); }
+
+.horizon {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 21%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--ambient-accent) 30%, transparent), transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--ambient-accent) 16%, transparent);
+}
+
+.subtle { opacity: 0.52; }
+
+@keyframes particleFloat {
+  from { transform: translate3d(0, 12px, 0) scale(0.8); opacity: 0.18; }
+  to { transform: translate3d(14px, -18px, 0) scale(1.15); opacity: 0.58; }
+}
+
+@keyframes orbitTurn {
+  to { transform: rotateX(62deg) rotateZ(342deg); }
+}
+
+@media (max-width: 720px) {
+  .atmosphere { opacity: 0.65; }
+  .orbit { width: 360px; right: -13rem; }
+  .left .orbit { left: -13rem; }
+  .perspectiveGrid { bottom: -30%; height: 70%; background-size: 42px 42px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particles i, .orbit { animation: none; }
+}

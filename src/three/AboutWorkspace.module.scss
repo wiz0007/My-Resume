@@ -1,0 +1,8 @@
+.scene {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+
+  &:active { cursor: grabbing; }
+  canvas { display: block; touch-action: pan-y; }
+}

@@ -1,80 +1,132 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Code2, Database, ShieldCheck } from "lucide-react";
+import { BookOpen, BriefcaseBusiness, Code2, Trophy } from "lucide-react";
+import { pointerTilt } from "../../utils/pointerTilt";
+import SectionAtmosphere from "../SectionAtmosphere/SectionAtmosphere";
 import styles from "./About.module.scss";
 
-const strengths = [
-  {
-    icon: <Code2 size={24} />,
-    title: "Application Flow",
-    text: "I can explain how UI actions move through APIs, auth checks, data operations, and responses.",
-  },
-  {
-    icon: <Database size={24} />,
-    title: "Backend Thinking",
-    text: "Focused on API design, database workflows, debugging, and Postman testing.",
-  },
-  {
-    icon: <ShieldCheck size={24} />,
-    title: "Secure Systems",
-    text: "Hands-on with JWT auth, role-based access, and blockchain verification concepts.",
-  },
-];
-
-const cardVariants = {
+const reveal = {
   hidden: { opacity: 0, y: 28 },
-  show: (index) => ({
+  show: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, delay: index * 0.1, ease: "easeOut" },
+    transition: { duration: 0.58, delay, ease: "easeOut" },
   }),
 };
 
-const About = () => {
-  return (
-    <section className={styles.about} id="about">
-      <div className={styles.accentLine} aria-hidden="true" />
-      <motion.div
-        className={styles.content}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        viewport={{ once: true }}
-      >
-        <div className={styles.copy}>
-          <span className={styles.kicker}>Professional Summary</span>
-          <h2>Developer with web, backend, and desktop project experience.</h2>
-          <p>
-            I build practical projects with React, Node.js, databases, Python
-            GUI, and Core Java. My strongest web work covers APIs,
-            authentication, database flows, and blockchain-backed verification.
-          </p>
-          <a className={styles.cta} href="#projects">
-            Review Featured Work
-          </a>
-        </div>
+const About = () => (
+  <section className={styles.about} id="about">
+    <SectionAtmosphere accent="#22d3ee" secondary="#8b5cf6" side="right" />
 
-        <div className={styles.strengthGrid}>
-          {strengths.map((item, index) => (
-            <motion.article
-              className={styles.strength}
-              key={item.title}
-              custom={index}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.4 }}
-              whileHover={{ y: -8 }}
-            >
-              <span>{item.icon}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </motion.article>
-          ))}
+    <motion.header
+      className={styles.header}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.45 }}
+    >
+      <motion.span variants={reveal}>Inside the build</motion.span>
+      <motion.h2 variants={reveal} custom={0.06}>
+        I care about the whole system, not only the screen.
+      </motion.h2>
+      <motion.p variants={reveal} custom={0.12}>
+        A little depth, a lot of practical engineering.
+      </motion.p>
+    </motion.header>
+
+    <div className={styles.bento}>
+      <motion.article
+        className={`${styles.card} ${styles.profileCard}`}
+        style={{ "--accent": "#22d3ee" }}
+        onPointerMove={pointerTilt.onPointerMove}
+        onPointerLeave={pointerTilt.onPointerLeave}
+        variants={reveal}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+      >
+        <div className={styles.cardGlow} aria-hidden="true" />
+        <div className={styles.cardCopy}>
+          <span className={styles.cardLabel}>01 · About</span>
+          <h3>Builder of useful, complete software.</h3>
+          <p>
+            I’m Ayushmaan Mishra, a final-year Computer Engineering student
+            building across MERN, TypeScript, FastAPI, PostgreSQL, MongoDB,
+            Python GUI, and Core Java.
+          </p>
+          <div className={styles.pills}>
+            <span>Full-stack</span>
+            <span>Backend-minded</span>
+            <span>Open to roles</span>
+          </div>
         </div>
-      </motion.div>
-    </section>
-  );
-};
+        <div className={styles.depthVisual} aria-hidden="true">
+          <div className={styles.depthPlane} />
+          <div className={styles.depthPlane} />
+          <div className={styles.depthPlane}>
+            <Code2 size={54} />
+            <strong>AM</strong>
+          </div>
+          <span className={styles.orbit} />
+        </div>
+      </motion.article>
+
+      <motion.article
+        className={`${styles.card} ${styles.educationCard}`}
+        style={{ "--accent": "#8b5cf6" }}
+        onPointerMove={pointerTilt.onPointerMove}
+        onPointerLeave={pointerTilt.onPointerLeave}
+        variants={reveal}
+        initial="hidden"
+        whileInView="show"
+        custom={0.08}
+        viewport={{ once: true, amount: 0.25 }}
+      >
+        <div className={styles.cardGlow} aria-hidden="true" />
+        <div className={styles.iconBlock}><BookOpen size={28} /></div>
+        <span className={styles.cardLabel}>02 · Education</span>
+        <h3>Computer Engineering</h3>
+        <p>Systems, databases, software design, and the engineering foundations behind every build.</p>
+        <div className={styles.cardFooter}><strong>2026</strong><span>B.Tech graduation</span></div>
+      </motion.article>
+
+      <motion.article
+        className={`${styles.card} ${styles.experienceCard}`}
+        style={{ "--accent": "#06b6d4" }}
+        onPointerMove={pointerTilt.onPointerMove}
+        onPointerLeave={pointerTilt.onPointerLeave}
+        variants={reveal}
+        initial="hidden"
+        whileInView="show"
+        custom={0.14}
+        viewport={{ once: true, amount: 0.25 }}
+      >
+        <div className={styles.cardGlow} aria-hidden="true" />
+        <div className={styles.iconBlock}><BriefcaseBusiness size={28} /></div>
+        <span className={styles.cardLabel}>03 · Experience</span>
+        <h3>Interface to database.</h3>
+        <p>React UI, APIs, authentication, database workflows, testing, and verification concepts.</p>
+        <div className={styles.signal} aria-hidden="true"><i /><i /><i /><i /></div>
+      </motion.article>
+
+      <motion.article
+        className={`${styles.card} ${styles.achievementCard}`}
+        style={{ "--accent": "#10b981" }}
+        onPointerMove={pointerTilt.onPointerMove}
+        onPointerLeave={pointerTilt.onPointerLeave}
+        variants={reveal}
+        initial="hidden"
+        whileInView="show"
+        custom={0.2}
+        viewport={{ once: true, amount: 0.25 }}
+      >
+        <div className={styles.cardGlow} aria-hidden="true" />
+        <div className={styles.iconBlock}><Trophy size={28} /></div>
+        <span className={styles.cardLabel}>04 · Momentum</span>
+        <div className={styles.metric}><strong>6+</strong><span>projects built across multiple stacks</span></div>
+        <a href="#journey">See the journey <span aria-hidden="true">↗</span></a>
+      </motion.article>
+    </div>
+  </section>
+);
 
 export default About;

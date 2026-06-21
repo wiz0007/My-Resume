@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import SectionAtmosphere from "../SectionAtmosphere/SectionAtmosphere";
 import styles from "./Education.module.scss";
 
 const education = [
@@ -23,6 +24,7 @@ const education = [
 const Education = () => {
   return (
     <section className={styles.education} id="education">
+      <SectionAtmosphere accent="#f59e0b" secondary="#22d3ee" side="right" subtle />
       <div className={styles.header}>
         <span>Academic Base</span>
         <motion.h2

@@ -64,6 +64,8 @@
 }
 
 .container {
+  position: relative;
+  z-index: 1;
   @include Flex(row, space-between, center);
   width: 100%;
   max-width: 1200px;
@@ -353,6 +355,8 @@
 }
 
 .stats {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 1200px;
   display: grid;

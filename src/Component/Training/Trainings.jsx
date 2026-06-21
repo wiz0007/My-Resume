@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Award, X } from "lucide-react";
+import SectionAtmosphere from "../SectionAtmosphere/SectionAtmosphere";
 import styles from "./Trainings.module.scss";
 
 const trainings = [
@@ -36,6 +37,7 @@ const Trainings = () => {
 
   return (
     <section className={styles.trainings} id="trainings">
+      <SectionAtmosphere accent="#8b5cf6" secondary="#10b981" side="left" subtle />
       <div className={styles.header}>
         <span>Certifications</span>
         <motion.h2

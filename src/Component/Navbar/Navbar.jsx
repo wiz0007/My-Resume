@@ -38,7 +38,7 @@ const Navbar = () => {
     "About",
     "Projects",
     "Skills",
-    "Education",
+    "Journey",
     "Contact",
   ];
 

@@ -6,12 +6,23 @@ import ScrollToTop from "./routes/ScrollToTop";
 import Loader from "./Component/Loader/Loader";
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const alreadyLoaded = window.sessionStorage.getItem("portfolio-loaded");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return !alreadyLoaded && !reduceMotion;
+  });
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2200);
+    if (!loading) return undefined;
+
+    const timer = setTimeout(() => {
+      window.sessionStorage.setItem("portfolio-loaded", "true");
+      setLoading(false);
+    }, 1800);
+
     return () => clearTimeout(timer);
-  }, []);
+  }, [loading]);
 
   return (
     <>
