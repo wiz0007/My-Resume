@@ -21,15 +21,6 @@ import styles from "./Project.module.scss";
 
 const projects = [
   {
-    title: "SchoolSys",
-    label: "Under Development",
-    category: "School Management System",
-    icon: School,
-    color: "#14b8a6",
-    desc: "School management platform for school profiles, students, staff, classes, and attendance with HTTP-only authentication, refresh-token rotation, and ownership validation.",
-    stack: ["Angular", "Spring Boot", "PostgreSQL", "Laravel", "JWT"],
-  },
-  {
     title: "SkillSphere",
     label: "Final Year Project",
     category: "Full-Stack + Web3",
@@ -40,6 +31,16 @@ const projects = [
     live: "https://skillsphere.online",
   },
   {
+    title: "SchoolSys",
+    label: "Under Development",
+    category: "Under Development",
+    icon: School,
+    color: "#14b8a6",
+    desc: "Under development school management platform for school profiles, students, staff, classes, and attendance with HTTP-only authentication, refresh-token rotation, and ownership validation.",
+    stack: ["Angular", "Spring Boot", "PostgreSQL", "Laravel", "JWT"],
+    live: "https://school-management-space-frontend.vercel.app",
+  },
+  {
     title: "Pipeline Builder & DAG Validator",
     label: "React Project",
     category: "Visual Workflow Tool",
@@ -47,6 +48,7 @@ const projects = [
     color: "#60a5fa",
     desc: "Visual node and edge editor with a FastAPI parser that returns node count, edge count, and DAG validation using DFS.",
     stack: ["React", "React Flow", "FastAPI", "Python", "DFS"],
+    live: "https://react-node-project-lm7m.vercel.app",
   },
   {
     title: "E-Commerce Application",
@@ -286,3 +288,4 @@ const Project = () => {
 };
 
 export default Project;
+
