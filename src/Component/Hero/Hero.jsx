@@ -11,8 +11,8 @@ const slides = [
     text: "React, Node.js, Express, REST APIs, JWT auth, and reusable UI systems.",
   },
   {
-    title: "Backend + Databases",
-    text: "MongoDB, PostgreSQL, API testing, role-based access, and backend flow design.",
+    title: "Backend + APIs",
+    text: "Spring Boot, MongoDB, API testing, role-based access, and backend flow design.",
   },
   {
     title: "Blockchain Verification",
@@ -60,7 +60,7 @@ const Hero = () => {
           animate="show"
         >
           <motion.p className={styles.eyebrow} variants={itemVariants}>
-            Full-Stack Developer | MERN | TypeScript | FastAPI | PostgreSQL
+            Full-Stack Developer | MERN | TypeScript | FastAPI | Spring Boot
           </motion.p>
 
           <motion.h1 className={styles.srOnly} variants={itemVariants}>
@@ -69,7 +69,7 @@ const Hero = () => {
 
           <motion.p className={styles.summary} variants={itemVariants}>
             I am Ayushmaan Mishra, a final-year Computer Engineering student
-            working across MERN, TypeScript, PostgreSQL, MongoDB, Python GUI,
+            working across MERN, TypeScript, Spring Boot, MongoDB, Python GUI,
             and Core Java projects.
           </motion.p>
 

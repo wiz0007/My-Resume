@@ -11,13 +11,24 @@ import {
   Hotel,
   MessageCircle,
   PanelsTopLeft,
+  School,
   ShoppingBag,
+  Workflow,
   X,
 } from "lucide-react";
 import SectionAtmosphere from "../SectionAtmosphere/SectionAtmosphere";
 import styles from "./Project.module.scss";
 
 const projects = [
+  {
+    title: "SchoolSys",
+    label: "Under Development",
+    category: "School Management System",
+    icon: School,
+    color: "#14b8a6",
+    desc: "School management platform for school profiles, students, staff, classes, and attendance with HTTP-only authentication, refresh-token rotation, and ownership validation.",
+    stack: ["Angular", "Spring Boot", "PostgreSQL", "Laravel", "JWT"],
+  },
   {
     title: "SkillSphere",
     label: "Final Year Project",
@@ -27,6 +38,15 @@ const projects = [
     desc: "Skill-sharing platform with authentication, role-based access, database-backed workflows, and Polygon Amoy transaction verification.",
     stack: ["TypeScript", "MERN", "PostgreSQL", "MongoDB", "Polygon Amoy"],
     live: "https://skillsphere.online",
+  },
+  {
+    title: "Pipeline Builder & DAG Validator",
+    label: "React Project",
+    category: "Visual Workflow Tool",
+    icon: Workflow,
+    color: "#60a5fa",
+    desc: "Visual node and edge editor with a FastAPI parser that returns node count, edge count, and DAG validation using DFS.",
+    stack: ["React", "React Flow", "FastAPI", "Python", "DFS"],
   },
   {
     title: "E-Commerce Application",
