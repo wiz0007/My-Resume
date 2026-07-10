@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Send } from "lucide-react";
+import { ArrowUpRight, Code2, Github, Linkedin, Mail, MapPin, Send } from "lucide-react";
 import SectionAtmosphere from "../SectionAtmosphere/SectionAtmosphere";
 import styles from "./Contact.module.scss";
 
@@ -11,6 +11,12 @@ const socials = [
     title: "GitHub",
     detail: "wiz0007",
     href: "https://github.com/wiz0007",
+  },
+  {
+    icon: <Code2 size={19} />,
+    title: "LeetCode",
+    detail: "marshallcode007",
+    href: "https://leetcode.com/u/marshallcode007/",
   },
   {
     icon: <Linkedin size={19} />,

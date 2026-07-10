@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, Github, Linkedin, Mail } from "lucide-react";
+import { Code2, Download, Github, Linkedin, Mail } from "lucide-react";
 import styles from "./Hero.module.scss";
 import profilepic from "../../assets/MyPic.jpeg";
 import HeroBackground from "../../three/HeroBackground";
@@ -135,6 +135,14 @@ const Hero = () => {
               aria-label="GitHub"
             >
               <Github size={20} />
+            </a>
+            <a
+              href="https://leetcode.com/u/marshallcode007/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LeetCode"
+            >
+              <Code2 size={20} />
             </a>
             <a
               href="https://in.linkedin.com/in/ayushmaan-mishra-254020257"
