@@ -38,9 +38,13 @@ const Navbar = () => {
     "About",
     "Projects",
     "Skills",
-    "Journey",
+    "Education",
+    "Certificates",
     "Contact",
   ];
+
+  const getSectionId = (link) =>
+    link === "Certificates" ? "certificates" : link.toLowerCase();
 
   return (
     <motion.header
@@ -63,7 +67,7 @@ const Navbar = () => {
       {/* Desktop Navigation */}
       <nav className={styles.navLinks}>
         {links.map((link) => {
-          const id = link.toLowerCase();
+          const id = getSectionId(link);
 
           return (
             <a
@@ -111,7 +115,7 @@ const Navbar = () => {
             {links.map((link) => (
               <a
                 key={link}
-                href={`#${link.toLowerCase()}`}
+                href={`#${getSectionId(link)}`}
                 onClick={() => setIsOpen(false)}
               >
                 {link}

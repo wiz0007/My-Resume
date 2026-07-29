@@ -16,7 +16,7 @@ const education = [
     title: "B.Tech in Computer Engineering",
     school: "College of Technology, Pantnagar",
     year: "2022-2026",
-    desc: "Pursuing Bachelor of Technology in Computer Engineering with a full-stack and backend development focus.",
+    desc: "Completed Bachelor of Technology in Computer Engineering in June 2026 with a full-stack and backend development focus.",
     link: "https://www.gbpuat.ac.in/",
   },
 ];

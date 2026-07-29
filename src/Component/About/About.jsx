@@ -46,12 +46,12 @@ const About = () => (
       >
         <div className={styles.cardGlow} aria-hidden="true" />
         <div className={styles.cardCopy}>
-          <span className={styles.cardLabel}>01 · About</span>
+          <span className={styles.cardLabel}>01 - About</span>
           <h3>Builder of useful, complete software.</h3>
           <p>
-            I’m Ayushmaan Mishra, a final-year Computer Engineering student
-            building across MERN, TypeScript, FastAPI, PostgreSQL, MongoDB,
-            Python GUI, and Core Java.
+            I am Ayushmaan Mishra, a Computer Engineering graduate from GBPUAT
+            Pantnagar building across MERN, TypeScript, Spring Boot, FastAPI,
+            MongoDB, Python GUI, and Core Java.
           </p>
           <div className={styles.pills}>
             <span>Full-stack</span>
@@ -83,10 +83,10 @@ const About = () => (
       >
         <div className={styles.cardGlow} aria-hidden="true" />
         <div className={styles.iconBlock}><BookOpen size={28} /></div>
-        <span className={styles.cardLabel}>02 · Education</span>
+        <span className={styles.cardLabel}>02 - Education</span>
         <h3>Computer Engineering</h3>
-        <p>Systems, databases, software design, and the engineering foundations behind every build.</p>
-        <div className={styles.cardFooter}><strong>2026</strong><span>B.Tech graduation</span></div>
+        <p>Completed B.Tech in Computer Engineering in June 2026 with systems, databases, software design, and engineering foundations.</p>
+        <div className={styles.cardFooter}><strong>June 2026</strong><span>B.Tech completed</span></div>
       </motion.article>
 
       <motion.article
@@ -102,7 +102,7 @@ const About = () => (
       >
         <div className={styles.cardGlow} aria-hidden="true" />
         <div className={styles.iconBlock}><BriefcaseBusiness size={28} /></div>
-        <span className={styles.cardLabel}>03 · Experience</span>
+        <span className={styles.cardLabel}>03 - Experience</span>
         <h3>Interface to database.</h3>
         <p>React UI, APIs, authentication, database workflows, testing, and verification concepts.</p>
         <div className={styles.signal} aria-hidden="true"><i /><i /><i /><i /></div>
@@ -121,9 +121,9 @@ const About = () => (
       >
         <div className={styles.cardGlow} aria-hidden="true" />
         <div className={styles.iconBlock}><Trophy size={28} /></div>
-        <span className={styles.cardLabel}>04 · Momentum</span>
+        <span className={styles.cardLabel}>04 - Momentum</span>
         <div className={styles.metric}><strong>6+</strong><span>projects built across multiple stacks</span></div>
-        <a href="#journey">See the journey <span aria-hidden="true">↗</span></a>
+        <a href="#projects">See the projects <span aria-hidden="true">↗</span></a>
       </motion.article>
     </div>
   </section>

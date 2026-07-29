@@ -22,7 +22,7 @@ const slides = [
 
 const stats = [
   { value: "6+", label: "Projects built" },
-  { value: "2026", label: "B.Tech graduation" },
+  { value: "2026", label: "B.Tech completed" },
   { value: "MERN", label: "Web stack" },
 ];
 
@@ -68,9 +68,9 @@ const Hero = () => {
           </motion.h1>
 
           <motion.p className={styles.summary} variants={itemVariants}>
-            I am Ayushmaan Mishra, a final-year Computer Engineering student
-            working across MERN, TypeScript, Spring Boot, MongoDB, Python GUI,
-            and Core Java projects.
+            I am Ayushmaan Mishra, a Computer Engineering graduate from
+            GBPUAT Pantnagar working across MERN, TypeScript, Spring Boot,
+            MongoDB, Python GUI, and Core Java projects.
           </motion.p>
 
           <AnimatePresence mode="wait">

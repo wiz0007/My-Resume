@@ -36,7 +36,7 @@ const Trainings = () => {
   const [openPDF, setOpenPDF] = useState(null);
 
   return (
-    <section className={styles.trainings} id="trainings">
+    <section className={styles.trainings} id="certificates">
       <SectionAtmosphere accent="#8b5cf6" secondary="#10b981" side="left" subtle />
       <div className={styles.header}>
         <span>Certifications</span>
