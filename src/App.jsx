@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Lenis from "lenis";
 import "./App.css";
 import AllRoutes from "./routes/AllRoutes";
 import ScrollToTop from "./routes/ScrollToTop";
@@ -23,6 +24,49 @@ function App() {
 
     return () => clearTimeout(timer);
   }, [loading]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+
+    const lenis = new Lenis({
+      duration: 1.05,
+      smoothWheel: true,
+      touchMultiplier: 1.15,
+    });
+
+    window.lenis = lenis;
+
+    let frame = 0;
+    let active = !document.hidden;
+
+    const raf = (time) => {
+      if (!active) return;
+      lenis.raf(time);
+      frame = window.requestAnimationFrame(raf);
+    };
+
+    const handleVisibility = () => {
+      active = !document.hidden;
+      if (active) {
+        lenis.start();
+        frame = window.requestAnimationFrame(raf);
+      } else {
+        lenis.stop();
+        window.cancelAnimationFrame(frame);
+      }
+    };
+
+    frame = window.requestAnimationFrame(raf);
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      lenis.destroy();
+      delete window.lenis;
+    };
+  }, []);
 
   return (
     <>

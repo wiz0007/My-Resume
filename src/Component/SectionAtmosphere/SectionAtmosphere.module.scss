@@ -1,6 +1,6 @@
 .atmosphere {
-  --ambient-accent: #22d3ee;
-  --ambient-secondary: #8b5cf6;
+  --ambient-accent: rgba(255, 255, 255, 0.34);
+  --ambient-secondary: rgba(255, 255, 255, 0.18);
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -8,6 +8,7 @@
   pointer-events: none;
   perspective: 900px;
   isolation: isolate;
+  opacity: 0.34;
 }
 
 .particles { position: absolute; inset: 0; }
@@ -21,11 +22,11 @@
   border-radius: 50%;
   background: var(--ambient-accent);
   box-shadow: 0 0 12px color-mix(in srgb, var(--ambient-accent) 82%, transparent);
-  opacity: 0.42;
+  opacity: 0.24;
   animation: particleFloat var(--particle-duration) ease-in-out var(--particle-delay) infinite alternate;
 }
 
-.particles i:nth-child(3n) { background: var(--ambient-secondary); opacity: 0.28; }
+.particles i:nth-child(3n) { background: var(--ambient-secondary); opacity: 0.2; }
 .particles i:nth-child(4n) { filter: blur(1px); }
 
 .perspectiveGrid {
@@ -41,7 +42,7 @@
   transform: rotateX(64deg) rotateZ(-2deg);
   transform-origin: center top;
   mask-image: linear-gradient(to bottom, transparent 3%, #000 38%, transparent 92%);
-  opacity: 0.68;
+  opacity: 0.32;
 }
 
 .left .perspectiveGrid { transform: rotateX(64deg) rotateZ(2deg); }
@@ -55,6 +56,7 @@
   border: 1px solid color-mix(in srgb, var(--ambient-accent) 24%, transparent);
   border-radius: 50%;
   transform: rotateX(62deg) rotateZ(-18deg);
+  opacity: 0.46;
   animation: orbitTurn 24s linear infinite;
 }
 
@@ -75,12 +77,12 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--ambient-accent);
-  box-shadow: 0 0 20px var(--ambient-accent);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
 }
 
 .orbit b:nth-of-type(1) { top: 8%; left: 23%; }
-.orbit b:nth-of-type(2) { right: 5%; bottom: 28%; background: var(--ambient-secondary); box-shadow: 0 0 20px var(--ambient-secondary); }
+.orbit b:nth-of-type(2) { right: 5%; bottom: 28%; background: rgba(255, 255, 255, 0.34); box-shadow: 0 0 20px rgba(255, 255, 255, 0.12); }
 
 .horizon {
   position: absolute;
@@ -92,7 +94,7 @@
   box-shadow: 0 0 18px color-mix(in srgb, var(--ambient-accent) 16%, transparent);
 }
 
-.subtle { opacity: 0.52; }
+.subtle { opacity: 0.22; }
 
 @keyframes particleFloat {
   from { transform: translate3d(0, 12px, 0) scale(0.8); opacity: 0.18; }
@@ -104,7 +106,7 @@
 }
 
 @media (max-width: 720px) {
-  .atmosphere { opacity: 0.65; }
+  .atmosphere { opacity: 0.24; }
   .orbit { width: 360px; right: -13rem; }
   .left .orbit { left: -13rem; }
   .perspectiveGrid { bottom: -30%; height: 70%; background-size: 42px 42px; }

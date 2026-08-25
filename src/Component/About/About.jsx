@@ -1,130 +1,94 @@
-import React from "react";
+import React, { createElement } from "react";
 import { motion } from "framer-motion";
-import { BookOpen, BriefcaseBusiness, Code2, Trophy } from "lucide-react";
-import { pointerTilt } from "../../utils/pointerTilt";
-import SectionAtmosphere from "../SectionAtmosphere/SectionAtmosphere";
+import { BookOpen, BriefcaseBusiness, Code2, Database, Trophy } from "lucide-react";
 import styles from "./About.module.scss";
 
-const reveal = {
-  hidden: { opacity: 0, y: 28 },
-  show: (delay = 0) => ({
+const pages = [
+  {
+    id: "01",
+    label: "About",
+    title: "Builder of useful, complete software.",
+    text: "I am Ayushmaan Mishra, a Computer Engineering graduate from GBPUAT Pantnagar building practical full-stack products across React, TypeScript, Spring Boot, FastAPI, MongoDB, Python GUI, and Core Java.",
+    meta: ["Full-stack", "Backend-minded", "Open to roles"],
+    icon: Code2,
+  },
+  {
+    id: "02",
+    label: "Education",
+    title: "Computer Engineering foundation.",
+    text: "Completed B.Tech in Computer Engineering in June 2026 with a foundation in systems, databases, software design, and engineering fundamentals.",
+    meta: ["June 2026", "GBPUAT Pantnagar", "B.Tech completed"],
+    icon: BookOpen,
+  },
+  {
+    id: "03",
+    label: "Experience",
+    title: "Interfaces connected to dependable data flow.",
+    text: "I think from the screen to the API to the database: React UI, authentication, validation, testing, ownership checks, and verification workflows.",
+    meta: ["React UI", "REST APIs", "Auth workflows"],
+    icon: Database,
+  },
+  {
+    id: "04",
+    label: "Momentum",
+    title: "Projects across practical stacks.",
+    text: "Built web, desktop, workflow, commerce, chat, and verification projects with a focus on complete working systems instead of placeholder demos.",
+    meta: ["6+ projects", "Multiple stacks", "Live builds"],
+    icon: Trophy,
+    href: "#projects",
+  },
+];
+
+const pageVariants = {
+  hidden: { opacity: 0, y: 90, rotateX: 8, filter: "blur(8px)" },
+  show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.58, delay, ease: "easeOut" },
-  }),
+    rotateX: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 const About = () => (
   <section className={styles.about} id="about">
-    <SectionAtmosphere accent="#22d3ee" secondary="#8b5cf6" side="right" />
-
-    <motion.header
-      className={styles.header}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.45 }}
-    >
-      <motion.span variants={reveal}>Inside the build</motion.span>
-      <motion.h2 variants={reveal} custom={0.06}>
-        I care about the whole system, not only the screen.
-      </motion.h2>
-      <motion.p variants={reveal} custom={0.12}>
-        A little depth, a lot of practical engineering.
-      </motion.p>
-    </motion.header>
-
-    <div className={styles.bento}>
-      <motion.article
-        className={`${styles.card} ${styles.profileCard}`}
-        style={{ "--accent": "#22d3ee" }}
-        onPointerMove={pointerTilt.onPointerMove}
-        onPointerLeave={pointerTilt.onPointerLeave}
-        variants={reveal}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-      >
-        <div className={styles.cardGlow} aria-hidden="true" />
-        <div className={styles.cardCopy}>
-          <span className={styles.cardLabel}>01 - About</span>
-          <h3>Builder of useful, complete software.</h3>
-          <p>
-            I am Ayushmaan Mishra, a Computer Engineering graduate from GBPUAT
-            Pantnagar building across MERN, TypeScript, Spring Boot, FastAPI,
-            MongoDB, Python GUI, and Core Java.
-          </p>
-          <div className={styles.pills}>
-            <span>Full-stack</span>
-            <span>Backend-minded</span>
-            <span>Open to roles</span>
+    <div className={styles.pageTrack}>
+      {pages.map(({ id, label, title, text, meta, icon: Icon, href }, index) => (
+        <motion.article
+          className={styles.page}
+          variants={pageVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.44, margin: "-80px 0px -120px 0px" }}
+          key={label}
+          style={{ "--index": index }}
+        >
+          <div className={styles.copy}>
+            <div className={styles.pageLabel}>
+              <span>{id}</span>
+              <strong>{label}</strong>
+            </div>
+            <h3>{title}</h3>
+            <p>{text}</p>
+            <div className={styles.meta}>
+              {meta.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+              {href && <a href={href}>See projects</a>}
+            </div>
           </div>
-        </div>
-        <div className={styles.depthVisual} aria-hidden="true">
-          <div className={styles.depthPlane} />
-          <div className={styles.depthPlane} />
-          <div className={styles.depthPlane}>
-            <Code2 size={54} />
-            <strong>AM</strong>
+
+          <div className={styles.visual} aria-hidden="true">
+            <div className={styles.visualIcon}>{createElement(Icon, { size: 42 })}</div>
+            <div className={styles.visualLines}>
+              <i />
+              <i />
+              <i />
+            </div>
+            <BriefcaseBusiness className={styles.watermark} size={160} />
           </div>
-          <span className={styles.orbit} />
-        </div>
-      </motion.article>
-
-      <motion.article
-        className={`${styles.card} ${styles.educationCard}`}
-        style={{ "--accent": "#8b5cf6" }}
-        onPointerMove={pointerTilt.onPointerMove}
-        onPointerLeave={pointerTilt.onPointerLeave}
-        variants={reveal}
-        initial="hidden"
-        whileInView="show"
-        custom={0.08}
-        viewport={{ once: true, amount: 0.25 }}
-      >
-        <div className={styles.cardGlow} aria-hidden="true" />
-        <div className={styles.iconBlock}><BookOpen size={28} /></div>
-        <span className={styles.cardLabel}>02 - Education</span>
-        <h3>Computer Engineering</h3>
-        <p>Completed B.Tech in Computer Engineering in June 2026 with systems, databases, software design, and engineering foundations.</p>
-        <div className={styles.cardFooter}><strong>June 2026</strong><span>B.Tech completed</span></div>
-      </motion.article>
-
-      <motion.article
-        className={`${styles.card} ${styles.experienceCard}`}
-        style={{ "--accent": "#06b6d4" }}
-        onPointerMove={pointerTilt.onPointerMove}
-        onPointerLeave={pointerTilt.onPointerLeave}
-        variants={reveal}
-        initial="hidden"
-        whileInView="show"
-        custom={0.14}
-        viewport={{ once: true, amount: 0.25 }}
-      >
-        <div className={styles.cardGlow} aria-hidden="true" />
-        <div className={styles.iconBlock}><BriefcaseBusiness size={28} /></div>
-        <span className={styles.cardLabel}>03 - Experience</span>
-        <h3>Interface to database.</h3>
-        <p>React UI, APIs, authentication, database workflows, testing, and verification concepts.</p>
-        <div className={styles.signal} aria-hidden="true"><i /><i /><i /><i /></div>
-      </motion.article>
-
-      <motion.article
-        className={`${styles.card} ${styles.achievementCard}`}
-        style={{ "--accent": "#10b981" }}
-        onPointerMove={pointerTilt.onPointerMove}
-        onPointerLeave={pointerTilt.onPointerLeave}
-        variants={reveal}
-        initial="hidden"
-        whileInView="show"
-        custom={0.2}
-        viewport={{ once: true, amount: 0.25 }}
-      >
-        <div className={styles.cardGlow} aria-hidden="true" />
-        <div className={styles.iconBlock}><Trophy size={28} /></div>
-        <span className={styles.cardLabel}>04 - Momentum</span>
-        <div className={styles.metric}><strong>6+</strong><span>projects built across multiple stacks</span></div>
-        <a href="#projects">See the projects <span aria-hidden="true">↗</span></a>
-      </motion.article>
+        </motion.article>
+      ))}
     </div>
   </section>
 );

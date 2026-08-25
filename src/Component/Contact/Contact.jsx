@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { ArrowUpRight, Code2, Github, Linkedin, Mail, MapPin, Send } from "lucide-react";
 import SectionAtmosphere from "../SectionAtmosphere/SectionAtmosphere";
 import styles from "./Contact.module.scss";
@@ -148,7 +149,7 @@ const Contact = () => {
 
       <div className={styles.footerLine}>
         <span>Copyright {new Date().getFullYear()} Ayushmaan Mishra</span>
-        <a href="#home">Back to top <ArrowUpRight size={15} /></a>
+        <Link to="/">Back to home <ArrowUpRight size={15} /></Link>
       </div>
     </footer>
   );
