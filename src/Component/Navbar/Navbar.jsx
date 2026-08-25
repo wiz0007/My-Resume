@@ -1,31 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Navbar.module.scss";
+import { prefetchRoute } from "../../routes/prefetchRoutes";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [active, setActive] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 30);
-
-      const sections = document.querySelectorAll("section[id]");
-
-      sections.forEach((section) => {
-        const top = section.offsetTop - 120;
-        const height = section.offsetHeight;
-
-        if (
-          window.scrollY >= top &&
-          window.scrollY < top + height
-        ) {
-          setActive(section.id);
-        }
-      });
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -33,18 +21,20 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const links = [
-    "Home",
-    "About",
-    "Projects",
-    "Skills",
-    "Education",
-    "Certificates",
-    "Contact",
+  const leftLinks = [
+    { label: "Home", to: "/" },
+    { label: "Projects", to: "/projects" },
+    { label: "Process", to: "/process" },
+    { label: "Skills", to: "/skills" },
   ];
+  const rightLinks = [
+    { label: "Profile", to: "/profile" },
+    { label: "Contact", to: "/contact" },
+  ];
+  const mobileLinks = [...leftLinks, ...rightLinks];
 
-  const getSectionId = (link) =>
-    link === "Certificates" ? "certificates" : link.toLowerCase();
+  const linkClass = ({ isActive }) => (isActive ? styles.active : undefined);
+  const warmRoute = (path) => () => prefetchRoute(path);
 
   return (
     <motion.header
@@ -55,54 +45,56 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7 }}
     >
-      <a href="#home" className={styles.logo}>
-        <div className={styles.logoIcon}>AM</div>
+      <nav className={`${styles.navLinks} ${styles.leftLinks}`} aria-label="Primary navigation left">
+        {leftLinks.map((link) => (
+          <NavLink
+            key={link.label}
+            to={link.to}
+            className={linkClass}
+            end={link.to === "/"}
+            onMouseEnter={warmRoute(link.to)}
+            onFocus={warmRoute(link.to)}
+          >
+            {link.label}
+          </NavLink>
+        ))}
+      </nav>
 
-        <div className={styles.logoText}>
-          <span>Ayushmaan Mishra</span>
-          <small>Full-Stack Developer</small>
-        </div>
-      </a>
+      <Link to="/" className={styles.logo} aria-label="Ayushmaan Mishra home">
+        Ayushmaan Mishra
+      </Link>
 
-      {/* Desktop Navigation */}
-      <nav className={styles.navLinks}>
-        {links.map((link) => {
-          const id = getSectionId(link);
+      <nav className={`${styles.navLinks} ${styles.rightLinks}`} aria-label="Primary navigation right">
+        {rightLinks.map((link) => (
+          <NavLink
+            key={link.label}
+            to={link.to}
+            className={linkClass}
+            onMouseEnter={warmRoute(link.to)}
+            onFocus={warmRoute(link.to)}
+          >
+            {link.label}
+          </NavLink>
+        ))}
 
-          return (
-            <a
-              key={link}
-              href={`#${id}`}
-              className={active === id ? styles.active : ""}
-            >
-              {link}
-            </a>
-          );
-        })}
-
-        <a
-          href="/Ayushmaan_Mishra-Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.resumeBtn}
-        >
+        <a href="/Ayushmaan_Mishra-Resume.pdf" target="_blank" rel="noopener noreferrer">
           Resume
         </a>
       </nav>
 
-      {/* Hamburger */}
       <button
         className={`${styles.hamburger} ${
           isOpen ? styles.open : ""
         }`}
         onClick={toggleMenu}
+        aria-label="Toggle navigation menu"
+        aria-expanded={isOpen}
       >
         <span />
         <span />
         <span />
       </button>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -112,14 +104,17 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.25 }}
           >
-            {links.map((link) => (
-              <a
-                key={link}
-                href={`#${getSectionId(link)}`}
+            {mobileLinks.map((link) => (
+              <NavLink
+                key={link.label}
+                to={link.to}
+                className={linkClass}
                 onClick={() => setIsOpen(false)}
+                onFocus={warmRoute(link.to)}
+                end={link.to === "/"}
               >
-                {link}
-              </a>
+                {link.label}
+              </NavLink>
             ))}
 
             <a

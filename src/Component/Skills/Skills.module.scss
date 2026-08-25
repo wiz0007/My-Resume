@@ -3,9 +3,8 @@
   padding: 6rem 8%;
   color: #eaf2f8;
   background:
-    radial-gradient(circle at 88% 16%, rgba(6, 182, 212, 0.14), transparent 30%),
-    radial-gradient(circle at 12% 82%, rgba(139, 92, 246, 0.14), transparent 30%),
-    #07111f;
+    radial-gradient(circle at 88% 16%, rgba(255, 255, 255, 0.055), transparent 30%),
+    #050505;
   overflow: hidden;
 }
 
@@ -14,7 +13,7 @@
   margin: 0 auto 2rem;
 
   span {
-    color: #67e8f9;
+    color: rgba(255, 255, 255, 0.62);
     font-size: 0.82rem;
     font-weight: 800;
     letter-spacing: 0.09em;
@@ -48,12 +47,12 @@
   place-items: center;
   border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: 18px;
-  color: #67e8f9;
-  background: rgba(5, 12, 24, 0.62);
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(18, 18, 18, 0.72);
 }
 
 .details {
-  --category-color: #22d3ee;
+  --category-color: rgba(255, 255, 255, 0.72);
   min-height: 520px;
   display: flex;
   flex-direction: column;
@@ -61,11 +60,11 @@
   padding: clamp(1.5rem, 4vw, 2.4rem);
   border: 1px solid color-mix(in srgb, var(--category-color) 35%, transparent);
   border-radius: 18px;
-  background: linear-gradient(145deg, rgba(15, 30, 50, 0.9), rgba(8, 17, 31, 0.7));
+  background: linear-gradient(145deg, rgba(22, 22, 22, 0.92), rgba(8, 8, 8, 0.78));
   box-shadow: 0 28px 72px rgba(0, 0, 0, 0.24);
 
-  .detailLabel {
-    color: var(--category-color);
+    .detailLabel {
+    color: rgba(255, 255, 255, 0.62);
     font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -98,8 +97,8 @@
     border: 1px solid color-mix(in srgb, var(--category-color) 32%, transparent);
     border-radius: 999px;
     padding: 0.45rem 0.7rem;
-    color: #e0f2fe;
-    background: color-mix(in srgb, var(--category-color) 12%, transparent);
+    color: rgba(255, 255, 255, 0.78);
+    background: rgba(255, 255, 255, 0.045);
     font-size: 0.88rem;
     font-weight: 700;
   }
@@ -113,7 +112,7 @@
   margin: 1rem auto 0;
 
   button {
-    --control-color: #22d3ee;
+    --control-color: rgba(255, 255, 255, 0.72);
     display: inline-flex;
     min-height: 52px;
     align-items: center;
@@ -122,7 +121,7 @@
     border: 1px solid rgba(148, 163, 184, 0.16);
     border-radius: 10px;
     color: #b8c7d8;
-    background: rgba(15, 23, 42, 0.68);
+    background: rgba(18, 18, 18, 0.78);
     font: inherit;
     font-size: 0.88rem;
     font-weight: 750;
@@ -138,7 +137,7 @@
     &.active {
       color: #fff;
       border-color: color-mix(in srgb, var(--control-color) 58%, transparent);
-      background: color-mix(in srgb, var(--control-color) 22%, rgba(15, 23, 42, 0.76));
+      background: rgba(255, 255, 255, 0.08);
       box-shadow: 0 12px 32px color-mix(in srgb, var(--control-color) 18%, transparent);
     }
   }

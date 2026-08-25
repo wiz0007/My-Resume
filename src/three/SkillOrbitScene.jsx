@@ -6,6 +6,8 @@ import {
   useMediaQuery,
   useReducedMotionPreference,
 } from "../hooks/useMediaPreferences";
+import { useNearViewport } from "../hooks/useNearViewport";
+import { usePageVisibility } from "../hooks/usePageVisibility";
 
 const SkillNode = ({ label, position, color, reducedMotion, index }) => {
   const mesh = useRef();
@@ -108,12 +110,17 @@ const OrbitSystem = ({ skills, color, title, compact, reducedMotion }) => {
 const SkillOrbitScene = ({ skills, color, title }) => {
   const compact = useMediaQuery("(max-width: 700px)");
   const reducedMotion = useReducedMotionPreference();
+  const sceneRef = useRef(null);
+  const isNearViewport = useNearViewport(sceneRef, { rootMargin: "180px 0px", threshold: 0.08, initial: true });
+  const isPageVisible = usePageVisibility();
+  const animated = isNearViewport && isPageVisible && !reducedMotion;
 
   return (
-    <div className={styles.scene} aria-hidden="true">
+    <div ref={sceneRef} className={styles.scene} aria-hidden="true">
       <Canvas
         camera={{ position: [0, 0.2, compact ? 6.8 : 6.2], fov: 42 }}
         dpr={[1, 1.35]}
+        frameloop={animated ? "always" : "demand"}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       >
         <ambientLight intensity={0.65} />
@@ -125,7 +132,7 @@ const SkillOrbitScene = ({ skills, color, title }) => {
             color={color}
             title={title}
             compact={compact}
-            reducedMotion={reducedMotion}
+            reducedMotion={!animated}
           />
         </Suspense>
       </Canvas>

@@ -1,0 +1,37 @@
+.fallback {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  gap: 0.8rem;
+  color: rgba(255, 255, 255, 0.72);
+  background: #050505;
+}
+
+.fallback span {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-top-color: rgba(255, 255, 255, 0.72);
+  border-radius: 50%;
+  animation: routeSpin 0.9s linear infinite;
+}
+
+.fallback p {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@keyframes routeSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fallback span {
+    animation: none;
+  }
+}
