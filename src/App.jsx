@@ -9,7 +9,7 @@ import Loader from "./Component/Loader/Loader";
 function App() {
   const [loading, setLoading] = useState(() => {
     if (typeof window === "undefined") return false;
-    const alreadyLoaded = window.sessionStorage.getItem("portfolio-loaded");
+    const alreadyLoaded = window.sessionStorage.getItem("portfolio-initialized");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     return !alreadyLoaded && !reduceMotion;
   });
@@ -18,7 +18,7 @@ function App() {
     if (!loading) return undefined;
 
     const timer = setTimeout(() => {
-      window.sessionStorage.setItem("portfolio-loaded", "true");
+      window.sessionStorage.setItem("portfolio-initialized", "true");
       setLoading(false);
     }, 1800);
 
@@ -27,7 +27,15 @@ function App() {
 
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+
+    const previousRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return () => {
+        window.history.scrollRestoration = previousRestoration;
+      };
+    }
 
     const lenis = new Lenis({
       duration: 1.05,
@@ -37,34 +45,53 @@ function App() {
 
     window.lenis = lenis;
 
-    let frame = 0;
-    let active = !document.hidden;
+    let frame = null;
 
     const raf = (time) => {
-      if (!active) return;
       lenis.raf(time);
       frame = window.requestAnimationFrame(raf);
     };
 
-    const handleVisibility = () => {
-      active = !document.hidden;
-      if (active) {
-        lenis.start();
-        frame = window.requestAnimationFrame(raf);
-      } else {
-        lenis.stop();
-        window.cancelAnimationFrame(frame);
-      }
+    const startRaf = () => {
+      if (frame !== null) return;
+      frame = window.requestAnimationFrame(raf);
     };
 
-    frame = window.requestAnimationFrame(raf);
+    const stopRaf = () => {
+      if (frame === null) return;
+      window.cancelAnimationFrame(frame);
+      frame = null;
+    };
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        lenis.stop();
+        stopRaf();
+        return;
+      }
+
+      lenis.start();
+      lenis.resize();
+      startRaf();
+    };
+
+    const handlePageShow = () => {
+      lenis.start();
+      lenis.resize();
+      startRaf();
+    };
+
+    if (!document.hidden) startRaf();
     document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("pageshow", handlePageShow);
 
     return () => {
-      window.cancelAnimationFrame(frame);
+      stopRaf();
       document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("pageshow", handlePageShow);
       lenis.destroy();
       delete window.lenis;
+      window.history.scrollRestoration = previousRestoration;
     };
   }, []);
 
@@ -82,4 +109,5 @@ function App() {
     </>
   );
 }
+
 export default App;

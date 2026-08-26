@@ -45,11 +45,12 @@ const Hero = () => {
         ref={videoRef}
         className={styles.video}
         src="/videos/professional-programmer-workstation.mp4"
+        poster="/videos/posters/hero-home.webp"
         autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         aria-hidden="true"
       />
       <div className={styles.overlay} aria-hidden="true" />
