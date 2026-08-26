@@ -1,4 +1,4 @@
-import { createElement, useEffect, useRef } from "react";
+import { createElement, useLayoutEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Braces, DatabaseZap, Layers3, ShieldCheck } from "lucide-react";
 import profilepic from "../../assets/MyPic.jpeg";
@@ -36,7 +36,7 @@ const HeroStory = () => {
   const sectionRef = useRef(null);
   useGsapRefreshOnReady([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = sectionRef.current;
     if (!section) return undefined;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
@@ -91,8 +91,24 @@ const HeroStory = () => {
   }, []);
 
   return (
-    <section className={styles.story} id="hero-story" ref={sectionRef}>
+    <section className={styles.story} id="profile-story" ref={sectionRef}>
       <div className={styles.inner}>
+        <motion.div
+          className={styles.imageColumn}
+          initial={{ opacity: 0, x: -36 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className={styles.imageFrame}>
+            <img src={profilepic} alt="Ayushmaan Mishra" loading="eager" />
+            <div className={styles.imageBadge}>
+              <span>Available for fresher roles</span>
+              <strong>Full-stack developer</strong>
+            </div>
+          </div>
+        </motion.div>
+
         <div className={styles.copyColumn}>
           <div className={styles.panels}>
             {highlights.map(({ icon: Icon, eyebrow, title, text }, index) => (
@@ -106,22 +122,6 @@ const HeroStory = () => {
             ))}
           </div>
         </div>
-
-        <motion.div
-          className={styles.imageColumn}
-          initial={{ opacity: 0, x: 36 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className={styles.imageFrame}>
-            <img src={profilepic} alt="Ayushmaan Mishra" loading="eager" />
-            <div className={styles.imageBadge}>
-              <span>Available for fresher roles</span>
-              <strong>Full-stack developer</strong>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

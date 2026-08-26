@@ -4,10 +4,14 @@ import styles from "./Loader.module.scss";
 
 const stack = ["React", "Node", "API", "DB", "Web3"];
 
-const Loader = () => {
+const Loader = ({
+  title = "Initializing portfolio",
+  text = "Building UI, APIs, data flows, and verification layers.",
+  compact = false,
+}) => {
   return (
     <motion.div
-      className={styles.loader}
+      className={`${styles.loader} ${compact ? styles.compact : ""}`}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, y: -24 }}
       transition={{ duration: 0.7, ease: "easeInOut" }}
@@ -37,7 +41,7 @@ const Loader = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.55 }}
         >
-          Initializing portfolio
+          {title}
         </motion.h1>
 
         <motion.p
@@ -45,7 +49,7 @@ const Loader = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.32, duration: 0.55 }}
         >
-          Building UI, APIs, data flows, and verification layers.
+          {text}
         </motion.p>
 
         <div className={styles.stack}>

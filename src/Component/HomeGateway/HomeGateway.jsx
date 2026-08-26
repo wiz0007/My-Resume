@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Blocks, Code2, Fingerprint, Mail, Route } from "lucide-react";
 import { Link } from "react-router-dom";
-import { prefetchRoute } from "../../routes/prefetchRoutes";
 import styles from "./HomeGateway.module.scss";
 
 const gateways = [
@@ -63,12 +62,7 @@ const HomeGateway = () => (
           viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.55, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
         >
-          <Link
-            className={styles.card}
-            to={to}
-            onMouseEnter={() => prefetchRoute(to)}
-            onFocus={() => prefetchRoute(to)}
-          >
+          <Link className={styles.card} to={to}>
             <span className={styles.icon}>
               {React.createElement(Icon, { size: 23 })}
             </span>

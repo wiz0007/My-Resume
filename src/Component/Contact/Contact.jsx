@@ -49,7 +49,7 @@ const Contact = () => {
   };
 
   return (
-    <footer className={styles.contact} id="contact">
+    <section className={styles.contact} id="contact">
       <SectionAtmosphere accent="#22d3ee" secondary="#8b5cf6" side="right" subtle />
       <div className={styles.scene} aria-hidden="true">
         <div className={styles.orbit}><i /><i /><i /></div>
@@ -151,7 +151,7 @@ const Contact = () => {
         <span>Copyright {new Date().getFullYear()} Ayushmaan Mishra</span>
         <Link to="/">Back to home <ArrowUpRight size={15} /></Link>
       </div>
-    </footer>
+    </section>
   );
 };
 

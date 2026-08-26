@@ -1,15 +1,16 @@
 .fallback {
-  min-height: 100svh;
+  min-height: 60svh;
   display: grid;
   place-items: center;
   gap: 0.8rem;
-  color: rgba(255, 255, 255, 0.72);
+  padding-top: 7rem;
+  color: rgba(255, 255, 255, 0.68);
   background: #050505;
 }
 
 .fallback span {
-  width: 42px;
-  height: 42px;
+  width: 34px;
+  height: 34px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-top-color: rgba(255, 255, 255, 0.72);
   border-radius: 50%;

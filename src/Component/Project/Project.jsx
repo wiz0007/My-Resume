@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useInView } from "framer-motion";
 import {
+  ArrowUpRight,
   BriefcaseBusiness,
+  Check,
   ExternalLink,
   Gamepad2,
   Github,
@@ -12,7 +13,6 @@ import {
   School,
   ShoppingBag,
   Workflow,
-  X,
 } from "lucide-react";
 import styles from "./Project.module.scss";
 
@@ -22,9 +22,17 @@ const projects = [
     label: "Final Year Project",
     category: "Full-Stack + Web3",
     icon: GraduationCap,
-    desc: "Skill-sharing platform with authentication, role-based access, database-backed workflows, and Polygon Amoy transaction verification.",
-    outcome: "Built as a final-year product with multi-role workflows and blockchain-backed verification.",
-    stack: ["TypeScript", "MERN", "PostgreSQL", "MongoDB", "Polygon Amoy"],
+    desc: "A skill-learning marketplace where learners discover courses, compare tutors, book live sessions, access recorded content, and manage learning activity through role-aware workflows.",
+    outcome: "Built as a multi-role product with learner, tutor, and admin experiences plus wallet transaction audit verification on Polygon Amoy.",
+    role: "Full-stack product engineering",
+    focus: "Marketplace + role workflows",
+    status: "Production project",
+    capabilities: [
+      "Learner, tutor, and administrator flows",
+      "Live-session, recorded-course, review, and support journeys",
+      "SkillCoin wallet activity with blockchain-backed audit proof",
+    ],
+    stack: ["TypeScript", "React", "Node.js", "Express", "MongoDB", "Socket.IO", "Polygon Amoy"],
     live: "https://skillsphere.online",
   },
   {
@@ -32,8 +40,16 @@ const projects = [
     label: "Under Development",
     category: "School Platform",
     icon: School,
-    desc: "School management platform for profiles, students, staff, classes, and attendance with HTTP-only authentication and refresh-token rotation.",
-    outcome: "Focuses on secure tenancy boundaries, token rotation, and admin-grade school operations.",
+    desc: "A school management platform designed around secure operational workflows for school profiles, students, staff, classes, attendance, and role-safe access.",
+    outcome: "The architecture emphasizes secure authentication, refresh-token rotation, tenancy boundaries, and maintainable school administration flows.",
+    role: "Full-stack platform development",
+    focus: "Secure school operations",
+    status: "In development",
+    capabilities: [
+      "Student, staff, class, and attendance management",
+      "HTTP-only authentication with refresh-token rotation",
+      "Role-safe data access and administrative workflows",
+    ],
     stack: ["Angular", "Spring Boot", "PostgreSQL", "Laravel", "JWT"],
     live: "https://school-management-space-frontend.vercel.app",
   },
@@ -42,8 +58,16 @@ const projects = [
     label: "React Project",
     category: "Visual Workflow Tool",
     icon: Workflow,
-    desc: "Visual node and edge editor with a FastAPI parser that returns node count, edge count, and DAG validation using DFS.",
-    outcome: "Turns a visual workflow into structured graph analysis with immediate validation feedback.",
+    desc: "A visual node-and-edge editor paired with a FastAPI parser that converts the canvas into structured graph information and validates whether the graph is a directed acyclic graph.",
+    outcome: "Transforms an interactive workflow canvas into immediate node counts, edge counts, and graph validation feedback.",
+    role: "Frontend + API integration",
+    focus: "Graph interaction + validation",
+    status: "Completed",
+    capabilities: [
+      "Visual node and edge construction with React Flow",
+      "FastAPI parsing endpoint for submitted pipelines",
+      "Depth-first-search based directed acyclic graph validation",
+    ],
     stack: ["React", "React Flow", "FastAPI", "Python", "DFS"],
     live: "https://react-node-project-lm7m.vercel.app",
   },
@@ -52,9 +76,17 @@ const projects = [
     label: "MERN Web App",
     category: "Commerce System",
     icon: ShoppingBag,
-    desc: "Shopping flow with products, cart, authentication, orders, and payment integration.",
-    outcome: "Covers the core commerce journey from browsing to checkout-oriented order flow.",
-    stack: ["MERN", "REST APIs", "Authentication", "Payments"],
+    desc: "A full shopping journey covering product discovery, cart state, authentication, order workflows, and payment-oriented checkout behavior.",
+    outcome: "Brings the essential commerce path into one application, from browsing products through authenticated order creation.",
+    role: "Full-stack development",
+    focus: "Commerce journey",
+    status: "Completed",
+    capabilities: [
+      "Product browsing and cart workflows",
+      "Authenticated customer experience",
+      "Order and payment-oriented application flow",
+    ],
+    stack: ["MongoDB", "Express", "React", "Node.js", "REST APIs", "Authentication"],
     live: "https://my-kart-taupe.vercel.app/",
   },
   {
@@ -62,9 +94,17 @@ const projects = [
     label: "Real-time Web App",
     category: "Communication",
     icon: MessageCircle,
-    desc: "MERN chat application with secure user access, message workflows, and reusable modules.",
-    outcome: "Packages real-time communication patterns into a reusable authenticated web experience.",
-    stack: ["MERN", "Real-time", "Authentication"],
+    desc: "A community chat application centered on authenticated access, real-time conversations, message workflows, and reusable communication modules.",
+    outcome: "Packages real-time messaging patterns into an authenticated web experience that can grow with additional community features.",
+    role: "Full-stack development",
+    focus: "Real-time communication",
+    status: "Completed",
+    capabilities: [
+      "Authenticated user access",
+      "Real-time message workflows",
+      "Reusable chat and community interface modules",
+    ],
+    stack: ["MongoDB", "Express", "React", "Node.js", "Real-time", "Authentication"],
     live: "https://we-chatt-ruby.vercel.app",
   },
   {
@@ -72,8 +112,16 @@ const projects = [
     label: "Python Desktop App",
     category: "Game Logic",
     icon: Gamepad2,
-    desc: "Python desktop application for team selection and score-based fantasy game logic.",
-    outcome: "Applies desktop UI structure and scoring rules to an interactive selection workflow.",
+    desc: "A Python desktop application for assembling a fantasy team and evaluating selections through score-based game rules.",
+    outcome: "Combines desktop interface structure with selection constraints and scoring logic in an interactive application.",
+    role: "Desktop application development",
+    focus: "Selection + scoring logic",
+    status: "Completed",
+    capabilities: [
+      "Interactive team selection workflow",
+      "Rule-driven score calculation",
+      "Desktop graphical user interface structure",
+    ],
     stack: ["Python", "Desktop GUI", "Game Logic"],
     code: "https://github.com/wiz0007/Fantasy-Game-App",
   },
@@ -82,8 +130,16 @@ const projects = [
     label: "Java Desktop App",
     category: "Management System",
     icon: Hotel,
-    desc: "Core Java desktop application for room booking, customer records, and hotel workflows.",
-    outcome: "Models operational CRUD workflows around booking, rooms, and customer records.",
+    desc: "A Core Java desktop application that models practical hotel operations around rooms, bookings, customers, and record management.",
+    outcome: "Turns common hotel operations into a structured desktop CRUD workflow with clear domain-oriented screens.",
+    role: "Desktop application development",
+    focus: "Operational CRUD workflows",
+    status: "Completed",
+    capabilities: [
+      "Room and booking management",
+      "Customer record workflows",
+      "Desktop-oriented operational interface",
+    ],
     stack: ["Core Java", "Desktop GUI", "Booking Logic"],
     code: "https://github.com/wiz0007/Hotel_management",
   },
@@ -92,9 +148,17 @@ const projects = [
     label: "Frontend Experience",
     category: "Interactive Portfolio",
     icon: PanelsTopLeft,
-    desc: "Responsive React portfolio with animated sections, 3D experiences, project presentation, and SEO setup.",
-    outcome: "Uses Framer Motion, Three.js, and responsive SCSS to present project evidence with polish.",
-    stack: ["React", "Three.js", "SCSS", "Framer Motion"],
+    desc: "This portfolio itself: a responsive React experience combining cinematic hero sections, motion, 3D scenes, project storytelling, and performance-aware page architecture.",
+    outcome: "Treats the portfolio as a product experience rather than a static résumé page, while keeping the content responsive and navigable.",
+    role: "Frontend experience engineering",
+    focus: "Motion + spatial presentation",
+    status: "Live",
+    capabilities: [
+      "Animated multi-page portfolio architecture",
+      "Three-dimensional and scroll-driven visual experiences",
+      "Responsive styling, navigation, and search-engine setup",
+    ],
+    stack: ["React", "Three.js", "SCSS", "Framer Motion", "GSAP"],
     live: "https://ayushmaan-mishra-resume.vercel.app/",
   },
   {
@@ -102,204 +166,251 @@ const projects = [
     label: "Service Website",
     category: "Client Acquisition",
     icon: BriefcaseBusiness,
-    desc: "Service-focused React website for showcasing work and generating client interest.",
-    outcome: "Structures a service offer around clear messaging, navigation, and project presentation.",
+    desc: "A service-focused React website designed to introduce an offer, showcase relevant work, and move a potential client toward starting a conversation.",
+    outcome: "Structures project evidence and service messaging into a focused client-acquisition experience.",
+    role: "Frontend development",
+    focus: "Service positioning",
+    status: "Live",
+    capabilities: [
+      "Service-led landing experience",
+      "Project presentation and navigation",
+      "Clear contact-oriented conversion path",
+    ],
     stack: ["React", "Landing Flow", "Project Showcase"],
     live: "https://innovatech-puce.vercel.app",
   },
 ];
 
-const ProjectVisual = ({ project, large = false }) => {
+const ProjectSystemVisual = ({ project, index }) => {
   const Icon = project.icon;
+  const visualStack = project.stack.slice(0, 5);
 
   return (
-    <div className={`${styles.projectVisual} ${large ? styles.largeVisual : ""}`} aria-hidden="true">
-      <div className={styles.windowBar}>
-        <span />
-        <span />
-        <span />
+    <div className={styles.systemVisual} aria-hidden="true">
+      <div className={styles.visualGrid} />
+      <div className={styles.visualGlow} />
+
+      <div className={styles.visualTopline}>
+        <span>System map</span>
+        <span>{String(index + 1).padStart(2, "0")}</span>
       </div>
-      <div className={styles.visualBody}>
-        <div className={styles.visualHeader}>
+
+      <div className={styles.orbitStage}>
+        <span className={`${styles.orbit} ${styles.orbitOne}`} />
+        <span className={`${styles.orbit} ${styles.orbitTwo}`} />
+        <span className={`${styles.orbit} ${styles.orbitThree}`} />
+
+        <div className={styles.coreNode}>
+          <Icon size={30} strokeWidth={1.7} />
           <span>{project.category}</span>
-          <Icon size={large ? 34 : 28} />
         </div>
-        <div className={styles.visualLines}>
-          <i />
-          <i />
-          <i />
-        </div>
-        <div className={styles.visualFooter}>
-          <span>{project.stack[0]}</span>
-          <span>{project.stack[1]}</span>
-        </div>
+
+        {visualStack.map((tech, techIndex) => (
+          <span
+            key={tech}
+            className={`${styles.techNode} ${styles[`techNode${techIndex + 1}`]}`}
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <div className={styles.visualRoute}>
+        <span>idea</span>
+        <i />
+        <span>architecture</span>
+        <i />
+        <span>working system</span>
       </div>
     </div>
   );
 };
 
-const ProjectRow = ({ project, index, active, onActivate, onOpen }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { amount: 0.62, margin: "-20% 0px -35% 0px" });
-  const isActive = active === index;
+const ProjectCard = ({ project, index, activeIndex, total }) => {
+  const isActive = index === activeIndex;
+  const isArchived = index === activeIndex - 1;
+  const isBuried = index < activeIndex - 1;
 
-  useEffect(() => {
-    if (inView) onActivate(index);
-  }, [inView, index, onActivate]);
+  const cardState = isActive
+    ? styles.activeCard
+    : isArchived
+      ? styles.archivedCard
+      : isBuried
+        ? styles.buriedCard
+        : styles.futureCard;
 
   return (
-    <motion.article
-      ref={ref}
-      className={`${styles.projectRow} ${isActive ? styles.activeRow : ""}`}
-      initial={{ opacity: 0, y: 34 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
-      transition={{ duration: 0.52, ease: [0.16, 1, 0.3, 1] }}
-      onMouseEnter={() => onActivate(index)}
-      onFocus={() => onActivate(index)}
+    <article
+      className={`${styles.projectCard} ${cardState}`}
+      style={{ "--project-index": index }}
+      aria-current={isActive ? "true" : undefined}
     >
-      <button type="button" className={styles.rowButton} onClick={() => onOpen(project)}>
-        <span className={styles.rowIndex}>{String(index + 1).padStart(2, "0")}</span>
-        <span className={styles.rowMain}>
-          <span className={styles.projectLabel}>{project.label}</span>
-          <strong>{project.title}</strong>
-          <span>{project.outcome}</span>
-        </span>
-        <span className={styles.rowMeta}>
-          {project.stack.slice(0, 3).map((tech) => (
-            <span key={tech}>{tech}</span>
-          ))}
-        </span>
-      </button>
-    </motion.article>
+      <div className={styles.cardSurface}>
+        <header className={styles.cardHeader}>
+          <div className={styles.headerIdentity}>
+            <span className={styles.projectNumber}>
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <span className={styles.projectLabel}>{project.label}</span>
+              <strong>{project.title}</strong>
+            </div>
+          </div>
+
+          <div className={styles.headerState}>
+            <span>{project.status}</span>
+            <span>{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
+          </div>
+        </header>
+
+        <div className={styles.cardBody}>
+          <div className={styles.projectNarrative}>
+            <div className={styles.categoryRow}>
+              <span>{project.category}</span>
+              <span>Case file</span>
+            </div>
+
+            <h3>{project.title}</h3>
+            <p className={styles.description}>{project.desc}</p>
+
+            <div className={styles.metaGrid}>
+              <div>
+                <span>Role</span>
+                <strong>{project.role}</strong>
+              </div>
+              <div>
+                <span>Focus</span>
+                <strong>{project.focus}</strong>
+              </div>
+              <div>
+                <span>Status</span>
+                <strong>{project.status}</strong>
+              </div>
+            </div>
+
+            <div className={styles.capabilityBlock}>
+              <span className={styles.blockLabel}>What it demonstrates</span>
+              <ul>
+                {project.capabilities.map((capability) => (
+                  <li key={capability}>
+                    <Check size={15} />
+                    <span>{capability}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className={styles.stackBlock}>
+              <span className={styles.blockLabel}>Technology stack</span>
+              <div className={styles.tags}>
+                {project.stack.map((tech) => (
+                  <span key={tech}>{tech}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.actions}>
+              {project.live && (
+                <a href={project.live} target="_blank" rel="noopener noreferrer">
+                  View live <ExternalLink size={16} />
+                </a>
+              )}
+              {project.code && (
+                <a href={project.code} target="_blank" rel="noopener noreferrer">
+                  Source code <Github size={16} />
+                </a>
+              )}
+              {!project.live && !project.code && (
+                <span className={styles.privateProject}>Project details available on request</span>
+              )}
+            </div>
+          </div>
+
+          <div className={styles.projectEvidence}>
+            <ProjectSystemVisual project={project} index={index} />
+            <div className={styles.outcomePanel}>
+              <span>Build outcome</span>
+              <p>{project.outcome}</p>
+              <ArrowUpRight size={19} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
   );
 };
 
 const Project = () => {
-  const [active, setActive] = useState(0);
-  const [selected, setSelected] = useState(null);
-  const featured = projects[active];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const markerRefs = useRef([]);
 
   useEffect(() => {
-    const handleKey = (event) => {
-      if (event.key === "Escape") setSelected(null);
+    let frameId = null;
+
+    const syncActiveProject = () => {
+      frameId = null;
+      const markers = markerRefs.current;
+      const triggerLine = window.innerHeight * 0.68;
+      let nextIndex = 0;
+
+      for (let index = 0; index < markers.length; index += 1) {
+        const marker = markers[index];
+        if (!marker) continue;
+
+        if (marker.getBoundingClientRect().top <= triggerLine) {
+          nextIndex = index;
+        } else {
+          break;
+        }
+      }
+
+      setActiveIndex((currentIndex) =>
+        currentIndex === nextIndex ? currentIndex : nextIndex,
+      );
     };
 
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, []);
+    const requestSync = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(syncActiveProject);
+    };
 
-  useEffect(() => {
-    document.body.style.overflow = selected ? "hidden" : "";
+    syncActiveProject();
+    window.addEventListener("scroll", requestSync, { passive: true });
+    window.addEventListener("resize", requestSync);
+
     return () => {
-      document.body.style.overflow = "";
+      window.removeEventListener("scroll", requestSync);
+      window.removeEventListener("resize", requestSync);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
     };
-  }, [selected]);
+  }, []);
 
   return (
     <section className={styles.projects} id="projects">
-      <div className={styles.header}>
-        <span>Selected Work</span>
-        <h2>Projects built as working systems.</h2>
-      </div>
+      <div className={styles.sectionLabel}>Selected work</div>
 
-      <div className={styles.showcase}>
-        <aside className={styles.featured} aria-live="polite">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={featured.title}
-              className={styles.featuredInner}
-              initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -18, filter: "blur(8px)" }}
-              transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <ProjectVisual project={featured} large />
-              <span className={styles.projectLabel}>{featured.label}</span>
-              <h3>{featured.title}</h3>
-              <p>{featured.desc}</p>
-              <div className={styles.tags}>
-                {featured.stack.map((tech) => (
-                  <span key={tech}>{tech}</span>
-                ))}
-              </div>
-              <div className={styles.actions}>
-                <button type="button" onClick={() => setSelected(featured)}>View details</button>
-                {featured.live && (
-                  <a href={featured.live} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink size={17} /> Live
-                  </a>
-                )}
-                {featured.code && (
-                  <a href={featured.code} target="_blank" rel="noopener noreferrer">
-                    <Github size={17} /> GitHub
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </aside>
-
-        <div className={styles.projectList}>
+      <div className={styles.stackFrame}>
+        <div className={styles.projectStack}>
           {projects.map((project, index) => (
-            <ProjectRow
-              key={project.title}
-              project={project}
-              index={index}
-              active={active}
-              onActivate={setActive}
-              onOpen={setSelected}
-            />
+            <React.Fragment key={project.title}>
+              <span
+                ref={(node) => {
+                  markerRefs.current[index] = node;
+                }}
+                className={styles.projectMarker}
+                data-project-marker={index}
+                aria-hidden="true"
+              />
+              <ProjectCard
+                project={project}
+                index={index}
+                activeIndex={activeIndex}
+                total={projects.length}
+              />
+            </React.Fragment>
           ))}
         </div>
       </div>
-
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            className={styles.modalOverlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelected(null)}
-          >
-            <motion.article
-              className={styles.modal}
-              initial={{ opacity: 0, y: 30, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 30, scale: 0.96 }}
-              transition={{ duration: 0.3 }}
-              onClick={(event) => event.stopPropagation()}
-            >
-              <button type="button" className={styles.closeBtn} onClick={() => setSelected(null)} aria-label="Close project details" title="Close">
-                <X />
-              </button>
-              <ProjectVisual project={selected} large />
-              <span className={styles.projectLabel}>{selected.label}</span>
-              <h3>{selected.title}</h3>
-              <p>{selected.desc}</p>
-              <p className={styles.modalOutcome}>{selected.outcome}</p>
-              <div className={styles.tags}>
-                {selected.stack.map((tech) => (
-                  <span key={tech}>{tech}</span>
-                ))}
-              </div>
-              <div className={styles.actions}>
-                {selected.live && (
-                  <a href={selected.live} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink size={17} /> Live Demo
-                  </a>
-                )}
-                {selected.code && (
-                  <a href={selected.code} target="_blank" rel="noopener noreferrer">
-                    <Github size={17} /> GitHub
-                  </a>
-                )}
-              </div>
-            </motion.article>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

@@ -1,10 +1,6 @@
 .deferred {
+  min-height: var(--deferred-section-height, 60svh);
   background: #050505;
-}
-
-.placeholder {
-  min-height: inherit;
-  background:
-    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.035), transparent),
-    #050505;
+  content-visibility: auto;
+  contain-intrinsic-size: auto var(--deferred-section-height, 60svh);
 }
