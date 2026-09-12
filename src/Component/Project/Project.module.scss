@@ -662,7 +662,8 @@
     position: relative;
     top: auto;
     height: auto;
-    margin-bottom: 1.15rem;
+    min-height: 0;
+    margin-bottom: 2rem;
     perspective: none;
   }
 
@@ -676,19 +677,23 @@
     opacity: 1 !important;
     border-radius: 18px;
     filter: none;
-    transform: none;
+    transform: none !important;
     pointer-events: auto;
   }
 
+  .cardHeader,
   .archivedCard .cardHeader {
     min-height: 4.65rem;
-    border-bottom-color: rgba(255, 255, 255, 0.09);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
   }
 
+  .cardBody,
   .archivedCard .cardBody,
   .buriedCard .cardBody {
-    opacity: 1;
-    transform: none;
+    display: grid;
+    height: auto;
+    opacity: 1 !important;
+    transform: none !important;
     pointer-events: auto;
   }
 

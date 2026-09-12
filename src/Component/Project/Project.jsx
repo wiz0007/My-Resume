@@ -162,7 +162,7 @@ const projects = [
     live: "https://ayushmaan-mishra-resume.vercel.app/",
   },
   {
-    title: "Freelance Application",
+    title: "Rogue AI",
     label: "Service Website",
     category: "Client Acquisition",
     icon: BriefcaseBusiness,
@@ -177,7 +177,7 @@ const projects = [
       "Clear contact-oriented conversion path",
     ],
     stack: ["React", "Landing Flow", "Project Showcase"],
-    live: "https://innovatech-puce.vercel.app",
+    live: "https://rogueai-puce.vercel.app/",
   },
 ];
 
