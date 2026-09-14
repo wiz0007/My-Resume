@@ -1,4 +1,4 @@
-import React, { createElement } from "react";
+import { createElement } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, BriefcaseBusiness, Code2, Database, Trophy } from "lucide-react";
 import styles from "./About.module.scss";

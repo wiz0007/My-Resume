@@ -1,4 +1,3 @@
-import React from "react";
 import PageHero from "../PageHero/PageHero";
 
 const featuredStack = [

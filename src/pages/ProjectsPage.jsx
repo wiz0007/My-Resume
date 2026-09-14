@@ -1,4 +1,3 @@
-import React from "react";
 import PageHero from "../Component/PageHero/PageHero";
 import Projects from "../Component/Project/Project";
 import ProjectInquiry from "../Component/ProjectInquiry/ProjectInquiry";

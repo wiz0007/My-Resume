@@ -57,7 +57,7 @@
   text-transform: uppercase;
 }
 
-.content h1 {
+.title {
   max-width: 600px;
   margin: 0;
   color: #ffffff;
@@ -67,6 +67,12 @@
   letter-spacing: 0;
   text-wrap: balance;
   text-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+}
+
+.summaryWord {
+  display: inline-block;
+  margin-right: 0.3em;
+  will-change: transform, opacity, filter;
 }
 
 .summary {
@@ -145,7 +151,7 @@
     letter-spacing: 0.24em;
   }
 
-  .content h1 {
+  .title {
     font-size: clamp(2.55rem, 12vw, 4rem);
   }
 

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Braces, Database, GitBranch, Layers, Server, Shield } from "lucide-react";
 import SectionAtmosphere from "../SectionAtmosphere/SectionAtmosphere";
 import styles from "./Skills.module.scss";

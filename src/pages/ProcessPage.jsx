@@ -1,4 +1,3 @@
-import React from "react";
 import PageHero from "../Component/PageHero/PageHero";
 import Process from "../Component/Process/Process";
 
