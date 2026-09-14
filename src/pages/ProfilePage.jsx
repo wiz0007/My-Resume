@@ -1,4 +1,3 @@
-import React from "react";
 import PageHero from "../Component/PageHero/PageHero";
 import HeroStory from "../Component/HeroStory/HeroStory";
 import About from "../Component/About/About";

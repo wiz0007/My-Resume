@@ -68,17 +68,9 @@
   max-width: 720px;
 }
 
-.eyebrow {
-  color: rgba(255, 255, 255, 0.58);
-  font-size: 0.78rem;
-  font-weight: 850;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
 .copy h2 {
   max-width: 660px;
-  margin: 0.8rem 0 1rem;
+  margin: 0 0 1rem;
   color: #ffffff;
   font-size: clamp(1.85rem, 3vw, 2.8rem);
   line-height: 1.1;
@@ -86,7 +78,7 @@
   text-wrap: balance;
 }
 
-.copy > p {
+.intro {
   max-width: 680px;
   margin: 0;
   color: rgba(229, 236, 245, 0.72);
@@ -122,17 +114,26 @@
     background: rgba(255, 255, 255, 0.88);
   }
 
-  strong {
+  .strengthTitle {
+    display: block;
     color: #ffffff;
     font-size: 0.96rem;
+    font-weight: 800;
+    line-height: 1.35;
   }
 
-  p {
+  .strengthText {
     margin: 0.25rem 0 0;
     color: rgba(229, 236, 245, 0.64);
     font-size: 0.9rem;
     line-height: 1.55;
   }
+}
+
+.dropWord {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-origin: center bottom;
 }
 
 .link {

@@ -1,4 +1,3 @@
-import React from "react";
 import PageHero from "../Component/PageHero/PageHero";
 import Contact from "../Component/Contact/Contact";
 
