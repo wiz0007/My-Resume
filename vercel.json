@@ -53,9 +53,16 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/resume",
+      "destination": "/Ayushmaan_Mishra-Resume.pdf",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
-      "source": "/((?!assets/|videos/|certificates/|favicon|og-image|robots.txt|sitemap.xml).*)",
+      "source": "/((?!assets/|videos/|certificates/|favicon|og-image|robots.txt|sitemap.xml|.*\\.pdf).*)",
       "destination": "/index.html"
     }
   ]
