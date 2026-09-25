@@ -1,17 +1,70 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowDown, Download } from "lucide-react";
-import { useNearViewport } from "../../hooks/useNearViewport";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowDown, ArrowRight, Download, Send, Sparkles } from "lucide-react";
 import { usePageVisibility } from "../../hooks/usePageVisibility";
 import { useReducedMotionPreference } from "../../hooks/useMediaPreferences";
+import myPic from "../../assets/MyPic.jpeg";
 import styles from "./Hero.module.scss";
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
 };
+
+const titleFirst = "Ayushmaan";
+const titleLast = "Mishra";
+
+const charVariants = {
+  hidden: {
+    opacity: 0,
+    z: -140,
+    scale: 0.65,
+    rotateX: 40,
+    filter: "blur(6px)",
+  },
+  show: (i) => ({
+    opacity: 1,
+    z: 0,
+    scale: 1,
+    rotateX: 0,
+    filter: "blur(0px)",
+    transition: {
+      type: "spring",
+      stiffness: 280,
+      damping: 18,
+      mass: 0.75,
+      delay: 0.12 + i * 0.032,
+    },
+  }),
+};
+
+const summaryWordVariants = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+    z: -30,
+    filter: "blur(4px)",
+  },
+  show: (i) => ({
+    opacity: 1,
+    y: 0,
+    z: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1],
+      delay: 0.5 + i * 0.015,
+    },
+  }),
+};
+
+const specializations = [
+  "Full-Stack Web Systems",
+  "Scalable APIs & Microservices",
+  "High-Performance Interfaces",
+  "React • Spring Boot • FastAPI",
+];
 
 const summaryText =
   "I design and build clean web products where polished interfaces, dependable APIs, authentication, and database workflows work together as one complete experience.";
@@ -20,155 +73,250 @@ const splitWords = (text) => text.split(" ");
 
 const Hero = () => {
   const heroRef = useRef(null);
-  const videoRef = useRef(null);
-  const isNearViewport = useNearViewport(videoRef, {
-    rootMargin: "160px 0px",
-    threshold: 0.12,
-    initial: true,
-  });
   const isPageVisible = usePageVisibility();
   const reducedMotion = useReducedMotionPreference();
 
+  const [activeSpecIndex, setActiveSpecIndex] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
+
+  // Rotating specialization ticker
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return undefined;
+    if (reducedMotion || !isPageVisible) return undefined;
+    const interval = setInterval(() => {
+      setActiveSpecIndex((prev) => (prev + 1) % specializations.length);
+    }, 3200);
+    return () => clearInterval(interval);
+  }, [reducedMotion, isPageVisible]);
 
-    if (reducedMotion || !isNearViewport || !isPageVisible) {
-      video.pause();
-      return undefined;
-    }
+  // Interactive mouse spotlight and 3D typography tilt
+  const handleMouseMove = (e) => {
+    if (reducedMotion) return;
+    const rect = heroRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
 
-    video.play().catch(() => {});
+  const handleMouseLeave = () => {
+    setMousePos({ x: -1000, y: -1000 });
+  };
 
-    return () => {
-      video.pause();
-    };
-  }, [isNearViewport, isPageVisible, reducedMotion]);
+  // Smooth optical scroll parallax (natural, non-pinning)
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
 
-  useLayoutEffect(() => {
-    const hero = heroRef.current;
-    if (!hero || reducedMotion) return undefined;
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-16%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.15]);
+  const portraitParallaxY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    const summaryWords = Array.from(hero.querySelectorAll(`.${styles.summaryWord}`));
-    const mm = gsap.matchMedia();
-
-    mm.add(
-      {
-        desktop: "(min-width: 761px)",
-        mobile: "(max-width: 760px)",
-      },
-      (matchContext) => {
-        const { desktop } = matchContext.conditions;
-        const summaryX = desktop ? 150 : 64;
-        const summaryY = desktop ? 76 : 46;
-
-        const summaryFrom = (index) => {
-          const lane = index % 6;
-          const direction = index % 2 === 0 ? -1 : 1;
-          const xMagnitude = summaryX * (0.36 + lane * 0.1);
-          const yMagnitude = summaryY * (((index * 7) % 5) / 4 - 0.5);
-
-          return {
-            x: direction * xMagnitude,
-            y: yMagnitude,
-            rotation: ((index * 11) % 9) - 4,
-            skewX: ((index * 5) % 7) - 3,
-            scale: 0.95 + (index % 3) * 0.015,
-            autoAlpha: 0.12 + (index % 4) * 0.05,
-            filter: `blur(${3 + (index % 3)}px)`,
-          };
-        };
-
-        summaryWords.forEach((word, index) => gsap.set(word, summaryFrom(index)));
-
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: hero,
-            start: "top top",
-            end: () => `+=${Math.max(window.innerHeight * (desktop ? 0.82 : 0.68), 420)}`,
-            pin: true,
-            scrub: 0.8,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        timeline.to(summaryWords, {
-          x: 0,
-          y: 0,
-          rotation: 0,
-          skewX: 0,
-          scale: 1,
-          autoAlpha: 1,
-          filter: "blur(0px)",
-          duration: 0.72,
-          stagger: {
-            each: 0.012,
-            from: "edges",
-          },
-          ease: "none",
-        });
-
-        timeline.to({}, { duration: 0.2 });
-      }
-    );
-
-    ScrollTrigger.refresh();
-
-    return () => mm.revert();
-  }, [reducedMotion]);
+  // Calculate subtle 3D typography tilt based on cursor position
+  const tiltX =
+    mousePos.x >= 0 && heroRef.current
+      ? (mousePos.y / heroRef.current.offsetHeight - 0.5) * -8
+      : 0;
+  const tiltY =
+    mousePos.x >= 0 && heroRef.current
+      ? (mousePos.x / heroRef.current.offsetWidth - 0.5) * 10
+      : 0;
 
   return (
-    <section className={styles.hero} id="home" ref={heroRef}>
-      <video
-        ref={videoRef}
-        className={styles.video}
-        src="/videos/professional-programmer-workstation.mp4"
-        poster="/videos/posters/hero-home.webp"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
+    <section
+      className={styles.hero}
+      id="home"
+      ref={heroRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <motion.div
+        className={styles.portraitWrapper}
+        style={reducedMotion ? undefined : { y: portraitParallaxY }}
+        aria-hidden="true"
+      >
+        <img
+          src={myPic}
+          alt=""
+          className={styles.portraitImage}
+          loading="eager"
+          decoding="async"
+        />
+        <div className={styles.portraitOverlay} />
+      </motion.div>
+
+      {/* Reactive cursor spotlight */}
+      <div
+        className={styles.cursorSpotlight}
+        style={{
+          opacity: mousePos.x >= 0 ? 1 : 0,
+          background: `radial-gradient(650px circle at ${mousePos.x}px ${mousePos.y}px, rgba(56, 189, 248, 0.12), transparent 70%)`,
+        }}
         aria-hidden="true"
       />
-      <div className={styles.overlay} aria-hidden="true" />
 
-      <div className={styles.content}>
-        <motion.p
-          className={styles.eyebrow}
+      <motion.div
+        className={styles.content}
+        style={reducedMotion ? undefined : { y: contentY, opacity: contentOpacity }}
+      >
+        {/* Status indicator bar */}
+        <motion.div
+          className={styles.statusBadge}
           variants={itemVariants}
           initial="hidden"
           animate="show"
         >
-          Full-stack developer
-        </motion.p>
+          <span className={styles.statusPulse} aria-hidden="true">
+            <span className={styles.pulseDot} />
+            <span className={styles.pulseRing} />
+          </span>
+          <span className={styles.statusText}>Available for Roles</span>
+          <span className={styles.statusSep}>•</span>
+          <span className={styles.statusSub}>B.Tech Computer Engineering</span>
+        </motion.div>
 
-        <h1 className={styles.title}>Ayushmaan Mishra</h1>
+        {/* 3D Kinetic Depth Title: letters spring forward from Z-depth */}
+        <h1
+          className={styles.title}
+          aria-label="Ayushmaan Mishra"
+          style={
+            reducedMotion
+              ? undefined
+              : {
+                  transform: `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
+                }
+          }
+        >
+          <span className={styles.titleWord} aria-hidden="true">
+            {titleFirst.split("").map((char, index) => (
+              <motion.span
+                key={`first-${index}`}
+                className={styles.titleChar}
+                custom={index}
+                variants={charVariants}
+                initial={reducedMotion ? { opacity: 1 } : "hidden"}
+                animate="show"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </span>{" "}
+          <span className={`${styles.titleWord} ${styles.titleAccent}`} aria-hidden="true">
+            {titleLast.split("").map((char, index) => (
+              <motion.span
+                key={`last-${index}`}
+                className={`${styles.titleChar} ${styles.titleAccentChar}`}
+                custom={titleFirst.length + index}
+                variants={charVariants}
+                initial={reducedMotion ? { opacity: 1 } : "hidden"}
+                animate="show"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </span>
+        </h1>
 
+        {/* Rotating specialization ticker with 3D perspective flip */}
+        <div className={styles.tickerWrapper}>
+          <span className={styles.tickerPrefix}>Focus:</span>
+          <div className={styles.tickerTrack}>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={activeSpecIndex}
+                className={styles.tickerText}
+                initial={{ opacity: 0, rotateX: -75, y: 10, filter: "blur(4px)" }}
+                animate={{ opacity: 1, rotateX: 0, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, rotateX: 75, y: -10, filter: "blur(4px)" }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {specializations[activeSpecIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Summary text with cascading wave and interactive word hover */}
         <p className={styles.summary} aria-label={summaryText}>
           {splitWords(summaryText).map((word, index) => (
-            <span className={styles.summaryWord} key={`${word}-${index}`}>
+            <motion.span
+              key={`${word}-${index}`}
+              className={styles.summaryWord}
+              custom={index}
+              variants={summaryWordVariants}
+              initial={reducedMotion ? { opacity: 1 } : "hidden"}
+              animate="show"
+              whileHover={
+                reducedMotion
+                  ? undefined
+                  : {
+                      color: "#7dd3fc",
+                      textShadow: "0 0 14px rgba(56, 189, 248, 0.45)",
+                      y: -2,
+                      transition: { duration: 0.12 },
+                    }
+              }
+            >
               {word}
-            </span>
+            </motion.span>
           ))}
         </p>
 
+        {/* Key capabilities strip */}
+        <motion.div
+          className={styles.capabilityStrip}
+          variants={itemVariants}
+          initial="hidden"
+          animate="show"
+          transition={{ delay: 0.7 }}
+        >
+          <div className={styles.capItem}>
+            <span className={styles.capValue}>9+</span>
+            <span className={styles.capLabel}>Systems</span>
+          </div>
+          <div className={styles.capDivider} />
+          <div className={styles.capItem}>
+            <span className={styles.capValue}>Full-Stack</span>
+            <span className={styles.capLabel}>React • Spring • FastAPI</span>
+          </div>
+          <div className={styles.capDivider} />
+          <div className={styles.capItem}>
+            <span className={styles.capValue}>Specialty</span>
+            <span className={styles.capLabel}>Architecture</span>
+          </div>
+        </motion.div>
+
+        {/* Multi-action launchpad */}
         <motion.div
           className={styles.actions}
           variants={itemVariants}
           initial="hidden"
           animate="show"
-          transition={{ delay: 0.18 }}
+          transition={{ delay: 0.78 }}
         >
-          <a href="/Ayushmaan_Mishra-Resume.pdf" target="_blank" rel="noopener noreferrer">
-            <Download size={17} />
-            Resume
+          <Link to="/projects" className={styles.primaryBtn}>
+            <Sparkles size={16} />
+            <span>Explore Systems</span>
+            <ArrowRight size={15} />
+          </Link>
+
+          <Link to="/contact" className={styles.secondaryBtn}>
+            <Send size={15} />
+            <span>Contact</span>
+          </Link>
+
+          <a
+            href="/Ayushmaan_Mishra-Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.resumeBtn}
+          >
+            <Download size={15} />
+            <span>Resume</span>
           </a>
         </motion.div>
-      </div>
+      </motion.div>
 
       <a className={styles.scrollCue} href="#explore" aria-label="Scroll to site sections">
         <ArrowDown size={22} />

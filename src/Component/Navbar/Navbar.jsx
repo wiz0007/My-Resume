@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { prefetchRoute } from "../../routes/prefetchRoutes";
 import styles from "./Navbar.module.scss";
 
 const Navbar = () => {
@@ -33,6 +34,7 @@ const Navbar = () => {
   const mobileLinks = [...leftLinks, ...rightLinks];
 
   const linkClass = ({ isActive }) => (isActive ? styles.active : undefined);
+  const warmRoute = (path) => () => prefetchRoute(path);
 
   return (
     <motion.header
@@ -50,13 +52,15 @@ const Navbar = () => {
             to={link.to}
             className={linkClass}
             end={link.to === "/"}
+            onMouseEnter={warmRoute(link.to)}
+            onFocus={warmRoute(link.to)}
           >
             {link.label}
           </NavLink>
         ))}
       </nav>
 
-      <Link to="/" className={styles.logo} aria-label="Ayushmaan Mishra home">
+      <Link to="/" className={styles.logo} aria-label="Ayushmaan Mishra home" onMouseEnter={warmRoute("/")}>
         Ayushmaan Mishra
       </Link>
 
@@ -66,6 +70,8 @@ const Navbar = () => {
             key={link.label}
             to={link.to}
             className={linkClass}
+            onMouseEnter={warmRoute(link.to)}
+            onFocus={warmRoute(link.to)}
           >
             {link.label}
           </NavLink>
@@ -104,6 +110,7 @@ const Navbar = () => {
                 to={link.to}
                 className={linkClass}
                 onClick={() => setIsOpen(false)}
+                onFocus={warmRoute(link.to)}
                 end={link.to === "/"}
               >
                 {link.label}
