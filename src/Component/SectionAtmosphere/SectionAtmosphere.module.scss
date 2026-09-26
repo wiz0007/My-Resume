@@ -5,6 +5,8 @@
   inset: 0;
   z-index: 0;
   overflow: hidden;
+  overflow: clip;
+  contain: paint;
   pointer-events: none;
   perspective: 900px;
   isolation: isolate;
@@ -106,10 +108,21 @@
 }
 
 @media (max-width: 720px) {
-  .atmosphere { opacity: 0.24; }
-  .orbit { width: 360px; right: -13rem; }
-  .left .orbit { left: -13rem; }
-  .perspectiveGrid { bottom: -30%; height: 70%; background-size: 42px 42px; }
+  .atmosphere {
+    opacity: 0.24;
+    overflow: clip;
+    contain: paint;
+  }
+  .orbit {
+    display: none;
+  }
+  .perspectiveGrid {
+    left: 0;
+    right: 0;
+    bottom: -20%;
+    height: 60%;
+    background-size: 36px 36px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

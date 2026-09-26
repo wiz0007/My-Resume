@@ -5,12 +5,16 @@
     radial-gradient(circle at 14% 12%, rgba(16, 185, 129, 0.07), transparent 25%),
     radial-gradient(circle at 86% 46%, rgba(245, 158, 11, 0.055), transparent 24%),
     linear-gradient(180deg, #050505 0%, #080808 48%, #040404 100%);
+  overflow: clip;
+  overflow-x: clip;
+  contain: paint;
 }
 
 .inner {
   position: relative;
   z-index: 1;
   width: min(1240px, calc(100% - 2.5rem));
+  max-width: 100%;
   margin-inline: auto;
 }
 
@@ -819,12 +823,19 @@
   .overviewScene,
   .spatialStage {
     min-height: 470px;
+    overflow: clip;
+    contain: paint;
+  }
+
+  .discoveryBoard {
+    overflow: clip;
   }
 }
 
 @media (max-width: 680px) {
   .inner {
     width: min(100% - 2rem, 1240px);
+    max-width: calc(100vw - 2rem);
   }
 
   .overview {
@@ -833,6 +844,7 @@
 
   .scene {
     padding-block: 4.5rem;
+    overflow: clip;
   }
 
   .overviewCopy h2,
@@ -844,6 +856,12 @@
   .spatialStage {
     min-height: 390px;
     border-radius: 18px;
+    overflow: clip;
+    contain: paint;
+  }
+
+  .discoveryBoard {
+    overflow: clip;
   }
 
   .overviewNode {
