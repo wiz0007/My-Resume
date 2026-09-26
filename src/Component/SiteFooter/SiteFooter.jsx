@@ -1,4 +1,4 @@
-import React from "react";
+import { createElement } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Code2, Github, Linkedin, Mail } from "lucide-react";
 import styles from "./SiteFooter.module.scss";
@@ -57,7 +57,7 @@ const SiteFooter = () => {
         <div className={styles.socials}>
           {socialLinks.map(({ label, href, icon: Icon }) => (
             <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" aria-label={label}>
-              {React.createElement(Icon, { size: 18 })}
+              {createElement(Icon, { size: 18 })}
             </a>
           ))}
         </div>

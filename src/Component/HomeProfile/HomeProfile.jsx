@@ -1,4 +1,4 @@
-import React from "react";
+import { createElement } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Code2, DatabaseZap, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -117,7 +117,7 @@ const HomeProfile = () => (
               ease: [0.16, 1, 0.3, 1],
             }}
           >
-            <span>{React.createElement(Icon, { size: 20 })}</span>
+            <span>{createElement(Icon, { size: 20 })}</span>
             <div>
               <DropWords
                 as="strong"

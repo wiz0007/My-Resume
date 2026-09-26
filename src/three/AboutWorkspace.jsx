@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Grid, RoundedBox } from "@react-three/drei";
 import { Vector3 } from "three";

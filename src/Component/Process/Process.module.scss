@@ -5,8 +5,8 @@
     radial-gradient(circle at 14% 12%, rgba(16, 185, 129, 0.07), transparent 25%),
     radial-gradient(circle at 86% 46%, rgba(245, 158, 11, 0.055), transparent 24%),
     linear-gradient(180deg, #050505 0%, #080808 48%, #040404 100%);
-  overflow: clip;
-  overflow-x: clip;
+  overflow: hidden;
+  overflow-x: hidden;
   contain: paint;
 }
 
@@ -823,12 +823,12 @@
   .overviewScene,
   .spatialStage {
     min-height: 470px;
-    overflow: clip;
+    overflow: hidden;
     contain: paint;
   }
 
   .discoveryBoard {
-    overflow: clip;
+    overflow: hidden;
   }
 }
 
@@ -844,7 +844,7 @@
 
   .scene {
     padding-block: 4.5rem;
-    overflow: clip;
+    overflow: hidden;
   }
 
   .overviewCopy h2,
@@ -856,12 +856,12 @@
   .spatialStage {
     min-height: 390px;
     border-radius: 18px;
-    overflow: clip;
+    overflow: hidden;
     contain: paint;
   }
 
   .discoveryBoard {
-    overflow: clip;
+    overflow: hidden;
   }
 
   .overviewNode {

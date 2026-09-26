@@ -1,4 +1,3 @@
-import React from "react";
 import ProcessStepCard from "./ProcessStepCard";
 import styles from "./Process.module.scss";
 

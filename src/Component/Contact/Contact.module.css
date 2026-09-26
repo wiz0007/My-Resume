@@ -33,6 +33,7 @@ h2 {
   margin-bottom: 1rem;
   background: linear-gradient(90deg, #00b4d8, #48cae4);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   position: relative;
   z-index: 1;

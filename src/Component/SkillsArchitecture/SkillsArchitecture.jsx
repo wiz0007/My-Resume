@@ -1,4 +1,4 @@
-import React from "react";
+import { createElement } from "react";
 import { motion } from "framer-motion";
 import { Braces, Database, Layers, Server, ShieldCheck, Workflow } from "lucide-react";
 import styles from "./SkillsArchitecture.module.scss";
@@ -52,7 +52,7 @@ const SkillsArchitecture = () => (
           viewport={{ once: true, amount: 0.28 }}
           transition={{ duration: 0.5, delay: index * 0.05 }}
         >
-          <span>{React.createElement(Icon, { size: 22 })}</span>
+          <span>{createElement(Icon, { size: 22 })}</span>
           <h3>{title}</h3>
           <p>{text}</p>
         </motion.article>

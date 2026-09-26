@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import { createElement, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -303,7 +303,7 @@ const HomeGateway = () => {
             >
               <Link className={styles.card} to={to} aria-label={`Open ${title} page`}>
                 <span className={styles.icon} aria-hidden="true">
-                  {React.createElement(Icon, { size: 23 })}
+                  {createElement(Icon, { size: 23 })}
                 </span>
                 <span className={styles.label}>{label}</span>
                 <strong>{title}</strong>
@@ -341,7 +341,7 @@ const HomeGateway = () => {
                 >
                   <span className={styles.accordionNumber}>{String(index + 1).padStart(2, "0")}</span>
                   <span className={styles.accordionIcon} aria-hidden="true">
-                    {React.createElement(Icon, { size: 20 })}
+                    {createElement(Icon, { size: 20 })}
                   </span>
                   <span className={styles.accordionTitle}>
                     <small>{item.label}</small>
