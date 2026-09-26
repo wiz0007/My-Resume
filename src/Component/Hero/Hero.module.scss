@@ -408,10 +408,11 @@
 /* Responsive Mobile Layout (Uncrowded, Balanced, Above the fold) */
 @media (max-width: 767px) {
   .hero {
-    min-height: 100svh;
+    min-height: calc(100svh - 4rem);
     display: flex;
-    align-items: center;
-    padding: 4.8rem 0 2.2rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 5.2rem 0 1.25rem;
   }
 
   .content {
@@ -444,10 +445,10 @@
 
   /* Single-line compact status badge */
   .statusBadge {
-    padding: 0.28rem 0.72rem;
-    font-size: 0.72rem;
+    padding: 0.3rem 0.78rem;
+    font-size: 0.75rem;
     gap: 0.45rem;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.9rem;
   }
 
   .statusSep,
@@ -457,41 +458,41 @@
 
   /* Title: punchy, properly proportioned */
   .title {
-    font-size: clamp(2.15rem, 8.8vw, 2.85rem);
-    line-height: 1.04;
+    font-size: clamp(2.25rem, 9vw, 3rem);
+    line-height: 1.05;
     letter-spacing: -0.02em;
   }
 
   /* Ticker: strictly single line, zero overlap */
   .tickerWrapper {
-    gap: 0.45rem;
-    margin-top: 0.65rem;
-    font-size: 0.82rem;
-    min-height: 1.4rem;
+    gap: 0.48rem;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    min-height: 1.5rem;
   }
 
   .tickerPrefix {
-    font-size: 0.68rem;
+    font-size: 0.7rem;
   }
 
   .tickerText {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
   }
 
-  /* Summary: sharp, readable, no ghost blur */
+  /* Summary: sharp, readable, naturally spaced */
   .summary {
     max-width: 100%;
-    margin: 0.85rem 0 0;
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.78);
+    margin: 1rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .summaryWord {
     margin-right: 0.26em;
   }
 
-  /* Capability Strip: sleek single horizontal bar */
+  /* Capability Strip: sleek single horizontal bar with comfortable breathing room */
   .capabilityStrip {
     display: flex;
     flex-direction: row;
@@ -499,10 +500,10 @@
     align-items: center;
     width: 100%;
     gap: 0.4rem;
-    padding: 0.48rem 0.8rem;
-    margin-top: 1rem;
+    padding: 0.58rem 0.9rem;
+    margin-top: 1.35rem;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.045);
   }
 
   .capItem {
@@ -522,12 +523,12 @@
   }
 
   .capValue {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 700;
   }
 
   .capLabel {
-    font-size: 0.6rem;
+    font-size: 0.62rem;
     letter-spacing: 0.04em;
   }
 
@@ -542,26 +543,26 @@
   .actions {
     display: flex;
     flex-direction: row;
-    gap: 0.55rem;
-    margin-top: 1.15rem;
+    gap: 0.6rem;
+    margin-top: 1.35rem;
     width: 100%;
   }
 
   .primaryBtn {
     flex: 1.3;
-    min-height: 42px;
-    padding: 0.6rem 0.85rem;
-    font-size: 0.82rem;
-    gap: 0.35rem;
+    min-height: 44px;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.84rem;
+    gap: 0.38rem;
     border-radius: 8px;
   }
 
   .resumeBtn {
     flex: 1;
-    min-height: 42px;
-    padding: 0.6rem 0.75rem;
-    font-size: 0.82rem;
-    gap: 0.35rem;
+    min-height: 44px;
+    padding: 0.65rem 0.8rem;
+    font-size: 0.84rem;
+    gap: 0.38rem;
     border-radius: 8px;
   }
 
