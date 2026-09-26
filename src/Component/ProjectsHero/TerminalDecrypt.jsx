@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import { createElement, useEffect, useRef, useState, useCallback } from "react";
 import { useReducedMotionPreference } from "../../hooks/useMediaPreferences";
 import { usePageVisibility } from "../../hooks/usePageVisibility";
 import styles from "./TerminalDecrypt.module.scss";
@@ -182,7 +182,7 @@ export const TerminalDecrypt = ({
     </>
   );
 
-  return React.createElement(
+  return createElement(
     as,
     {
       className: `${styles.container} ${className}`,

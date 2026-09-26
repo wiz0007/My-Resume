@@ -1,4 +1,4 @@
-import React from "react";
+import { createElement } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowUpRight,
@@ -57,7 +57,7 @@ const ProjectInquiry = () => (
 
         {orbitItems.map(({ label, icon: Icon, className }) => (
           <span key={label} className={`${styles.orbitItem} ${className}`}>
-            {React.createElement(Icon, { size: 15 })} {label}
+            {createElement(Icon, { size: 15 })} {label}
           </span>
         ))}
 

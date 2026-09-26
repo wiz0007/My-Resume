@@ -1,4 +1,3 @@
-import React, { createElement } from "react";
 import styles from "./Process.module.scss";
 
 const ProcessStepCard = ({ step, index }) => {
@@ -8,7 +7,7 @@ const ProcessStepCard = ({ step, index }) => {
     <article className={styles.step}>
       <div className={styles.stepIndex}>0{index + 1}</div>
       <div className={styles.stepIcon}>
-        {createElement(Icon, { size: 24 })}
+        <Icon size={24} />
       </div>
       <div>
         <span>{label}</span>

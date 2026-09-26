@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import ProcessIllustration from "./ProcessIllustration";
 import styles from "./Process.module.scss";

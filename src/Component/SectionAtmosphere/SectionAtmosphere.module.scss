@@ -5,7 +5,6 @@
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  overflow: clip;
   contain: paint;
   pointer-events: none;
   perspective: 900px;
@@ -110,7 +109,7 @@
 @media (max-width: 720px) {
   .atmosphere {
     opacity: 0.24;
-    overflow: clip;
+    overflow: hidden;
     contain: paint;
   }
   .orbit {

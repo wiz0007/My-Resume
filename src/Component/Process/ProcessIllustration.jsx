@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Process.module.scss";
 
 const ProcessIllustration = () => (

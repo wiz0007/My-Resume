@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./RouteFallback.module.scss";
 
 const RouteFallback = () => (

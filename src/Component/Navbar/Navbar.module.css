@@ -31,6 +31,7 @@
   font-weight: 700;
   background: linear-gradient(90deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
   cursor: pointer;
   letter-spacing: 1px;
