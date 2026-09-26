@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useRef } from "react";
+import { Fragment, Suspense, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, Line } from "@react-three/drei";
 import styles from "./SkillOrbitScene.module.scss";
@@ -86,7 +86,7 @@ const OrbitSystem = ({ skills, color, title, compact, reducedMotion }) => {
       </Html>
 
       {nodes.map((node, index) => (
-        <React.Fragment key={node.label}>
+        <Fragment key={node.label}>
           <Line
             points={[[0, 0, 0], node.position]}
             color={color}
@@ -100,7 +100,7 @@ const OrbitSystem = ({ skills, color, title, compact, reducedMotion }) => {
             index={index}
             reducedMotion={reducedMotion}
           />
-        </React.Fragment>
+        </Fragment>
       ))}
       <pointLight color={color} intensity={2.6} distance={5} />
     </group>
