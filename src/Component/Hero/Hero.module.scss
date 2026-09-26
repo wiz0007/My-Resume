@@ -245,7 +245,7 @@
   font-weight: 500;
 }
 
-/* Capability Strip */
+/* Capability Strip (Desktop) */
 .capabilityStrip {
   display: inline-flex;
   align-items: center;
@@ -377,6 +377,10 @@
   }
 }
 
+.tooltip {
+  display: none;
+}
+
 /* Scroll Cue */
 .scrollCue {
   position: absolute;
@@ -409,10 +413,11 @@
 @media (max-width: 767px) {
   .hero {
     min-height: calc(100svh - 4rem);
+    min-height: calc(100dvh - 4rem);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    padding: 5.2rem 0 1.25rem;
+    justify-content: center;
+    padding: 4.8rem 0 2rem;
   }
 
   .content {
@@ -445,10 +450,10 @@
 
   /* Single-line compact status badge */
   .statusBadge {
-    padding: 0.3rem 0.78rem;
-    font-size: 0.75rem;
-    gap: 0.45rem;
-    margin-bottom: 0.9rem;
+    padding: 0.36rem 0.88rem;
+    font-size: 0.78rem;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
   }
 
   .statusSep,
@@ -458,128 +463,162 @@
 
   /* Title: punchy, properly proportioned */
   .title {
-    font-size: clamp(2.25rem, 9vw, 3rem);
-    line-height: 1.05;
+    font-size: clamp(2.35rem, 9.5vw, 3.1rem);
+    line-height: 1.08;
     letter-spacing: -0.02em;
   }
 
   /* Ticker: strictly single line, zero overlap */
   .tickerWrapper {
-    gap: 0.48rem;
-    margin-top: 0.75rem;
-    font-size: 0.85rem;
-    min-height: 1.5rem;
-  }
-
-  .tickerPrefix {
-    font-size: 0.7rem;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+    font-size: 0.92rem;
+    min-height: 1.6rem;
   }
 
   .tickerText {
-    font-size: 0.85rem;
+    font-size: 0.92rem;
   }
 
   /* Summary: sharp, readable, naturally spaced */
   .summary {
     max-width: 100%;
-    margin: 1rem 0 0;
+    margin: 1.25rem 0 0;
     font-size: 0.92rem;
     line-height: 1.65;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.82);
   }
 
   .summaryWord {
     margin-right: 0.26em;
   }
 
-  /* Capability Strip: sleek single horizontal bar with comfortable breathing room */
+  /* Clean Hero: Hide capability strip on mobile to eliminate clutter */
   .capabilityStrip {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    gap: 0.4rem;
-    padding: 0.58rem 0.9rem;
-    margin-top: 1.35rem;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.045);
+    display: none;
   }
 
-  .capItem {
-    flex: 1;
-    text-align: center;
-    gap: 0.08rem;
-
-    &:first-child {
-      flex: 0 0 auto;
-      text-align: left;
-    }
-
-    &:last-child {
-      flex: 0 0 auto;
-      text-align: right;
-    }
-  }
-
-  .capValue {
-    font-size: 0.84rem;
-    font-weight: 700;
-  }
-
-  .capLabel {
-    font-size: 0.62rem;
-    letter-spacing: 0.04em;
-  }
-
-  .capDivider {
-    display: block;
-    height: 18px;
-    width: 1px;
-    background: rgba(255, 255, 255, 0.14);
-  }
-
-  /* Action Buttons: prominent, visible above fold */
+  /* Action Buttons: 3 tactile, logo-only icon buttons with hover tooltips */
   .actions {
     display: flex;
     flex-direction: row;
-    gap: 0.6rem;
-    margin-top: 1.35rem;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: 1.75rem;
     width: 100%;
   }
 
   .primaryBtn {
-    flex: 1.3;
-    min-height: 44px;
-    padding: 0.65rem 0.9rem;
-    font-size: 0.84rem;
-    gap: 0.38rem;
-    border-radius: 8px;
-  }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    padding: 0;
+    border-radius: 11px;
+    position: relative;
+    border: 1px solid rgba(56, 189, 248, 0.5);
+    background: rgba(56, 189, 248, 0.16);
+    color: #38bdf8;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
 
-  .resumeBtn {
-    flex: 1;
-    min-height: 44px;
-    padding: 0.65rem 0.8rem;
-    font-size: 0.84rem;
-    gap: 0.38rem;
-    border-radius: 8px;
+    .btnLabel,
+    .btnArrow {
+      display: none;
+    }
   }
 
   .secondaryBtn {
-    display: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    padding: 0;
+    border-radius: 11px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+
+    .btnLabel {
+      display: none;
+    }
+  }
+
+  .resumeBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    padding: 0;
+    border-radius: 11px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.9);
+
+    .btnLabel {
+      display: none;
+    }
+  }
+
+  .tooltip {
+    display: block;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: rgba(15, 23, 42, 0.96);
+    color: #f8fafc;
+    padding: 0.26rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 30;
+  }
+
+  .primaryBtn:hover .tooltip,
+  .primaryBtn:focus-visible .tooltip,
+  .primaryBtn:active .tooltip,
+  .secondaryBtn:hover .tooltip,
+  .secondaryBtn:focus-visible .tooltip,
+  .secondaryBtn:active .tooltip,
+  .resumeBtn:hover .tooltip,
+  .resumeBtn:focus-visible .tooltip,
+  .resumeBtn:active .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 
   .scrollCue {
-    display: none;
+    display: flex;
+    bottom: 0.85rem;
+    width: 36px;
+    height: 36px;
+    opacity: 0.7;
   }
 }
 
 /* Extra small / short mobile viewports (e.g. iPhone SE / < 680px height) */
 @media (max-height: 700px) and (max-width: 767px) {
   .hero {
+    min-height: auto;
     padding-top: 4.2rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
   }
 
   .title {
