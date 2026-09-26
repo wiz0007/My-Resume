@@ -162,6 +162,8 @@
 @media (max-width: 900px) {
   .profile {
     grid-template-columns: 1fr;
+    padding-top: 2rem;
+    padding-bottom: 3.5rem;
   }
 
   .imageFrame {
@@ -170,9 +172,17 @@
   }
 }
 
+@media (max-width: 767px) {
+  .profile {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+  }
+}
+
 @media (max-width: 560px) {
   .profile {
     padding-inline: 1rem;
+    padding-top: 0.75rem;
   }
 
   .strengths article {

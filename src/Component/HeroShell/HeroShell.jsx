@@ -38,6 +38,15 @@ export const HeroShell = ({
   const contentOpacity = useTransform(scrollYProgress, [0, 0.78, 1], [1, 0.85, 0]);
   const cueOpacity = useTransform(scrollYProgress, [0, 0.22], [1, 0]);
 
+  // Guarantee hero mounts at top anchor so useScroll never starts with faded opacity
+  useEffect(() => {
+    if (window.scrollY > 0) {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      window.lenis?.scrollTo(0, { immediate: true, force: true });
+      window.lenis?.resize();
+    }
+  }, []);
+
   // Video autoplay/pause management
   useEffect(() => {
     const video = videoRef.current;

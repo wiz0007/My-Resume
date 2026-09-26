@@ -220,7 +220,6 @@ const Hero = () => {
 
         {/* Rotating specialization ticker with 3D perspective flip */}
         <div className={styles.tickerWrapper}>
-          <span className={styles.tickerPrefix}>Focus:</span>
           <div className={styles.tickerTrack}>
             <AnimatePresence mode="wait">
               <motion.span
@@ -263,7 +262,7 @@ const Hero = () => {
           ))}
         </p>
 
-        {/* Key capabilities strip */}
+        {/* Key capabilities strip (desktop only, hidden on mobile for clean hero) */}
         <motion.div
           className={styles.capabilityStrip}
           variants={itemVariants}
@@ -295,15 +294,27 @@ const Hero = () => {
           animate="show"
           transition={{ delay: 0.78 }}
         >
-          <Link to="/projects" className={styles.primaryBtn}>
-            <Sparkles size={16} />
-            <span>Explore Systems</span>
-            <ArrowRight size={15} />
+          <Link
+            to="/projects"
+            className={styles.primaryBtn}
+            aria-label="Explore Systems"
+            title="Explore Systems"
+          >
+            <Sparkles size={18} />
+            <span className={styles.btnLabel}>Explore Systems</span>
+            <ArrowRight size={15} className={styles.btnArrow} />
+            <span className={styles.tooltip} aria-hidden="true">Explore Systems</span>
           </Link>
 
-          <Link to="/contact" className={styles.secondaryBtn}>
-            <Send size={15} />
-            <span>Contact</span>
+          <Link
+            to="/contact"
+            className={styles.secondaryBtn}
+            aria-label="Contact Ayushmaan"
+            title="Contact"
+          >
+            <Send size={17} />
+            <span className={styles.btnLabel}>Contact</span>
+            <span className={styles.tooltip} aria-hidden="true">Contact</span>
           </Link>
 
           <a
@@ -311,9 +322,12 @@ const Hero = () => {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.resumeBtn}
+            aria-label="Download Resume (PDF)"
+            title="Download Resume"
           >
-            <Download size={15} />
-            <span>Resume</span>
+            <Download size={17} />
+            <span className={styles.btnLabel}>Resume</span>
+            <span className={styles.tooltip} aria-hidden="true">Resume</span>
           </a>
         </motion.div>
       </motion.div>

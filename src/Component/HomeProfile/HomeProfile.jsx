@@ -79,7 +79,7 @@ const DropWords = ({ text, className, delay = 0, as = "span" }) => {
 };
 
 const HomeProfile = () => (
-  <section className={styles.profile} aria-labelledby="home-profile-title">
+  <section className={styles.profile} id="explore" aria-labelledby="home-profile-title">
     <motion.div
       className={styles.imageFrame}
       initial={{ opacity: 0, x: -36, rotateY: 5 }}

@@ -15,10 +15,16 @@ export const prefetchRoute = (path) => {
   if (!prefetcher) return;
 
   warmedRoutes.add(path);
+  const run = () => {
+    prefetcher().catch(() => {
+      warmedRoutes.delete(path);
+    });
+  };
+
   if ("requestIdleCallback" in window) {
-    window.requestIdleCallback(() => prefetcher(), { timeout: 1400 });
+    window.requestIdleCallback(run, { timeout: 1400 });
     return;
   }
 
-  window.setTimeout(() => prefetcher(), 120);
+  window.setTimeout(run, 120);
 };
