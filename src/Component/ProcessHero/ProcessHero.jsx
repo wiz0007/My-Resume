@@ -30,8 +30,8 @@ export const ProcessHero = () => {
 
   return (
     <HeroShell
-      videoSrc="/videos/hero-process.mp4"
-      posterSrc="/videos/posters/hero-process.webp"
+      videoSrc="/videos/professional-programmer-workstation.mp4"
+      posterSrc="/videos/posters/hero-home.webp"
       nextId="process"
       variant="process"
     >
@@ -99,10 +99,35 @@ export const ProcessHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.75, ease: "easeOut" }}
         >
-          {steps.map((step) => (
-            <span key={step} className={styles.pill}>
+          {steps.map((step, index) => (
+            <button
+              key={step}
+              type="button"
+              className={styles.pill}
+              onClick={() => {
+                if (window.processScrollTrigger) {
+                  const st = window.processScrollTrigger;
+                  const targetRatios = [0, 0.33, 0.66, 0.95];
+                  const targetScroll = st.start + (st.end - st.start) * (targetRatios[index] ?? 0);
+                  if (window.lenis) {
+                    window.lenis.scrollTo(targetScroll, { duration: 1.2 });
+                  } else {
+                    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+                  }
+                } else {
+                  const targetEl = document.getElementById("process");
+                  if (targetEl) {
+                    if (window.lenis) {
+                      window.lenis.scrollTo(targetEl, { duration: 1.2 });
+                    } else {
+                      targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  }
+                }
+              }}
+            >
               {step}
-            </span>
+            </button>
           ))}
         </motion.div>
       </div>
