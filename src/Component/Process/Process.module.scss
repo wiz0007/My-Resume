@@ -1,13 +1,46 @@
 .process {
   position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 600px;
   color: #f8fafc;
   background:
     radial-gradient(circle at 14% 12%, rgba(16, 185, 129, 0.07), transparent 25%),
     radial-gradient(circle at 86% 46%, rgba(245, 158, 11, 0.055), transparent 24%),
     linear-gradient(180deg, #050505 0%, #080808 48%, #040404 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  overflow-x: hidden;
-  contain: paint;
+  box-sizing: border-box;
+}
+
+.stageViewport {
+  position: relative;
+  width: min(1240px, calc(100% - 2.5rem));
+  min-height: min(600px, 80vh);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stagePanel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+
+  .scene {
+    width: 100%;
+    min-height: auto;
+    padding: 0;
+  }
 }
 
 .inner {
@@ -210,22 +243,12 @@
 
 .scene {
   position: relative;
-  min-height: min(780px, 88vh);
+  width: 100%;
   display: grid;
   grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
-  gap: clamp(3rem, 7vw, 7.5rem);
+  gap: clamp(2.5rem, 5vw, 5.5rem);
   align-items: center;
-  padding: clamp(5rem, 8vw, 8rem) 0;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  }
+  padding: 0;
 }
 
 .sceneCopy {
@@ -788,26 +811,61 @@
 }
 
 @media (max-width: 980px) {
-  .overview,
+  .process {
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    padding-bottom: 0.8rem;
+    box-sizing: border-box;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: unset;
+  }
+
+  .stageViewport {
+    width: min(100% - 2rem, 1240px);
+    height: calc(100svh - 68px);
+    max-height: calc(100svh - 68px);
+    min-height: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stagePanel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .scene,
   .architectScene,
   .improveScene {
     grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
     min-height: auto;
-    gap: 2.75rem;
+    gap: 0.85rem;
+    padding: 0;
+    width: 100%;
   }
 
-  .overview {
-    padding-block: 6rem;
-  }
+  .sceneCopy {
+    max-width: 100%;
+    order: 1;
 
-  .scene {
-    padding-block: 5.5rem;
-  }
+    h3 {
+      font-size: clamp(1.15rem, 3.8vw, 1.45rem);
+      margin: 0.25rem 0 0.35rem;
+      line-height: 1.18;
+    }
 
-  .sceneCopy,
-  .overviewCopy {
-    max-width: 620px;
+    p {
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+      line-height: 1.5;
+    }
   }
 
   .architectScene .sceneCopy,
@@ -815,14 +873,28 @@
     order: 1;
   }
 
+  .sceneVisual,
   .architectScene .sceneVisual,
   .improveScene .sceneVisual {
     order: 2;
+    width: 100%;
   }
 
-  .overviewScene,
+  .tags {
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+
+    span {
+      padding: 0.25rem 0.55rem;
+      font-size: 0.68rem;
+    }
+  }
+
   .spatialStage {
-    min-height: 470px;
+    width: 100%;
+    height: clamp(230px, 36vh, 310px);
+    min-height: unset;
+    border-radius: 16px;
     overflow: hidden;
     contain: paint;
   }
@@ -833,137 +905,219 @@
 }
 
 @media (max-width: 680px) {
-  .inner {
-    width: min(100% - 2rem, 1240px);
-    max-width: calc(100vw - 2rem);
+  .process {
+    padding-top: calc(52px + env(safe-area-inset-top, 0px));
+    padding-bottom: 0.5rem;
   }
 
-  .overview {
-    padding-block: 4.8rem;
+  .stageViewport {
+    width: calc(100% - 1.5rem);
+    height: calc(100svh - 58px);
+    max-height: calc(100svh - 58px);
   }
 
-  .scene {
-    padding-block: 4.5rem;
-    overflow: hidden;
+  .scene,
+  .architectScene,
+  .improveScene {
+    gap: 0.55rem;
   }
 
-  .overviewCopy h2,
+  .sceneLabel {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
   .sceneCopy h3 {
-    font-size: clamp(1.4rem, 6.2vw, 1.8rem);
+    font-size: clamp(1.05rem, 4.4vw, 1.25rem);
+    margin: 0.15rem 0 0.25rem;
+    line-height: 1.16;
   }
 
-  .overviewScene,
+  .sceneCopy p {
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .tags {
+    gap: 0.3rem;
+    margin-top: 0.35rem;
+
+    span {
+      padding: 0.18rem 0.48rem;
+      font-size: 0.62rem;
+    }
+  }
+
   .spatialStage {
-    min-height: 390px;
-    border-radius: 18px;
-    overflow: hidden;
-    contain: paint;
+    height: clamp(200px, 32vh, 255px);
+    min-height: unset;
+    border-radius: 14px;
   }
 
-  .discoveryBoard {
-    overflow: hidden;
-  }
+  /* Discover Scene on Mobile */
+  .discoveryFocus {
+    min-width: 96px;
+    padding: 0.5rem 0.65rem;
+    border-radius: 12px;
 
-  .overviewNode {
-    min-width: 66px;
-    padding: 0.58rem 0.68rem;
+    span {
+      font-size: 0.58rem;
+    }
 
-    span { font-size: 0.67rem; }
-  }
-
-  .overviewNodeBrief { left: 7%; top: 14%; }
-  .overviewNodeFlow { right: 7%; top: 17%; }
-  .overviewNodeApi { left: 5%; top: 52%; }
-  .overviewNodeData { right: 5%; top: 56%; }
-  .overviewNodeRelease { right: 23%; bottom: 10%; }
-
-  .overviewCore {
-    min-width: 0;
-    padding: 0.7rem 0.75rem;
-
-    span { font-size: 0.66rem; }
+    strong {
+      font-size: 0.82rem;
+    }
   }
 
   .discoveryCard {
-    width: 41%;
+    width: 44%;
     grid-template-columns: 1fr;
-    gap: 0.35rem;
-    padding: 0.68rem;
+    gap: 0.15rem;
+    padding: 0.48rem 0.55rem;
+    border-radius: 10px;
 
     > div { display: none; }
-    span { font-size: 0.62rem; }
-    strong { font-size: 0.72rem; }
+    span { font-size: 0.56rem; }
+    strong { font-size: 0.68rem; }
   }
 
-  .discoveryFocus {
-    min-width: 118px;
-    padding: 0.78rem 0.85rem;
-  }
+  .discoveryCard1 { left: 3%; top: 7%; }
+  .discoveryCard2 { right: 3%; top: 7%; }
+  .discoveryCard3 { left: 3%; bottom: 7%; }
+  .discoveryCard4 { right: 3%; bottom: 7%; }
 
+  /* Architect Scene on Mobile */
   .architectureStack {
-    width: 92%;
-    height: 78%;
+    width: 90%;
+    height: 84%;
+    transform: rotateX(52deg) rotateZ(-7deg) translateY(0);
   }
 
   .architectureLayer {
     left: 2%;
     right: 2%;
     grid-template-columns: auto 1fr;
-    min-height: 54px;
-    padding: 0.62rem 0.7rem;
+    min-height: 36px;
+    padding: 0.35rem 0.6rem;
+    gap: 0.5rem;
+    border-radius: 8px;
 
     small { display: none; }
-    > div { width: 30px; height: 30px; }
+    > div {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      svg { width: 13px; height: 13px; }
+    }
+    span { font-size: 0.72rem; }
   }
 
+  .architectureLayer:nth-child(1) { top: 2%; transform: translateZ(0); }
+  .architectureLayer:nth-child(2) { top: 24%; transform: translateZ(24px); }
+  .architectureLayer:nth-child(3) { top: 46%; transform: translateZ(48px); }
+  .architectureLayer:nth-child(4) { top: 68%; transform: translateZ(72px); }
+
+  /* Build Scene on Mobile */
   .buildStage {
-    min-height: 420px;
+    min-height: unset;
   }
 
   .buildBrowser {
-    left: 4%;
-    top: 10%;
-    width: 78%;
-    height: 60%;
+    left: 3%;
+    top: 7%;
+    width: 62%;
+    height: 72%;
+    border-radius: 10px;
+  }
+
+  .browserBar {
+    height: 30px;
+    padding: 0 0.6rem;
+
+    > span { width: 5px; height: 5px; }
+    small { font-size: 0.56rem; }
+  }
+
+  .browserContent {
+    padding: 0.6rem;
+    gap: 0.4rem;
+
+    i { height: 6px; }
+
+    div {
+      height: 48px;
+      margin-top: 0.3rem;
+    }
+  }
+
+  .buildTerminal {
+    left: 6%;
+    bottom: 5%;
+    width: 58%;
+    padding: 0.45rem 0.6rem;
+    border-radius: 8px;
+
+    > span { font-size: 0.56rem; }
+    strong { font-size: 0.75rem; gap: 0.25rem; }
+    code { font-size: 0.62rem; }
   }
 
   .buildRail {
-    right: 2%;
-    top: 19%;
-    width: 42%;
+    right: 3%;
+    top: 10%;
+    width: 32%;
+    gap: 0.35rem;
   }
 
   .buildRailItem {
     grid-template-columns: auto 1fr;
-    padding: 0.55rem;
+    padding: 0.35rem 0.45rem;
+    border-radius: 8px;
+    gap: 0.35rem;
 
     > svg { display: none; }
-    > span { width: 27px; height: 27px; }
+    > span {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      svg { width: 12px; height: 12px; }
+    }
+    strong { font-size: 0.66rem; }
     small { display: none; }
   }
 
-  .buildTerminal {
-    left: 9%;
-    bottom: 6%;
-    width: 62%;
-    padding: 0.72rem;
+  /* Improve Scene on Mobile */
+  .qualityCore {
+    width: 84px;
+    height: 84px;
+    gap: 0.1rem;
+
+    svg { width: 18px; height: 18px; }
+    span { font-size: 0.52rem; }
+    strong { font-size: 0.76rem; }
   }
 
-  .qualityCore {
-    width: 112px;
-    height: 112px;
-  }
+  .qualityRingOne { width: 68%; }
+  .qualityRingTwo { width: 48%; }
 
   .qualityNode {
-    padding: 0.58rem 0.64rem;
+    padding: 0.35rem 0.5rem;
+    gap: 0.3rem;
+    border-radius: 8px;
 
-    span { font-size: 0.63rem; }
+    svg { width: 13px; height: 13px; }
+    span { font-size: 0.6rem; }
   }
 
-  .qualityNode1 { left: 3%; top: 14%; }
-  .qualityNode2 { right: 2%; top: 18%; }
-  .qualityNode3 { left: 4%; bottom: 15%; }
-  .qualityNode4 { right: 3%; bottom: 12%; }
+  .qualityNode1 { left: 3%; top: 7%; }
+  .qualityNode2 { right: 3%; top: 7%; }
+  .qualityNode3 { left: 3%; bottom: 7%; }
+  .qualityNode4 { right: 3%; bottom: 7%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

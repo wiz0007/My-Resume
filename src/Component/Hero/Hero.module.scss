@@ -41,9 +41,11 @@
   0% {
     transform: scale(1) translate3d(0, 0, 0);
   }
+
   50% {
     transform: scale(1.04) translate3d(-1%, -0.6%, 0);
   }
+
   100% {
     transform: scale(1.015) translate3d(-0.4%, -0.2%, 0);
   }
@@ -121,10 +123,12 @@
     transform: scale(0.95);
     opacity: 0.8;
   }
+
   70% {
     transform: scale(2.6);
     opacity: 0;
   }
+
   100% {
     transform: scale(2.6);
     opacity: 0;
@@ -401,6 +405,7 @@
 }
 
 @keyframes floatCue {
+
   0%,
   100% {
     transform: translate(-50%, 0);
@@ -630,6 +635,7 @@
   .summary {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin-top: 0.65rem;
@@ -649,6 +655,7 @@
   0% {
     transform: scale(1) translate3d(0, 0, 0);
   }
+
   100% {
     transform: scale(1.05) translate3d(-1%, -0.5%, 0);
   }
@@ -660,4 +667,3 @@
     transform: none !important;
   }
 }
-

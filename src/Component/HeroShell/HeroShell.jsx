@@ -95,7 +95,7 @@ export const HeroShell = ({
 
   return (
     <section
-      className={`${styles.hero} ${className}`}
+      className={`${styles.hero} ${variant === "process" ? styles.processHero : ""} ${className}`}
       ref={heroRef}
       onMouseMove={handleMouseMove}
     >

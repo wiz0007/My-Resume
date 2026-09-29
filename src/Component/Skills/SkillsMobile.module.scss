@@ -1,0 +1,223 @@
+.mobileContainer {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* ==========================================================
+   ACCORDION LIST & ITEMS
+   ========================================================== */
+.accordionList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.accordionItem {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01)),
+    rgba(14, 14, 14, 0.95);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+
+  &.itemOpen {
+    border-color: color-mix(in srgb, var(--cat-accent, #38bdf8) 45%, transparent);
+    box-shadow: 0 12px 32px color-mix(in srgb, var(--cat-accent, #38bdf8) 16%, rgba(0, 0, 0, 0.5));
+    background:
+      linear-gradient(155deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+      rgba(14, 14, 14, 0.98);
+  }
+}
+
+.accordionHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.15rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  text-align: left;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.18s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--cat-accent, #38bdf8);
+    outline-offset: -2px;
+  }
+}
+
+.accordionHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.catIconBox {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--cat-accent, #38bdf8) 12%, rgba(255, 255, 255, 0.04));
+  border: 1px solid color-mix(in srgb, var(--cat-accent, #38bdf8) 32%, transparent);
+  color: var(--cat-accent, #38bdf8);
+  transition: transform 0.22s ease;
+}
+
+.catTitleWrap {
+  min-width: 0;
+
+  h4 {
+    margin: 0;
+    font-size: 0.96rem;
+    font-weight: 750;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.01em;
+  }
+
+  span {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+  }
+}
+
+.chevronIcon {
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  flex-shrink: 0;
+
+  &.rotated {
+    transform: rotate(180deg);
+    color: var(--cat-accent, #38bdf8);
+  }
+}
+
+/* ==========================================================
+   SMOOTH IN-PLACE CSS GRID EXPANSION
+   Directly unfolds downward under the header without top jumps
+   ========================================================== */
+.accordionBodyWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
+  opacity: 0;
+  overflow: hidden;
+
+  &.bodyOpen {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+}
+
+.accordionBodyInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.accordionBody {
+  padding: 0 1.15rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 1rem;
+
+  p {
+    margin: 0 0 1rem;
+    font-size: 0.84rem;
+    line-height: 1.55;
+    color: rgba(226, 232, 240, 0.74);
+  }
+}
+
+.skillsPillCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+
+  span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.32rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--cat-accent, #38bdf8) 25%, rgba(255, 255, 255, 0.08));
+    background: rgba(255, 255, 255, 0.035);
+    color: rgba(255, 255, 255, 0.88);
+    transition: background 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      background: color-mix(in srgb, var(--cat-accent, #38bdf8) 12%, rgba(255, 255, 255, 0.06));
+      border-color: color-mix(in srgb, var(--cat-accent, #38bdf8) 45%, transparent);
+    }
+  }
+}
+
+.specsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.45rem;
+}
+
+.specItem {
+  padding: 0.55rem 0.7rem;
+  border-radius: 8px;
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  .sKey {
+    display: block;
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 600;
+  }
+
+  .sVal {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 0.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .accordionHeader {
+    padding: 0.85rem 1rem;
+  }
+
+  .catTitleWrap h4 {
+    font-size: 0.92rem;
+  }
+
+  .accordionBody {
+    padding: 0 1rem 1.15rem;
+    padding-top: 0.85rem;
+  }
+
+  .specsGrid {
+    grid-template-columns: 1fr;
+  }
+}

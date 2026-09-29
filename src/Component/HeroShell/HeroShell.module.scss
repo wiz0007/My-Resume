@@ -134,6 +134,19 @@
     padding: 4.5rem 0 2rem;
     overflow: hidden;
     contain: paint;
+
+    &.processHero {
+      min-height: auto;
+      padding: 4.8rem 0 1.2rem;
+
+      .scrollCue {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        margin: 1.2rem auto 0;
+      }
+    }
   }
 
   .content {
