@@ -42,8 +42,13 @@ const Contact = () => {
   } = useForm({ mode: "onBlur" });
 
   const onSubmit = ({ name, email, message }) => {
-    const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
-    const body = encodeURIComponent(`${message}\n\nFrom: ${name}\nEmail: ${email}`);
+    const cleanName = name.trim();
+    const cleanEmail = email.trim();
+    const cleanMessage = message.trim();
+    if (!cleanName || !cleanEmail || !cleanMessage) return;
+
+    const subject = encodeURIComponent(`Portfolio enquiry from ${cleanName}`);
+    const body = encodeURIComponent(`${cleanMessage}\n\nFrom: ${cleanName}\nEmail: ${cleanEmail}`);
     setSubmitted(true);
     window.location.href = `mailto:ayush8171wiz@gmail.com?subject=${subject}&body=${body}`;
   };
@@ -78,7 +83,13 @@ const Contact = () => {
 
           <div className={styles.socials}>
             {socials.map(({ icon, title, detail, href }) => (
-              <a key={title} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+              <a
+                key={title}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                aria-label={`${title}: ${detail}${href.startsWith("http") ? " (opens in new tab)" : ""}`}
+              >
                 <span>{icon}</span>
                 <div><strong>{title}</strong><small>{detail}</small></div>
                 <ArrowUpRight size={17} />
@@ -109,7 +120,10 @@ const Contact = () => {
               autoComplete="name"
               placeholder="Your name"
               aria-invalid={Boolean(errors.name)}
-              {...register("name", { required: "Please enter your name", minLength: { value: 2, message: "Use at least 2 characters" } })}
+              {...register("name", {
+                required: "Please enter your name",
+                validate: (v) => v.trim().length >= 2 || "Please use at least 2 characters",
+              })}
             />
             {errors.name && <small role="alert">{errors.name.message}</small>}
           </label>
@@ -135,7 +149,10 @@ const Contact = () => {
               rows="5"
               placeholder="Tell me what you are building or hiring for..."
               aria-invalid={Boolean(errors.message)}
-              {...register("message", { required: "Please add a short message", minLength: { value: 12, message: "Add a little more detail" } })}
+              {...register("message", {
+                required: "Please add a message",
+                validate: (v) => v.trim().length >= 10 || "Please add a little more detail (at least 10 characters)",
+              })}
             />
             {errors.message && <small role="alert">{errors.message.message}</small>}
           </label>

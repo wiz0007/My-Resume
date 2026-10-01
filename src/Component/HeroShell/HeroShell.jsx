@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useNearViewport } from "../../hooks/useNearViewport";
 import { usePageVisibility } from "../../hooks/usePageVisibility";
-import { useReducedMotionPreference } from "../../hooks/useMediaPreferences";
+import { useReducedMotionPreference, useStaticHeroMotion } from "../../hooks/useMediaPreferences";
 import styles from "./HeroShell.module.scss";
 
 export const HeroShell = ({
@@ -25,6 +25,7 @@ export const HeroShell = ({
   });
   const isPageVisible = usePageVisibility();
   const reducedMotion = useReducedMotionPreference();
+  const staticMotion = useStaticHeroMotion();
 
   // Scroll animations synchronized with Lenis
   const { scrollYProgress } = useScroll({
@@ -38,14 +39,6 @@ export const HeroShell = ({
   const contentOpacity = useTransform(scrollYProgress, [0, 0.78, 1], [1, 0.85, 0]);
   const cueOpacity = useTransform(scrollYProgress, [0, 0.22], [1, 0]);
 
-  // Guarantee hero mounts at top anchor so useScroll never starts with faded opacity
-  useEffect(() => {
-    if (window.scrollY > 0) {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-      window.lenis?.scrollTo(0, { immediate: true, force: true });
-      window.lenis?.resize();
-    }
-  }, []);
 
   // Video autoplay/pause management
   useEffect(() => {
@@ -63,7 +56,7 @@ export const HeroShell = ({
 
   // Optional mouse tracking for electromagnetic spotlight (e.g. Contact)
   const handleMouseMove = (e) => {
-    if (!enableSpotlight || !heroRef.current) return;
+    if (staticMotion || !enableSpotlight || !heroRef.current) return;
     const rect = heroRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -76,10 +69,10 @@ export const HeroShell = ({
     e.preventDefault();
     const targetEl = document.getElementById(nextId);
     if (targetEl) {
-      if (window.lenis) {
+      if (window.lenis && !reducedMotion) {
         window.lenis.scrollTo(targetEl, { offset: -70 });
       } else {
-        targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        targetEl.scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth", block: "start" });
       }
     }
   };
@@ -106,14 +99,13 @@ export const HeroShell = ({
           className={`${styles.video} ${getVideoClass()}`}
           src={videoSrc}
           poster={posterSrc}
-          autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           aria-hidden="true"
           style={
-            reducedMotion
+            staticMotion
               ? undefined
               : {
                   y: videoY,
@@ -124,13 +116,13 @@ export const HeroShell = ({
       </div>
 
       <div className={styles.overlay} aria-hidden="true" />
-      {enableSpotlight && <div className={styles.spotlightLayer} aria-hidden="true" />}
+      {enableSpotlight && !staticMotion && <div className={styles.spotlightLayer} aria-hidden="true" />}
 
       {/* Hero Content with Scroll Fade & Shift */}
       <motion.div
         className={styles.content}
         style={
-          reducedMotion
+          staticMotion
             ? undefined
             : {
                 y: contentY,
@@ -148,7 +140,7 @@ export const HeroShell = ({
           href={`#${nextId}`}
           onClick={handleScrollCueClick}
           aria-label={`Scroll to ${nextId}`}
-          style={reducedMotion ? undefined : { opacity: cueOpacity }}
+          style={staticMotion ? undefined : { opacity: cueOpacity }}
         >
           <ArrowDown size={22} />
         </motion.a>

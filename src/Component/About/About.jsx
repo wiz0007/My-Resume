@@ -1,6 +1,7 @@
 import { createElement } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { BookOpen, BriefcaseBusiness, Code2, Database, Trophy } from "lucide-react";
+import { ArrowUpRight, BookOpen, BriefcaseBusiness, Code2, Database, Trophy } from "lucide-react";
 import styles from "./About.module.scss";
 
 const pages = [
@@ -35,7 +36,7 @@ const pages = [
     text: "Built web, desktop, workflow, commerce, chat, and verification projects with a focus on complete working systems instead of placeholder demos.",
     meta: ["6+ projects", "Multiple stacks", "Live builds"],
     icon: Trophy,
-    href: "#projects",
+    to: "/projects",
   },
 ];
 
@@ -53,13 +54,13 @@ const pageVariants = {
 const About = () => (
   <section className={styles.about} id="about">
     <div className={styles.pageTrack}>
-      {pages.map(({ id, label, title, text, meta, icon: Icon, href }, index) => (
+      {pages.map(({ id, label, title, text, meta, icon: Icon, to }, index) => (
         <motion.article
           className={styles.page}
           variants={pageVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.44, margin: "-80px 0px -120px 0px" }}
+          viewport={{ once: true, amount: 0.25 }}
           key={label}
           style={{ "--index": index }}
         >
@@ -74,7 +75,11 @@ const About = () => (
               {meta.map((item) => (
                 <span key={item}>{item}</span>
               ))}
-              {href && <a href={href}>See projects</a>}
+              {to && (
+                <Link to={to} className={styles.seeProjectsLink}>
+                  See projects <ArrowUpRight size={14} />
+                </Link>
+              )}
             </div>
           </div>
 

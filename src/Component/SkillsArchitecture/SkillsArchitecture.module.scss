@@ -130,6 +130,8 @@
   cursor: grab;
   user-select: none;
   touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
 
   &:active {
     cursor: grabbing;
@@ -180,15 +182,13 @@
     rgba(14, 14, 14, 0.94);
   box-shadow: 0 22px 55px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(14px);
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.28s ease,
-              box-shadow 0.28s ease;
+  transition: border-color 0.25s ease,
+              box-shadow 0.25s ease;
   user-select: none;
 
   &:hover {
-    transform: translateY(-4px);
-    border-color: rgba(56, 189, 248, 0.55);
-    box-shadow: 0 26px 65px rgba(0, 0, 0, 0.55), 0 0 24px rgba(56, 189, 248, 0.2);
+    border-color: rgba(56, 189, 248, 0.65);
+    box-shadow: 0 26px 65px rgba(0, 0, 0, 0.55), 0 0 24px rgba(56, 189, 248, 0.25);
   }
 
   h3 {
@@ -276,11 +276,13 @@
   }
 
   .navBtn {
-    display: none; // Native touch drag & swipe is standard on mobile
+    display: none;
   }
 
   .railContainer {
     padding: 1.8rem 0;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
     mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
   }

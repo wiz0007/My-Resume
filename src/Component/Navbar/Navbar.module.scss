@@ -124,6 +124,18 @@
   }
 }
 
+.backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 990;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
 .mobileMenu {
   position: absolute;
   top: calc(100% + 0.25rem);
@@ -134,9 +146,10 @@
   padding: 0.8rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  background: rgba(5, 5, 5, 0.94);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
-  backdrop-filter: blur(18px);
+  background: rgba(10, 10, 10, 0.96);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  z-index: 995;
 
   a {
     padding: 0.9rem 1rem;

@@ -301,6 +301,7 @@ const ProjectBentoCard = ({ project, index, isFiltered }) => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.bentoLiveBtn}
+              aria-label={`Live Demo for ${project.title}`}
             >
               <span>Live Demo</span>
               <ExternalLink size={14} />
@@ -312,6 +313,7 @@ const ProjectBentoCard = ({ project, index, isFiltered }) => {
               target="_blank"
               rel="noopener noreferrer"
               className={styles.bentoCodeBtn}
+              aria-label={`Source code for ${project.title}`}
             >
               <span>Source</span>
               <Github size={14} />
@@ -375,11 +377,10 @@ const ProjectCommandCenter = ({ projects, selectedIndex, onSelectIndex }) => {
     if (!railListRef.current) return;
     const activeEl = railListRef.current.children[selectedIndex];
     if (activeEl) {
-      activeEl.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
+      const container = railListRef.current;
+      const targetLeft =
+        activeEl.offsetLeft - container.offsetWidth / 2 + activeEl.offsetWidth / 2;
+      container.scrollTo({ left: targetLeft, behavior: "smooth" });
     }
   }, [selectedIndex]);
 
@@ -432,6 +433,7 @@ const ProjectCommandCenter = ({ projects, selectedIndex, onSelectIndex }) => {
                   type="button"
                   className={`${styles.railItem} ${isActive ? styles.activeRailItem : ""}`}
                   onClick={() => onSelectIndex(idx)}
+                  aria-label={`Select ${proj.title} project`}
                   aria-pressed={isActive}
                 >
                   {isActive && <span className={styles.activeRailIndicator} aria-hidden="true" />}
@@ -502,6 +504,7 @@ const ProjectCommandCenter = ({ projects, selectedIndex, onSelectIndex }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.stageLiveBtn}
+                  aria-label={`Live Demo for ${currentProject.title}`}
                 >
                   <span>Live Demo</span>
                   <ExternalLink size={14} />
@@ -513,6 +516,7 @@ const ProjectCommandCenter = ({ projects, selectedIndex, onSelectIndex }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.stageCodeBtn}
+                  aria-label={`Source code for ${currentProject.title}`}
                 >
                   <span>Source</span>
                   <Github size={14} />

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Award, X } from "lucide-react";
+import { Award, ExternalLink, X } from "lucide-react";
 import SectionAtmosphere from "../SectionAtmosphere/SectionAtmosphere";
 import styles from "./Trainings.module.scss";
 
@@ -34,6 +34,35 @@ const trainings = [
 
 const Trainings = () => {
   const [openPDF, setOpenPDF] = useState(null);
+
+  const closeModal = useCallback(() => setOpenPDF(null), []);
+
+  // Keyboard Escape and body scroll lock while modal is open
+  useEffect(() => {
+    if (!openPDF) return undefined;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    if (window.lenis) {
+      window.lenis.stop();
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      if (window.lenis) {
+        window.lenis.start();
+      }
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [openPDF, closeModal]);
 
   return (
     <section className={styles.trainings} id="certificates">
@@ -70,8 +99,9 @@ const Trainings = () => {
 
             <button
               type="button"
-              onClick={() => setOpenPDF(training.file)}
+              onClick={() => setOpenPDF(training)}
               className={styles.viewBtn}
+              aria-label={`View ${training.title} certificate`}
             >
               View Certificate
             </button>
@@ -83,10 +113,13 @@ const Trainings = () => {
         {openPDF && (
           <motion.div
             className={styles.modalOverlay}
-            onClick={() => setOpenPDF(null)}
+            onClick={closeModal}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${openPDF.title} Certificate Viewer`}
           >
             <motion.div
               className={styles.modalContent}
@@ -96,11 +129,27 @@ const Trainings = () => {
               exit={{ opacity: 0, y: 24, scale: 0.96 }}
               transition={{ duration: 0.25 }}
             >
-              <iframe src={openPDF} title="Certificate" />
-              <button className={styles.closeBtn} type="button" onClick={() => setOpenPDF(null)} aria-label="Close certificate">
-                <X size={18} />
-                Close
-              </button>
+              <iframe src={openPDF.file} title={`${openPDF.title} Certificate`} />
+              <div className={styles.modalActions}>
+                <a
+                  href={openPDF.file}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.openExternalBtn}
+                >
+                  <ExternalLink size={16} />
+                  Open in New Tab
+                </a>
+                <button
+                  className={styles.closeBtn}
+                  type="button"
+                  onClick={closeModal}
+                  aria-label="Close certificate"
+                >
+                  <X size={18} />
+                  Close
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         )}

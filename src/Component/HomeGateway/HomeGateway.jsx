@@ -271,6 +271,12 @@ const HomeGateway = () => {
         });
       });
 
+      let detachScroll = null;
+      if (typeof window !== "undefined" && window.lenis) {
+        window.lenis.on("scroll", ScrollTrigger.update);
+        detachScroll = () => window.lenis.off("scroll", ScrollTrigger.update);
+      }
+
       const refresh = () => ScrollTrigger.refresh();
       const refreshFrame = window.requestAnimationFrame(refresh);
       window.addEventListener("load", refresh, { once: true });
@@ -278,6 +284,7 @@ const HomeGateway = () => {
       return () => {
         window.cancelAnimationFrame(refreshFrame);
         window.removeEventListener("load", refresh);
+        if (detachScroll) detachScroll();
         media.revert();
       };
     }, sectionRef);
@@ -286,7 +293,7 @@ const HomeGateway = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className={styles.gateway} id="explore">
+    <section ref={sectionRef} className={styles.gateway} id="gateway">
       <div ref={stageRef} className={styles.desktopStage} aria-labelledby="site-gateway-title-desktop">
         <header className={styles.desktopHeader}>
           <h2 id="site-gateway-title-desktop">Choose the part of the portfolio you want to inspect.</h2>

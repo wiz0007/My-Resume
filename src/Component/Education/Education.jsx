@@ -44,6 +44,7 @@ const Education = () => {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.card}
+            aria-label={`${e.title} at ${e.school} (opens in new tab)`}
             initial={{ opacity: 0, x: idx % 2 === 0 ? -30 : 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}

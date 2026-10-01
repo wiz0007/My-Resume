@@ -87,7 +87,14 @@ const HomeProfile = () => (
       viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
-      <img src={profilepic} alt="Ayushmaan Mishra" loading="lazy" decoding="async" />
+      <img
+        src={profilepic}
+        alt="Ayushmaan Mishra"
+        width="430"
+        height="524"
+        loading="lazy"
+        decoding="async"
+      />
       <div className={styles.imageBadge}>
         <span>Available for fresher roles</span>
         <strong>Full-stack developer</strong>

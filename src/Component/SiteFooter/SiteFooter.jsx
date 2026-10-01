@@ -46,7 +46,12 @@ const SiteFooter = () => {
 
         <div className={styles.cta}>
           <span>Open to fresher full-stack and software engineering roles.</span>
-          <a href="/Ayushmaan_Mishra-Resume.pdf" target="_blank" rel="noopener noreferrer">
+          <a
+            href="/Ayushmaan_Mishra-Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Resume PDF (opens in new tab)"
+          >
             Resume <ArrowUpRight size={16} />
           </a>
         </div>
@@ -56,7 +61,13 @@ const SiteFooter = () => {
         <span>Copyright {year} Ayushmaan Mishra</span>
         <div className={styles.socials}>
           {socialLinks.map(({ label, href, icon: Icon }) => (
-            <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" aria-label={label}>
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith("http") ? "_blank" : undefined}
+              rel="noopener noreferrer"
+              aria-label={label}
+            >
               {createElement(Icon, { size: 18 })}
             </a>
           ))}

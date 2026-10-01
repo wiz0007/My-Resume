@@ -4,6 +4,9 @@ const SpatialSurface = ({ className, children }) => {
   const ref = useRef(null);
 
   const handlePointerMove = (event) => {
+    // Disable on touch devices and reduced motion to avoid blurring/flickering on mobile tap
+    if (event.pointerType === "touch") return;
+    if (window.matchMedia("(hover: none)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const node = ref.current;

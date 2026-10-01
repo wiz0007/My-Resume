@@ -1,7 +1,6 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import HeroShell from "../HeroShell/HeroShell";
-import { useReducedMotionPreference } from "../../hooks/useMediaPreferences";
+import { useStaticHeroMotion } from "../../hooks/useMediaPreferences";
 import styles from "./SkillsHero.module.scss";
 
 const textWords = [
@@ -24,18 +23,7 @@ const stackItems = [
 ];
 
 export const SkillsHero = () => {
-  const containerRef = useRef(null);
-  const reducedMotion = useReducedMotionPreference();
-
-  // Scroll animation: characters physically tumble downward under gravity as you scroll into the 3D orbit
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const scrollGravityFall = useTransform(scrollYProgress, [0, 1], ["0px", "90px"]);
-  const scrollTumble = useTransform(scrollYProgress, [0, 1], ["0deg", "12deg"]);
-  const scrollTumbleRev = useTransform(scrollYProgress, [0, 1], ["0deg", "-12deg"]);
+  const staticMotion = useStaticHeroMotion();
 
   let globalCharIndex = 0;
 
@@ -46,7 +34,7 @@ export const SkillsHero = () => {
       nextId="skills-architecture"
       variant="skills"
     >
-      <div ref={containerRef} className={styles.container}>
+      <div className={styles.container}>
         <h1
           className={styles.title}
           aria-label="Stack, grouped by product layers."
@@ -63,21 +51,13 @@ export const SkillsHero = () => {
                   const initialY = -140 - (charIdx % 4) * 25;
                   const initialRotate = ((charIdx * 7) % 25) - 12;
 
-                  const scrollStyle = reducedMotion
-                    ? undefined
-                    : {
-                        y: scrollGravityFall,
-                        rotateZ: charIdx % 2 === 0 ? scrollTumble : scrollTumbleRev,
-                      };
-
                   return (
                     <motion.span
-                      key={charIdx}
+                      key={`${word}-${charIdx}`}
                       className={`${styles.charFalling} ${isAccent ? styles.titleAccent : ""}`}
-                      style={scrollStyle}
                       initial={
-                        reducedMotion
-                          ? { opacity: 1 }
+                        staticMotion
+                          ? false
                           : {
                               opacity: 0,
                               y: initialY,
@@ -110,7 +90,7 @@ export const SkillsHero = () => {
 
         <motion.p
           className={styles.summary}
-          initial={{ opacity: 0, y: 16 }}
+          initial={staticMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.65, ease: "easeOut" }}
         >
@@ -119,7 +99,7 @@ export const SkillsHero = () => {
 
         <motion.div
           className={styles.stackGrid}
-          initial={{ opacity: 0, y: 16 }}
+          initial={staticMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
         >

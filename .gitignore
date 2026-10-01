@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Archives & Temporary files
+*.zip
+*.tar.gz
+*.rar
+.tempmediaStorage/

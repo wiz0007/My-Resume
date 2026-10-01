@@ -110,7 +110,7 @@
     display: inline-flex;
     min-height: 34px;
     align-items: center;
-    padding: 0.45rem 0.7rem;
+    padding: 0.45rem 0.75rem;
     border: 1px solid rgba(255, 255, 255, 0.13);
     border-radius: 999px;
     color: rgba(255, 255, 255, 0.78);
@@ -118,6 +118,21 @@
     font-size: 0.76rem;
     font-weight: 750;
     text-decoration: none;
+  }
+
+  a {
+    gap: 0.35rem;
+    color: #38bdf8;
+    border-color: rgba(56, 189, 248, 0.32);
+    background: rgba(56, 189, 248, 0.06);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(56, 189, 248, 0.14);
+      border-color: rgba(56, 189, 248, 0.65);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
   }
 }
 

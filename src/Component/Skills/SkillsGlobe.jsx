@@ -7,6 +7,9 @@ import {
   Server,
   Shield
 } from "lucide-react";
+import { useNearViewport } from "../../hooks/useNearViewport";
+import { usePageVisibility } from "../../hooks/usePageVisibility";
+import { useReducedMotionPreference } from "../../hooks/useMediaPreferences";
 import styles from "./SkillsGlobe.module.scss";
 
 const skillsList = [
@@ -188,7 +191,12 @@ const SkillsGlobe = () => {
   const [hoveredSkillId, setHoveredSkillId] = useState(null);
   const [filterCat, setFilterCat] = useState("all");
 
+  const containerRef = useRef(null);
   const viewportRef = useRef(null);
+  const isNearViewport = useNearViewport(containerRef, { rootMargin: "200px 0px" });
+  const isPageVisible = usePageVisibility();
+  const reducedMotion = useReducedMotionPreference();
+
   const isDraggingRef = useRef(false);
   const lastMouseRef = useRef({ x: 0, y: 0 });
   const velocityRef = useRef({ x: 0.0028, y: 0.0014 });
@@ -235,18 +243,27 @@ const SkillsGlobe = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [updateSphereDistribution]);
 
-  // Animation frame loop with smooth deceleration on hover
+  // Animation frame loop with smooth deceleration on hover & idle pause when off-screen
   useEffect(() => {
+    if (!isNearViewport || !isPageVisible) {
+      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+      return undefined;
+    }
+
     const fov = 380; // Perspective field of view
 
     const render = () => {
       if (!isDraggingRef.current) {
-        // Smoothly ease rotation speed on hover (gentle float) vs unhover (cruise)
-        const targetMultiplier = hoveredSkillId ? 0.2 : 1.0;
-        speedMultiplierRef.current += (targetMultiplier - speedMultiplierRef.current) * 0.08;
+        if (reducedMotion) {
+          speedMultiplierRef.current = 0;
+        } else {
+          // Smoothly ease rotation speed on hover (gentle float) vs unhover (cruise)
+          const targetMultiplier = hoveredSkillId ? 0.2 : 1.0;
+          speedMultiplierRef.current += (targetMultiplier - speedMultiplierRef.current) * 0.08;
 
-        rotationRef.current.y += velocityRef.current.x * speedMultiplierRef.current;
-        rotationRef.current.x += velocityRef.current.y * speedMultiplierRef.current;
+          rotationRef.current.y += velocityRef.current.x * speedMultiplierRef.current;
+          rotationRef.current.x += velocityRef.current.y * speedMultiplierRef.current;
+        }
       }
 
       const radX = rotationRef.current.x;
@@ -291,7 +308,7 @@ const SkillsGlobe = () => {
     return () => {
       if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
     };
-  }, [hoveredSkillId]);
+  }, [hoveredSkillId, isNearViewport, isPageVisible, reducedMotion]);
 
   // Pointer drag to spin the 3D globe in any direction
   const handlePointerDown = (e) => {
@@ -323,7 +340,7 @@ const SkillsGlobe = () => {
   };
 
   return (
-    <div className={styles.globeStudio}>
+    <div ref={containerRef} className={styles.globeStudio}>
       {/* Left Column: Seamless Floating 3D Tech Sphere (Unboxed) */}
       <div className={styles.globeStage}>
         <div
@@ -355,7 +372,10 @@ const SkillsGlobe = () => {
                 }}
                 onMouseEnter={() => setHoveredSkillId(tag.id)}
                 onMouseLeave={() => setHoveredSkillId(null)}
+                onFocus={() => setActiveSkillId(tag.id)}
                 onClick={() => setActiveSkillId(tag.id)}
+                aria-label={`Inspect ${tag.name} skill details`}
+                aria-pressed={isSelected}
               >
                 <span className={styles.tagDot} />
                 <span>{tag.name}</span>
@@ -382,6 +402,7 @@ const SkillsGlobe = () => {
               type="button"
               className={filterCat === cat.id ? styles.filterActive : ""}
               style={{ "--cat-accent": cat.color || "#38bdf8" }}
+              aria-pressed={filterCat === cat.id}
               onClick={() => {
                 setFilterCat(cat.id);
                 if (cat.id !== "all") {
