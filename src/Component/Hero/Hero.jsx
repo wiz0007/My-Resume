@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { Link } from "react-router-dom";
 import { ArrowDown, ArrowRight, Download, Send, Sparkles } from "lucide-react";
 import { usePageVisibility } from "../../hooks/usePageVisibility";
-import { useReducedMotionPreference } from "../../hooks/useMediaPreferences";
+import { useReducedMotionPreference, useStaticHeroMotion } from "../../hooks/useMediaPreferences";
 import myPic from "../../assets/MyPic.jpeg";
 import styles from "./Hero.module.scss";
 
@@ -75,6 +75,7 @@ const Hero = () => {
   const heroRef = useRef(null);
   const isPageVisible = usePageVisibility();
   const reducedMotion = useReducedMotionPreference();
+  const staticMotion = useStaticHeroMotion();
 
   const [activeSpecIndex, setActiveSpecIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
@@ -90,7 +91,7 @@ const Hero = () => {
 
   // Interactive mouse spotlight and 3D typography tilt
   const handleMouseMove = (e) => {
-    if (reducedMotion) return;
+    if (staticMotion) return;
     const rect = heroRef.current?.getBoundingClientRect();
     if (!rect) return;
     setMousePos({
@@ -123,6 +124,18 @@ const Hero = () => {
       ? (mousePos.x / heroRef.current.offsetWidth - 0.5) * 10
       : 0;
 
+  const handleScrollCueClick = (e) => {
+    e.preventDefault();
+    const targetEl = document.getElementById("explore");
+    if (targetEl) {
+      if (window.lenis) {
+        window.lenis.scrollTo(targetEl, { offset: -70 });
+      } else {
+        targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
+
   return (
     <section
       className={styles.hero}
@@ -133,7 +146,7 @@ const Hero = () => {
     >
       <motion.div
         className={styles.portraitWrapper}
-        style={reducedMotion ? undefined : { y: portraitParallaxY }}
+        style={staticMotion ? undefined : { y: portraitParallaxY }}
         aria-hidden="true"
       >
         <img
@@ -158,7 +171,7 @@ const Hero = () => {
 
       <motion.div
         className={styles.content}
-        style={reducedMotion ? undefined : { y: contentY, opacity: contentOpacity }}
+        style={staticMotion ? undefined : { y: contentY, opacity: contentOpacity }}
       >
         {/* Status indicator bar */}
         <motion.div
@@ -181,7 +194,7 @@ const Hero = () => {
           className={styles.title}
           aria-label="Ayushmaan Mishra"
           style={
-            reducedMotion
+            staticMotion
               ? undefined
               : {
                   transform: `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
@@ -195,7 +208,7 @@ const Hero = () => {
                 className={styles.titleChar}
                 custom={index}
                 variants={charVariants}
-                initial={reducedMotion ? { opacity: 1 } : "hidden"}
+                initial={staticMotion ? false : "hidden"}
                 animate="show"
               >
                 {char}
@@ -209,7 +222,7 @@ const Hero = () => {
                 className={`${styles.titleChar} ${styles.titleAccentChar}`}
                 custom={titleFirst.length + index}
                 variants={charVariants}
-                initial={reducedMotion ? { opacity: 1 } : "hidden"}
+                initial={staticMotion ? false : "hidden"}
                 animate="show"
               >
                 {char}
@@ -244,10 +257,10 @@ const Hero = () => {
               className={styles.summaryWord}
               custom={index}
               variants={summaryWordVariants}
-              initial={reducedMotion ? { opacity: 1 } : "hidden"}
+              initial={staticMotion ? false : "hidden"}
               animate="show"
               whileHover={
-                reducedMotion
+                staticMotion
                   ? undefined
                   : {
                       color: "#7dd3fc",
@@ -332,7 +345,12 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      <a className={styles.scrollCue} href="#explore" aria-label="Scroll to site sections">
+      <a
+        className={styles.scrollCue}
+        href="#explore"
+        onClick={handleScrollCueClick}
+        aria-label="Scroll to site sections"
+      >
         <ArrowDown size={22} />
       </a>
     </section>

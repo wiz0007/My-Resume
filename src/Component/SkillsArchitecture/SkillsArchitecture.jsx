@@ -1,5 +1,8 @@
 import { createElement, useEffect, useRef, useCallback } from "react";
 import { Braces, ChevronLeft, ChevronRight, Database, Layers, Server, ShieldCheck, Workflow } from "lucide-react";
+import { useReducedMotionPreference } from "../../hooks/useMediaPreferences";
+import { useNearViewport } from "../../hooks/useNearViewport";
+import { usePageVisibility } from "../../hooks/usePageVisibility";
 import styles from "./SkillsArchitecture.module.scss";
 
 const systems = [
@@ -38,14 +41,19 @@ const systems = [
 // 3 identical sets ensure seamless, infinite scrolling in both directions
 const railItems = [...systems, ...systems, ...systems];
 
-const SkillsArchitecture = () => {
+const AnimatedArchitecture = () => {
   const containerRef = useRef(null);
+  const nearViewport = useNearViewport(containerRef);
+  const pageVisible = usePageVisibility();
+  const reducedMotion = useReducedMotionPreference();
+  const isHoveredRef = useRef(false);
   const isInteractingRef = useRef(false);
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
-  const startScrollLeftRef = useRef(0);
   const rafIdRef = useRef(null);
   const resumeTimerRef = useRef(null);
+  const momentumRafRef = useRef(null);
+  const isTouchingRef = useRef(false);
 
   // Wraparound helper: seamlessly keeps scrollLeft within the center set
   const handleInfiniteWrap = useCallback(() => {
@@ -67,10 +75,16 @@ const SkillsArchitecture = () => {
     const container = containerRef.current;
     if (!container) return;
 
-    const singleSetWidth = container.scrollWidth / 3;
-    if (singleSetWidth > 0 && container.scrollLeft === 0) {
-      container.scrollLeft = singleSetWidth;
-    }
+    const initScroll = () => {
+      const singleSetWidth = container.scrollWidth / 3;
+      if (singleSetWidth > 0 && container.scrollLeft === 0) {
+        container.scrollLeft = singleSetWidth;
+      }
+    };
+
+    initScroll();
+    const raf = requestAnimationFrame(initScroll);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   const scheduleResume = useCallback((delay = 1200) => {
@@ -80,13 +94,9 @@ const SkillsArchitecture = () => {
     }, delay);
   }, []);
 
-  // Smooth continuous auto-scroll loop
+  // Smooth continuous auto-scroll loop: moves endlessly when user is not interacting or hovering
   useEffect(() => {
-    const prefersReducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) return;
+    if (reducedMotion || !nearViewport || !pageVisible) return;
 
     let lastTime = performance.now();
     const speed = 0.65; // pixels per frame for smooth continuous gliding
@@ -96,7 +106,13 @@ const SkillsArchitecture = () => {
       lastTime = now;
 
       const container = containerRef.current;
-      if (container && !isInteractingRef.current && !isDraggingRef.current) {
+      if (
+        container &&
+        !isHoveredRef.current &&
+        !isInteractingRef.current &&
+        !isDraggingRef.current &&
+        !isTouchingRef.current
+      ) {
         container.scrollLeft += speed * delta;
         handleInfiniteWrap();
       }
@@ -107,54 +123,157 @@ const SkillsArchitecture = () => {
     rafIdRef.current = requestAnimationFrame(tick);
     return () => {
       if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
     };
-  }, [handleInfiniteWrap]);
+  }, [handleInfiniteWrap, nearViewport, pageVisible, reducedMotion]);
 
-  // Pointer drag handling for mouse drag (horizontal scrubbing)
-  const handlePointerDown = (e) => {
-    if (e.button !== 0 && e.pointerType === "mouse") return;
+  useEffect(() => () => {
+    if (momentumRafRef.current) cancelAnimationFrame(momentumRafRef.current);
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+  }, []);
+
+  // Touch gesture handling via non-passive listeners to allow smooth horizontal finger scrolling
+  useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    if (e.pointerType !== "touch") {
+    let startX = 0;
+    let startY = 0;
+    let lastX = 0;
+    let lastTime = 0;
+    let velocity = 0;
+    let isScrolling = null; // null = undecided, true = vertical page scroll, false = horizontal drag
+
+    const onTouchStart = (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      if (momentumRafRef.current) cancelAnimationFrame(momentumRafRef.current);
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+
       isInteractingRef.current = true;
-      isDraggingRef.current = true;
-      startXRef.current = e.clientX;
-      startScrollLeftRef.current = container.scrollLeft;
-      container.setPointerCapture(e.pointerId);
-    }
+      isTouchingRef.current = true;
+      isScrolling = null;
+
+      const touch = e.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      lastX = touch.clientX;
+      lastTime = performance.now();
+      velocity = 0;
+    };
+
+    const onTouchMove = (e) => {
+      if (!isTouchingRef.current || !e.touches || !e.touches[0]) return;
+
+      const touch = e.touches[0];
+      const currentX = touch.clientX;
+      const currentY = touch.clientY;
+      const diffX = currentX - startX;
+      const diffY = currentY - startY;
+
+      if (isScrolling === null) {
+        if (Math.abs(diffX) > 6 || Math.abs(diffY) > 6) {
+          // If vertical movement is greater, let browser scroll the page
+          isScrolling = Math.abs(diffY) > Math.abs(diffX);
+        }
+      }
+
+      if (isScrolling === false) {
+        // Horizontal finger swipe: prevent page jitter and scrub cards
+        if (e.cancelable) e.preventDefault();
+
+        const now = performance.now();
+        const dt = now - lastTime;
+        if (dt > 8) {
+          velocity = (lastX - currentX) / dt;
+          lastTime = now;
+        }
+
+        const deltaX = lastX - currentX;
+        lastX = currentX;
+
+        container.scrollLeft += deltaX;
+        handleInfiniteWrap();
+      }
+    };
+
+    const onTouchEnd = () => {
+      if (!isTouchingRef.current) return;
+      isTouchingRef.current = false;
+
+      // Apply flick momentum decay for quick swipes
+      if (isScrolling === false && Math.abs(velocity) > 0.12) {
+        let vel = velocity * 15;
+        const glide = () => {
+          if (!isTouchingRef.current && Math.abs(vel) > 0.3 && containerRef.current) {
+            containerRef.current.scrollLeft += vel;
+            handleInfiniteWrap();
+            vel *= 0.92;
+            momentumRafRef.current = requestAnimationFrame(glide);
+          }
+        };
+        momentumRafRef.current = requestAnimationFrame(glide);
+      }
+
+      isScrolling = null;
+      scheduleResume(1800);
+    };
+
+    container.addEventListener("touchstart", onTouchStart, { passive: true });
+    container.addEventListener("touchmove", onTouchMove, { passive: false });
+    container.addEventListener("touchend", onTouchEnd, { passive: true });
+    container.addEventListener("touchcancel", onTouchEnd, { passive: true });
+
+    return () => {
+      container.removeEventListener("touchstart", onTouchStart);
+      container.removeEventListener("touchmove", onTouchMove);
+      container.removeEventListener("touchend", onTouchEnd);
+      container.removeEventListener("touchcancel", onTouchEnd);
+    };
+  }, [handleInfiniteWrap, scheduleResume]);
+
+  // Mouse drag handling for desktop users
+  const handleMouseDown = (e) => {
+    if (e.button !== 0) return;
+    const container = containerRef.current;
+    if (!container) return;
+
+    isInteractingRef.current = true;
+    isDraggingRef.current = true;
+    startXRef.current = e.clientX;
+
+    const onMouseMove = (moveEvent) => {
+      if (!isDraggingRef.current || !containerRef.current) return;
+      const deltaX = startXRef.current - moveEvent.clientX;
+      startXRef.current = moveEvent.clientX;
+      containerRef.current.scrollLeft += deltaX;
+      handleInfiniteWrap();
+    };
+
+    const onMouseUp = () => {
+      isDraggingRef.current = false;
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      scheduleResume(1200);
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
   };
 
-  const handlePointerMove = (e) => {
-    if (!isDraggingRef.current) return;
-    const container = containerRef.current;
-    if (!container) return;
-
-    const diff = e.clientX - startXRef.current;
-    container.scrollLeft = startScrollLeftRef.current - diff;
+  // Infinite wrapping check on scroll
+  const handleScroll = () => {
     handleInfiniteWrap();
   };
 
-  const handlePointerUp = (e) => {
-    if (!isDraggingRef.current) return;
-    isDraggingRef.current = false;
-    const container = containerRef.current;
-    if (container && container.hasPointerCapture(e.pointerId)) {
-      container.releasePointerCapture(e.pointerId);
-    }
-    scheduleResume(1200);
-  };
-
-  // Hover states to pause auto-scroll and allow user inspection
+  // Hover states to pause auto-scroll calmly while mouse is over the container
   const handleMouseEnter = () => {
-    isInteractingRef.current = true;
+    isHoveredRef.current = true;
     if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
   };
 
   const handleMouseLeave = () => {
+    isHoveredRef.current = false;
     if (!isDraggingRef.current) {
-      scheduleResume(500);
+      scheduleResume(600);
     }
   };
 
@@ -199,11 +318,8 @@ const SkillsArchitecture = () => {
         <div
           ref={containerRef}
           className={styles.railContainer}
-          onScroll={handleInfiniteWrap}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
+          onScroll={handleScroll}
+          onMouseDown={handleMouseDown}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -226,4 +342,4 @@ const SkillsArchitecture = () => {
   );
 };
 
-export default SkillsArchitecture;
+export default AnimatedArchitecture;

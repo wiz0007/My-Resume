@@ -52,34 +52,45 @@ const HeroStory = () => {
 
       if (cancelled) return;
       gsap.registerPlugin(ScrollTrigger);
+
+      if (window.lenis) {
+        window.lenis.on("scroll", ScrollTrigger.update);
+      }
+
       ctx = gsap.context(() => {
-      const panels = gsap.utils.toArray(`.${styles.panel}`);
-      const image = section.querySelector(`.${styles.imageFrame}`);
+        const panels = gsap.utils.toArray(`.${styles.panel}`);
+        const image = section.querySelector(`.${styles.imageFrame}`);
 
-      gsap.set(panels, { autoAlpha: 0, y: 54 });
-      gsap.set(panels[0], { autoAlpha: 1, y: 0 });
+        gsap.set(panels, { autoAlpha: 0, y: 54 });
+        gsap.set(panels[0], { autoAlpha: 1, y: 0 });
 
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: `+=${highlights.length * 82}%`,
-          pin: true,
-          scrub: 0.85,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: `+=${highlights.length * 82}%`,
+            pin: true,
+            scrub: 0.85,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
 
-      timeline.fromTo(image, { scale: 0.96, y: 36 }, { scale: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0);
+        timeline.fromTo(image, { scale: 0.96, y: 36 }, { scale: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0);
 
-      panels.forEach((panel, index) => {
-        if (index > 0) {
-          timeline.to(panels[index - 1], { autoAlpha: 0, y: -42, duration: 0.35, ease: "power2.out" }, index);
-          timeline.to(panel, { autoAlpha: 1, y: 0, duration: 0.45, ease: "power3.out" }, index + 0.08);
-        }
-      });
+        panels.forEach((panel, index) => {
+          if (index > 0) {
+            timeline.to(panels[index - 1], { autoAlpha: 0, y: -42, duration: 0.35, ease: "power2.out" }, index);
+            timeline.to(panel, { autoAlpha: 1, y: 0, duration: 0.45, ease: "power3.out" }, index + 0.08);
+          }
+        });
       }, section);
+
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
+
+      return () => clearTimeout(timer);
     };
 
     setupAnimation();

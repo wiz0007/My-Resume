@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Lenis from "lenis";
+import { useMediaQuery, useReducedMotionPreference } from "./hooks/useMediaPreferences";
 import "./App.css";
 import AllRoutes from "./routes/AllRoutes";
 import ScrollToTop from "./routes/ScrollToTop";
 import Loader from "./Component/Loader/Loader";
 
 function App() {
+  const reducedMotion = useReducedMotionPreference();
+  const nativeScroll = useMediaQuery("(max-width: 980px), (pointer: coarse)");
   const [loading, setLoading] = useState(() => {
     if (typeof window === "undefined") return false;
     const alreadyLoaded = window.sessionStorage.getItem("portfolio-initialized");
@@ -31,16 +34,21 @@ function App() {
     const previousRestoration = window.history.scrollRestoration;
     window.history.scrollRestoration = "manual";
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (reducedMotion || nativeScroll) {
       return () => {
         window.history.scrollRestoration = previousRestoration;
       };
     }
 
+    const isTouchDevice =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+
     const lenis = new Lenis({
       duration: 1.05,
-      smoothWheel: true,
-      touchMultiplier: 1.15,
+      smoothWheel: !isTouchDevice,
+      syncTouch: false,
+      touchMultiplier: 1,
     });
 
     window.lenis = lenis;
@@ -93,7 +101,7 @@ function App() {
       delete window.lenis;
       window.history.scrollRestoration = previousRestoration;
     };
-  }, []);
+  }, [reducedMotion, nativeScroll]);
 
   return (
     <>

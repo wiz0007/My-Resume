@@ -52,7 +52,7 @@ export const ContactHero = () => {
 
                   return (
                     <motion.span
-                      key={globalCharIndex}
+                      key={`${word}-${globalCharIndex}`}
                       className={`${styles.charLuminous} ${isAccent ? styles.silverAccent : ""}`}
                       initial={
                         reducedMotion

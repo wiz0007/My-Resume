@@ -11,6 +11,8 @@ const Loader = ({
   return (
     <motion.div
       className={`${styles.loader} ${compact ? styles.compact : ""}`}
+      role="status"
+      aria-live="polite"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, y: -24 }}
       transition={{ duration: 0.7, ease: "easeInOut" }}

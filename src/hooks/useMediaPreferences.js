@@ -20,3 +20,10 @@ export const useMediaQuery = (query) => {
 
 export const useReducedMotionPreference = () =>
   useMediaQuery("(prefers-reduced-motion: reduce)");
+
+// Touch scrolling stays on the browser compositor; avoid nested JS parallax.
+export const useStaticHeroMotion = () => {
+  const reduced = useReducedMotionPreference();
+  const compactOrTouch = useMediaQuery("(max-width: 980px), (pointer: coarse)");
+  return reduced || compactOrTouch;
+};

@@ -1,7 +1,6 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import HeroShell from "../HeroShell/HeroShell";
-import { useReducedMotionPreference } from "../../hooks/useMediaPreferences";
+import { useReducedMotionPreference, useStaticHeroMotion } from "../../hooks/useMediaPreferences";
 import styles from "./ProcessHero.module.scss";
 
 const textWords = [
@@ -14,17 +13,8 @@ const textWords = [
 const steps = ["Discover", "Architect", "Build", "Improve"];
 
 export const ProcessHero = () => {
-  const containerRef = useRef(null);
   const reducedMotion = useReducedMotionPreference();
-
-  // Scroll animation: characters rotate on 3D X-axis with velocity tilt on scroll
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const scrollTilt = useTransform(scrollYProgress, [0, 1], ["0deg", "-35deg"]);
-  const scrollDrift = useTransform(scrollYProgress, [0, 1], ["0px", "-28px"]);
+  const staticMotion = useStaticHeroMotion();
 
   let globalCharIndex = 0;
 
@@ -35,10 +25,9 @@ export const ProcessHero = () => {
       nextId="process"
       variant="process"
     >
-      <div ref={containerRef} className={styles.container}>
+      <div className={styles.container}>
         <motion.h1
           className={styles.title}
-          style={reducedMotion ? undefined : { rotateX: scrollTilt, y: scrollDrift }}
           aria-label="Brief to shipped software."
         >
           {textWords.map(({ word, isAccent }) => {
@@ -54,8 +43,8 @@ export const ProcessHero = () => {
                       key={globalCharIndex}
                       className={`${styles.char3D} ${isAccent ? styles.silverAccent : ""}`}
                       initial={
-                        reducedMotion
-                          ? { opacity: 1 }
+                        staticMotion
+                          ? false
                           : {
                               opacity: 0,
                               rotateX: 85,
@@ -86,7 +75,7 @@ export const ProcessHero = () => {
 
         <motion.p
           className={styles.summary}
-          initial={{ opacity: 0, y: 16 }}
+          initial={staticMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
         >
@@ -95,7 +84,7 @@ export const ProcessHero = () => {
 
         <motion.div
           className={styles.stepPills}
-          initial={{ opacity: 0, y: 16 }}
+          initial={staticMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.75, ease: "easeOut" }}
         >
@@ -105,22 +94,29 @@ export const ProcessHero = () => {
               type="button"
               className={styles.pill}
               onClick={() => {
-                if (window.processScrollTrigger) {
+                const sequence = document.querySelector('[data-process-sticky="true"]');
+                if (sequence) {
+                  // Use the stable sticky frame height, not the changing browser viewport.
+                  const start = sequence.getBoundingClientRect().top + window.scrollY;
+                  const distance = Math.max(0, sequence.offsetHeight - sequence.firstElementChild.offsetHeight);
+                  window.scrollTo({ top: start + distance * index / (steps.length - 1),
+                    behavior: reducedMotion ? "instant" : "smooth" });
+                } else if (window.processScrollTrigger) {
                   const st = window.processScrollTrigger;
-                  const targetRatios = [0, 0.33, 0.66, 0.95];
+                  const targetRatios = [0, 0.33, 0.65, 0.96];
                   const targetScroll = st.start + (st.end - st.start) * (targetRatios[index] ?? 0);
                   if (window.lenis) {
                     window.lenis.scrollTo(targetScroll, { duration: 1.2 });
                   } else {
-                    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+                    window.scrollTo({ top: targetScroll, behavior: reducedMotion ? "instant" : "smooth" });
                   }
                 } else {
-                  const targetEl = document.getElementById("process");
+                  const targetEl = document.getElementById(`process-${step.toLowerCase()}`);
                   if (targetEl) {
                     if (window.lenis) {
                       window.lenis.scrollTo(targetEl, { duration: 1.2 });
                     } else {
-                      targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                      targetEl.scrollIntoView({ behavior: reducedMotion ? "instant" : "smooth", block: "start" });
                     }
                   }
                 }

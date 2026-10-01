@@ -101,6 +101,7 @@ const SkillsMobile = () => {
                 className={styles.accordionHeader}
                 onClick={() => toggleCategory(cat.id)}
                 aria-expanded={isOpen}
+                aria-controls={`skills-panel-${cat.id}`}
               >
                 <div className={styles.accordionHeaderLeft}>
                   <span className={styles.catIconBox}>
@@ -115,7 +116,12 @@ const SkillsMobile = () => {
               </button>
 
               {/* Smooth CSS Grid Expansion: Unfolds smoothly downwards without layout jumps */}
-              <div className={`${styles.accordionBodyWrapper} ${isOpen ? styles.bodyOpen : ""}`}>
+              <div
+                id={`skills-panel-${cat.id}`}
+                className={`${styles.accordionBodyWrapper} ${isOpen ? styles.bodyOpen : ""}`}
+                role="region"
+                aria-label={cat.title}
+              >
                 <div className={styles.accordionBodyInner}>
                   <div className={styles.accordionBody}>
                     <p>{cat.desc}</p>
