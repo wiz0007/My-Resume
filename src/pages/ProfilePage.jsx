@@ -1,7 +1,5 @@
 import ProfileHero from "../Component/ProfileHero/ProfileHero";
-import HeroStory from "../Component/HeroStory/HeroStory";
-import About from "../Component/About/About";
-import DeferredSection from "../Component/DeferredSection/DeferredSection";
+import ProfileDossier from "../Component/ProfileDossier/ProfileDossier";
 import Education from "../Component/Education/Education";
 import Trainings from "../Component/Training/Trainings";
 import { useSEO } from "../hooks/useSEO";
@@ -13,16 +11,9 @@ const ProfilePage = () => {
   return (
     <>
       <ProfileHero />
-      <HeroStory />
-      <DeferredSection minHeight="80svh">
-        <About />
-      </DeferredSection>
-      <DeferredSection minHeight="55svh">
-        <Education />
-      </DeferredSection>
-      <DeferredSection minHeight="55svh">
-        <Trainings />
-      </DeferredSection>
+      <ProfileDossier />
+      <Education />
+      <Trainings />
     </>
   );
 };
