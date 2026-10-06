@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   GitCommit,
-  ArrowDown,
-  ChevronRight,
   Sparkles,
 } from "lucide-react";
 import { profilePillars } from "./profileData";
@@ -29,6 +27,9 @@ const ProfileDossier = () => {
             Building From Screen{" "}
             <span className={styles.accentGrad}>To Database.</span>
           </h2>
+          <p className={styles.subtitle}>
+            Full-lifecycle engineering execution across user interfaces, service contracts, data persistence, and verified deployment.
+          </p>
         </div>
 
         {/* Architecture Pipeline Container */}

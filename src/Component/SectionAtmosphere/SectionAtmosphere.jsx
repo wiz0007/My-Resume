@@ -8,7 +8,7 @@ const particleSeeds = [
   [54, 52, 3, 1], [68, 88, 2, 4], [82, 8, 3, 8], [95, 55, 2, 6],
 ];
 
-const SectionAtmosphere = ({ accent = "#22d3ee", secondary = "#8b5cf6", side = "right", subtle = false }) => (
+const SectionAtmosphere = ({ accent = "#38bdf8", secondary = "#818cf8", side = "right", subtle = false }) => (
   <div
     className={`${styles.atmosphere} ${styles[side]} ${subtle ? styles.subtle : ""}`}
     style={{ "--ambient-accent": accent, "--ambient-secondary": secondary }}

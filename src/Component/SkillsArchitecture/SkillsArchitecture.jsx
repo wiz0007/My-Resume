@@ -293,7 +293,13 @@ const AnimatedArchitecture = () => {
   return (
     <section className={styles.architecture} id="skills-architecture" aria-labelledby="skills-architecture-title">
       <div className={styles.sectionHeader}>
-        <h2 id="skills-architecture-title">The stack grouped into working layers.</h2>
+        <span className={styles.eyebrow}>Architectural Layers</span>
+        <h2 id="skills-architecture-title">
+          The stack grouped into <span className={styles.accent}>working layers.</span>
+        </h2>
+        <p className={styles.subtitle}>
+          End-to-end capabilities mapped across product interface, backend services, and reliable persistence.
+        </p>
       </div>
 
       <div className={styles.railWrapper}>

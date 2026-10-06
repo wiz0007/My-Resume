@@ -1,3 +1,5 @@
+@use "../../styles/_tokens.scss" as *;
+
 // ProfileDossier styling module
 // Standard portfolio theme: deep pure black (#050505)
 // Desktop (>= 821px): Wide Circuit Stream with streamlined content
@@ -6,12 +8,12 @@
 .dossierSection {
   position: relative;
   min-height: 70svh;
-  padding: clamp(3rem, 5vw, 5rem) clamp(1rem, 3.5vw, 3rem);
+  @include sectionPadding;
   background:
-    radial-gradient(circle at 78% 16%, rgba(255, 255, 255, 0.05), transparent 34%),
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.03), transparent 30%),
+    radial-gradient(circle at 78% 16%, rgba(56, 189, 248, 0.05), transparent 34%),
+    radial-gradient(circle at 20% 80%, rgba(129, 140, 248, 0.03), transparent 30%),
     linear-gradient(180deg, #050505 0%, #0a0a0a 50%, #050505 100%);
-  color: #f1f5f9;
+  color: $text-primary;
   overflow: hidden;
 }
 
@@ -23,40 +25,37 @@
 }
 
 // -------------------------------------------------------------
-// Header (Clean, Focused, No Subtitle)
+// Header
 // -------------------------------------------------------------
 .dossierHeader {
   text-align: center;
   margin-bottom: clamp(1.8rem, 3vw, 2.8rem);
   position: relative;
+
+  .subtitle {
+    @include sectionSubtitle;
+    margin: 0.65rem auto 0;
+  }
 }
 
 .eyebrowBadge {
+  @include sectionEyebrow;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.35rem 0.85rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  color: #38bdf8;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  margin-bottom: 0.65rem;
 }
 
 .mainTitle {
-  margin: 0;
-  font-size: clamp(2rem, 3.8vw, 3.25rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  color: #ffffff;
+  @include sectionHeading;
+  margin: 0 auto;
 
   .accentGrad {
-    background: linear-gradient(135deg, #a5f3fc 0%, #38bdf8 40%, #818cf8 100%);
+    background: $accent-gradient;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

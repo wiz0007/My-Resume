@@ -1,16 +1,18 @@
+@use "../../styles/_tokens.scss" as *;
+
 .skills {
   position: relative;
-  padding: 6rem 8%;
-  color: #eaf2f8;
+  padding: clamp(3.5rem, 5.5vw, 5rem) 8%;
+  color: $text-primary;
   background:
-    radial-gradient(circle at 88% 16%, rgba(255, 255, 255, 0.055), transparent 30%),
-    #050505;
+    radial-gradient(circle at 88% 16%, rgba(56, 189, 248, 0.04), transparent 30%),
+    $bg-primary;
   overflow-x: hidden;
 }
 
 .header {
   max-width: 1240px;
-  margin: 0 auto 2.4rem;
+  margin: 0 auto 2.2rem;
 
   .headerTop {
     display: flex;
@@ -20,26 +22,33 @@
     flex-wrap: wrap;
   }
 
+  .eyebrow {
+    @include sectionEyebrow;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
   h2 {
-    max-width: 760px;
+    @include sectionHeading;
+    margin: 0 0 0.45rem;
+    text-align: left;
+  }
+
+  .subtitle {
+    @include sectionSubtitle;
     margin: 0;
-    font-size: clamp(2rem, 3.6vw, 3rem);
-    line-height: 1.08;
-    letter-spacing: -0.01em;
+    text-align: left;
+    max-width: 640px;
   }
 }
 
 @media (max-width: 768px) {
   .skills {
-    padding: 3.5rem 1rem;
+    padding: 3rem 1rem;
     overflow-x: hidden;
   }
 
   .header {
-    margin-bottom: 1.6rem;
-
-    h2 {
-      font-size: clamp(1.5rem, 6vw, 2.2rem);
-    }
+    margin-bottom: 1.5rem;
   }
 }

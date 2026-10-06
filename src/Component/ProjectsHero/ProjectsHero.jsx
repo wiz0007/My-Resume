@@ -42,6 +42,7 @@ export const ProjectsHero = () => {
     >
       <motion.div
         ref={containerRef}
+        className={styles.container}
         variants={containerVariants}
         initial="hidden"
         animate="show"
@@ -56,30 +57,32 @@ export const ProjectsHero = () => {
           />
         </motion.h1>
 
-        <motion.p className={styles.summary} variants={itemVariants}>
-          Full-stack builds, visual tools, commerce flows, and desktop software.
-        </motion.p>
+        <motion.div className={styles.subFocusRow} variants={itemVariants}>
+          <p className={styles.summary}>
+            Full-stack builds, visual tools, commerce flows, and desktop software.
+          </p>
 
-        <motion.div className={styles.metaGrid} variants={itemVariants}>
-          {modules.map((item, index) => {
-            const spreadStyle =
-              !reducedMotion && index === 0
-                ? { x: spreadOffsetLeft }
-                : !reducedMotion && index === modules.length - 1
-                ? { x: spreadOffsetRight }
-                : undefined;
+          <div className={styles.metaGrid}>
+            {modules.map((item, index) => {
+              const spreadStyle =
+                !reducedMotion && index === 0
+                  ? { x: spreadOffsetLeft }
+                  : !reducedMotion && index === modules.length - 1
+                  ? { x: spreadOffsetRight }
+                  : undefined;
 
-            return (
-              <motion.span
-                key={item}
-                className={styles.moduleChip}
-                style={spreadStyle}
-              >
-                <span className={styles.modulePrefix}>#</span>
-                <span>{item}</span>
-              </motion.span>
-            );
-          })}
+              return (
+                <motion.span
+                  key={item}
+                  className={styles.moduleChip}
+                  style={spreadStyle}
+                >
+                  <span className={styles.modulePrefix}>#</span>
+                  <span>{item}</span>
+                </motion.span>
+              );
+            })}
+          </div>
         </motion.div>
       </motion.div>
     </HeroShell>

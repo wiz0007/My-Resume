@@ -1,3 +1,5 @@
+@use "../../styles/_tokens.scss" as *;
+
 .navbar {
   position: fixed;
   top: 0;
@@ -49,14 +51,15 @@
     letter-spacing: 0;
     transition: color 0.22s ease, transform 0.22s ease;
 
-    &:hover,
-    &.active {
+    &:hover {
       color: #ffffff;
       transform: translateY(-1px);
     }
 
     &.active {
-      text-shadow: 0 0 22px rgba(255, 255, 255, 0.22);
+      color: $accent-cyan;
+      text-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+      transform: translateY(-1px);
     }
   }
 }
@@ -164,8 +167,8 @@
     }
 
     &.active {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.1);
+      color: $accent-cyan;
+      background: rgba(56, 189, 248, 0.1);
     }
   }
 }

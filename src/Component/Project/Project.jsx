@@ -4,8 +4,6 @@ import {
   BriefcaseBusiness,
   Check,
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
   ChevronUp,
   ExternalLink,
   Gamepad2,
@@ -634,7 +632,15 @@ const Project = () => {
     <section className={styles.projects} id="projects">
       <div className={styles.sectionHeader}>
         <div className={styles.sectionTitleRow}>
-          <span className={styles.sectionLabel}>Engineering Portfolio</span>
+          <div>
+            <span className={styles.sectionLabel}>Engineering Portfolio</span>
+            <h2 className={styles.sectionTitle}>
+              Selected Works & <span className={styles.accent}>Working Systems</span>
+            </h2>
+            <p className={styles.sectionSubtitle}>
+              Full-stack platforms, distributed services, and interactive architectural tools.
+            </p>
+          </div>
           <span className={styles.sectionSubtext}>
             {filteredProjects.length} {filteredProjects.length === 1 ? "System" : "Systems"} Exhibited
           </span>

@@ -113,7 +113,12 @@ const Trainings = () => {
         <header className={styles.header}>
           <div className={styles.headerTitleGroup}>
             <span className={styles.categoryLabel}>Credentials</span>
-            <h2 className={styles.sectionHeading}>Verified Certifications</h2>
+            <h2 className={styles.sectionHeading}>
+              Verified <span className={styles.accent}>Certifications</span>
+            </h2>
+            <p className={styles.subtitle}>
+              Specialized industry trainings and formal capability assessments.
+            </p>
           </div>
         </header>
 

@@ -1,0 +1,218 @@
+// =========================================================
+// DESIGN SYSTEM TOKENS & MIXINS
+// Source of truth: docs/design-system-standards.md
+// =========================================================
+
+// --- 1. Colors (Strict 2-Color Accent Palette) ---
+$bg-primary: #050505;
+$bg-void: #050505;
+$bg-surface: rgba(18, 18, 18, 0.78);
+$bg-surface-elevated: linear-gradient(145deg, rgba(20, 20, 20, 0.96), rgba(8, 8, 8, 0.93));
+$glass-bg-subtle: rgba(18, 18, 18, 0.72);
+$glass-bg-card: rgba(20, 20, 20, 0.95);
+
+// Accents
+$accent-cyan: #38bdf8;       // Primary interactive accent, icons, tags
+$accent-indigo: #818cf8;     // Secondary gradient blend partner
+$accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+
+// Status
+$status-emerald: #10b981;    // Pulse dot, success checkmarks
+$status-live: #10b981;
+$status-emerald-text: #34d399;
+$status-emerald-bg: rgba(16, 185, 129, 0.08);
+$status-emerald-border: rgba(16, 185, 129, 0.28);
+
+// Borders & Lines
+$border-subtle: rgba(148, 163, 184, 0.12);
+$border-medium: rgba(148, 163, 184, 0.18);
+$border-accent-hover: rgba(56, 189, 248, 0.38);
+$glass-border-subtle: rgba(148, 163, 184, 0.14);
+$glass-border-hover: rgba(56, 189, 248, 0.45);
+
+// Typography Colors
+$text-primary: #ffffff;
+$text-sub: #f8fafc;
+$text-secondary: #94a3b8;
+$text-muted: #64748b;
+$text-accent: #38bdf8;
+
+// --- 2. Typography Sizing Tokens ---
+$font-eyebrow-desktop: 0.78rem;
+$font-eyebrow-mobile: 0.75rem;
+
+$font-h2-desktop: clamp(2rem, 3.2vw, 2.75rem);
+$font-h2-mobile: 1.85rem;
+
+$font-lead-desktop: 0.95rem;
+$font-lead-mobile: 0.88rem;
+
+$font-card-title-desktop: 0.88rem;
+$font-card-title-mobile: 0.82rem;
+
+$font-card-text-desktop: 0.84rem;
+$font-card-text-mobile: 0.80rem;
+
+$font-mono-desktop: 0.75rem;
+$font-mono-mobile: 0.72rem;
+
+// --- 3. Responsive Breakpoints ---
+$bp-desktop-large: 1200px;
+$bp-laptop: 960px;
+$bp-tablet: 768px;
+$bp-mobile: 640px;
+$bp-mobile-small: 480px;
+
+// Breakpoint aliases
+$bp-lg: 960px;
+$bp-md: 768px;
+$bp-sm: 640px;
+$bp-xs: 480px;
+
+// --- 4. Reusable Mixins ---
+@mixin sectionPadding {
+  padding: clamp(3rem, 5vw, 4.5rem) max(1.25rem, calc((100vw - 1200px) / 2)) clamp(3.5rem, 5.5vw, 5rem);
+
+  @media (max-width: $bp-mobile) {
+    padding-top: 2.75rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+@mixin sectionEyebrow {
+  color: $accent-cyan;
+  font-size: $font-eyebrow-desktop;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  @media (max-width: $bp-mobile) {
+    font-size: $font-eyebrow-mobile;
+  }
+}
+
+@mixin sectionHeading {
+  margin: 0.45rem auto 0.75rem;
+  font-size: $font-h2-desktop;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: $text-primary;
+  text-wrap: balance;
+
+  .accent {
+    background: $accent-gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media (max-width: $bp-mobile) {
+    font-size: $font-h2-mobile;
+  }
+}
+
+@mixin sectionSubtitle {
+  margin: 0 auto;
+  color: $text-secondary;
+  font-size: $font-lead-desktop;
+  line-height: 1.65;
+  max-width: 580px;
+
+  @media (max-width: $bp-mobile) {
+    font-size: $font-lead-mobile;
+  }
+}
+
+@mixin glassCard {
+  border: 1px solid $border-medium;
+  border-radius: 12px;
+  background: $bg-surface;
+  backdrop-filter: blur(14px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    border-color: $border-accent-hover;
+    background: rgba(28, 36, 52, 0.6);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35), 0 0 16px rgba(56, 189, 248, 0.12);
+  }
+}
+
+@mixin statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid $status-emerald-border;
+  background: $status-emerald-bg;
+  color: $status-emerald-text;
+  font-size: 0.72rem;
+  font-weight: 650;
+
+  .pulseDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $status-emerald;
+    box-shadow: 0 0 8px $status-emerald;
+    animation: pulse 2s infinite ease-in-out;
+  }
+}
+
+@mixin cardTitle {
+  font-size: $font-card-title-desktop;
+  font-weight: 750;
+  line-height: 1.25;
+  color: $text-primary;
+
+  @media (max-width: $bp-mobile) {
+    font-size: $font-card-title-mobile;
+  }
+}
+
+@mixin cardText {
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: $text-secondary;
+
+  @media (max-width: $bp-mobile) {
+    font-size: 0.80rem;
+  }
+}
+
+@mixin metaTag {
+  font-size: $font-mono-desktop;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: $accent-cyan;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+}
+
+@mixin actionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.90rem;
+  font-weight: 750;
+  color: #050505;
+  background: $accent-gradient;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.25rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(56, 189, 248, 0.28);
+  }
+
+  @media (max-width: $bp-mobile) {
+    font-size: 0.88rem;
+  }
+}
+

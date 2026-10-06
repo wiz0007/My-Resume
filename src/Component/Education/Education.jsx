@@ -141,7 +141,13 @@ const Education = () => {
         <div className={styles.contentWrap}>
           {/* Header */}
           <header className={styles.header}>
-            <span className={styles.heading}>Academic Base</span>
+            <span className={styles.eyebrow}>Academic Journey</span>
+            <h2 className={styles.heading}>
+              Formal Education & <span className={styles.accent}>Degree Foundation</span>
+            </h2>
+            <p className={styles.subtitle}>
+              Institutional qualifications and comprehensive engineering curriculum.
+            </p>
           </header>
 
           {/* Details Stage */}

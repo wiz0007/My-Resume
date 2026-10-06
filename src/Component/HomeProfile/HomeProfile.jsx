@@ -102,7 +102,10 @@ const HomeProfile = () => (
     </motion.div>
 
     <div className={styles.copy}>
-      <h2 id="home-profile-title">Practical engineering with a product-first mindset.</h2>
+      <span className={styles.eyebrow}>Product & Architecture</span>
+      <h2 id="home-profile-title">
+        Practical engineering with a <span className={styles.accent}>product-first mindset.</span>
+      </h2>
 
       <DropWords
         as="p"

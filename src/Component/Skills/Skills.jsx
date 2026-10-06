@@ -12,7 +12,15 @@ const Skills = () => {
       <SectionAtmosphere accent="#06b6d4" secondary="#10b981" side="right" subtle />
       <div className={styles.header}>
         <div className={styles.headerTop}>
-          <h2>Explore the stack behind how I build.</h2>
+          <div>
+            <span className={styles.eyebrow}>Domain Engine</span>
+            <h2 id="skills-globe-title">
+              Explore the stack behind <span className={styles.accent}>how I build.</span>
+            </h2>
+            <p className={styles.subtitle}>
+              Interactive 3D domain map spanning client runtime, backend services, databases, and tooling.
+            </p>
+          </div>
         </div>
       </div>
 
