@@ -52,25 +52,30 @@ export const ProfileHero = () => {
           </span>
         </h1>
 
-        <motion.p
-          className={styles.summary}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
-        >
-          Computer Engineering graduate building useful, complete software.
-        </motion.p>
+        {/* [2] SUB-FOCUS DUAL-ZONE: Narrative Pillar (2A) + Positioning Chips (2B) */}
+        <div className={styles.subFocusRow}>
+          <motion.p
+            className={styles.summary}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
+          >
+            Computer Engineering graduate building useful, complete software.
+          </motion.p>
 
-        <motion.div
-          className={styles.metaGrid}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
-        >
-          {profileTags.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </motion.div>
+          <motion.div
+            className={styles.metaGrid}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+          >
+            {profileTags.map((item) => (
+              <span key={item} className={styles.profileChip}>
+                {item}
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </HeroShell>
   );

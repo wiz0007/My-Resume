@@ -83,25 +83,30 @@ export const ContactHero = () => {
           })}
         </motion.h1>
 
-        <motion.p
-          className={styles.summary}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-        >
-          Open to full-stack, frontend, backend, and software engineering opportunities.
-        </motion.p>
+        {/* [2] SUB-FOCUS DUAL-ZONE: Narrative Pillar (2A) + Discussion Channels (2B) */}
+        <div className={styles.subFocusRow}>
+          <motion.p
+            className={styles.summary}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+          >
+            Open to full-stack, frontend, backend, and software engineering opportunities.
+          </motion.p>
 
-        <motion.div
-          className={styles.metaChips}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.75, ease: "easeOut" }}
-        >
-          {contactTags.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </motion.div>
+          <motion.div
+            className={styles.metaChips}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.75, ease: "easeOut" }}
+          >
+            {contactTags.map((item) => (
+              <span key={item} className={styles.contactChip}>
+                {item}
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </HeroShell>
   );

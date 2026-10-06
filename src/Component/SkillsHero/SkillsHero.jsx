@@ -88,39 +88,42 @@ export const SkillsHero = () => {
           })}
         </h1>
 
-        <motion.p
-          className={styles.summary}
-          initial={staticMotion ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65, ease: "easeOut" }}
-        >
-          Interface, services, data, security, tools, and programming fundamentals.
-        </motion.p>
+        {/* [2] SUB-FOCUS DUAL-ZONE: Narrative Pillar (2A) + Core Stack Matrix (2B) */}
+        <div className={styles.subFocusRow}>
+          <motion.p
+            className={styles.summary}
+            initial={staticMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.65, ease: "easeOut" }}
+          >
+            Interface, services, data, security, tools, and programming fundamentals.
+          </motion.p>
 
-        <motion.div
-          className={styles.stackGrid}
-          initial={staticMotion ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-        >
-          {stackItems.map((item) => (
-            <span
-              key={item.name}
-              className={styles.skillChip}
-              style={{ "--chip-accent": item.color }}
-            >
+          <motion.div
+            className={styles.stackGrid}
+            initial={staticMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+          >
+            {stackItems.map((item) => (
               <span
-                className={styles.chipDot}
-                style={{
-                  backgroundColor: item.color,
-                  boxShadow: `0 0 8px ${item.color}88`,
-                }}
-                aria-hidden="true"
-              />
-              <span className={styles.chipName}>{item.name}</span>
-            </span>
-          ))}
-        </motion.div>
+                key={item.name}
+                className={styles.skillChip}
+                style={{ "--chip-accent": item.color }}
+              >
+                <span
+                  className={styles.chipDot}
+                  style={{
+                    backgroundColor: item.color,
+                    boxShadow: `0 0 8px ${item.color}88`,
+                  }}
+                  aria-hidden="true"
+                />
+                <span className={styles.chipName}>{item.name}</span>
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </HeroShell>
   );

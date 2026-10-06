@@ -1,11 +1,13 @@
+@use "../../styles/_tokens.scss" as *;
+
 .projects {
   position: relative;
   isolation: isolate;
   padding: clamp(2.5rem, 4vw, 3.75rem) max(1.25rem, calc((100vw - 1280px) / 2)) clamp(6rem, 10vw, 9rem);
-  color: #f8fafc;
+  color: $text-primary;
   background:
-    radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 0.055), transparent 26%),
-    #050505;
+    radial-gradient(circle at 50% 8%, rgba(56, 189, 248, 0.04), transparent 26%),
+    $bg-primary;
   overflow: hidden;
 
   &::before {
@@ -15,8 +17,8 @@
     z-index: -1;
     pointer-events: none;
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 64px 64px;
     mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
   }
@@ -33,25 +35,36 @@
 
 .sectionTitleRow {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .sectionLabel {
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 0.72rem;
-  font-weight: 850;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  @include sectionEyebrow;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.sectionTitle {
+  @include sectionHeading;
+  margin: 0 0 0.45rem;
+  text-align: left;
+}
+
+.sectionSubtitle {
+  @include sectionSubtitle;
+  margin: 0;
+  text-align: left;
+  max-width: 680px;
 }
 
 .sectionSubtext {
-  color: rgba(255, 255, 255, 0.35);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  @include metaTag;
+  align-self: flex-start;
+  margin-top: 0.5rem;
 }
 
 .controlsBar {
@@ -108,13 +121,13 @@
 
   &.activeFilter {
     color: #050505;
-    background: #f8fafc;
-    border-color: #f8fafc;
-    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.22);
+    background: $accent-gradient;
+    border-color: transparent;
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.32);
 
     .filterCount {
-      color: rgba(0, 0, 0, 0.7);
-      background: rgba(0, 0, 0, 0.1);
+      color: rgba(0, 0, 0, 0.85);
+      background: rgba(255, 255, 255, 0.35);
     }
   }
 }
@@ -230,10 +243,10 @@
 
   &:hover {
     transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color: $border-accent-hover;
     box-shadow:
       0 32px 75px rgba(0, 0, 0, 0.55),
-      0 0 28px rgba(255, 255, 255, 0.035),
+      0 0 24px rgba(56, 189, 248, 0.12),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
     .bentoCardGlow {
@@ -407,10 +420,10 @@
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.22);
   border-radius: 12px;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.06);
+  color: $accent-cyan;
+  background: rgba(56, 189, 248, 0.08);
   flex: 0 0 auto;
 }
 
@@ -422,21 +435,21 @@
 }
 
 .bentoLabel {
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 0.62rem;
-  font-weight: 850;
-  letter-spacing: 0.1em;
+  color: rgba(148, 163, 184, 0.72);
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .bentoTitle {
   margin: 0;
-  color: #f1f5f9;
-  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  color: $text-primary;
+  font-size: clamp(1.2rem, 1.8vw, 1.48rem);
   font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  transition: color 0.2s ease;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .bentoDesc {
@@ -527,19 +540,21 @@
 }
 
 .techPill {
-  padding: 0.32rem 0.58rem;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 999px;
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.025);
-  font-size: 0.68rem;
-  font-weight: 750;
+  @include metaTag;
+  font-size: 0.70rem;
+  padding: 0.25rem 0.52rem;
   transition: all 0.2s ease;
+
+  &:first-child {
+    color: $accent-cyan;
+    border-color: rgba(56, 189, 248, 0.25);
+    background: rgba(56, 189, 248, 0.08);
+  }
 
   &:hover {
     color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(56, 189, 248, 0.45);
+    background: rgba(56, 189, 248, 0.16);
   }
 }
 
@@ -564,20 +579,19 @@
   display: inline-flex;
   align-items: center;
   gap: 0.42rem;
-  padding: 0.52rem 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 9px;
+  padding: 0.52rem 0.95rem;
+  border: none;
+  border-radius: 8px;
   color: #050505;
-  background: #f8fafc;
-  font-size: 0.75rem;
-  font-weight: 850;
+  background: $accent-gradient;
+  font-size: 0.78rem;
+  font-weight: 750;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 
   &:hover {
-    background: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.22);
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.35);
   }
 }
 
@@ -586,19 +600,19 @@
   align-items: center;
   gap: 0.42rem;
   padding: 0.52rem 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 9px;
-  color: rgba(255, 255, 255, 0.82);
-  background: rgba(255, 255, 255, 0.045);
-  font-size: 0.75rem;
-  font-weight: 800;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 8px;
+  color: $accent-cyan;
+  background: rgba(56, 189, 248, 0.08);
+  font-size: 0.78rem;
+  font-weight: 750;
   text-decoration: none;
   transition: all 0.2s ease;
 
   &:hover {
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color: rgba(56, 189, 248, 0.45);
+    background: rgba(56, 189, 248, 0.16);
     transform: translateY(-2px);
   }
 }
@@ -851,9 +865,9 @@
 }
 
 .railCategory {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 0.62rem;
-  font-weight: 800;
+  color: rgba(148, 163, 184, 0.72);
+  font-size: 0.64rem;
+  font-weight: 650;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -887,8 +901,8 @@
 
 .railItemTitle {
   margin: 0;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 0.88rem;
+  color: #ffffff;
+  font-size: 0.90rem;
   font-weight: 800;
   line-height: 1.25;
   overflow: hidden;

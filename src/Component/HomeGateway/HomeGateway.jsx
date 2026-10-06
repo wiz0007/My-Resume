@@ -2,18 +2,13 @@ import { createElement, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  ArrowRight,
   ArrowUpRight,
   Blocks,
-  Braces,
   Code2,
-  Database,
   Fingerprint,
-  GitBranch,
   Layers3,
   Mail,
   Route,
-  ServerCog,
   Sparkles,
   UserRound,
   Workflow,
@@ -296,7 +291,13 @@ const HomeGateway = () => {
     <section ref={sectionRef} className={styles.gateway} id="gateway">
       <div ref={stageRef} className={styles.desktopStage} aria-labelledby="site-gateway-title-desktop">
         <header className={styles.desktopHeader}>
-          <h2 id="site-gateway-title-desktop">Choose the part of the portfolio you want to inspect.</h2>
+          <span className={styles.eyebrow}>Exploration Index</span>
+          <h2 id="site-gateway-title-desktop">
+            Choose the part of the portfolio you want to <span className={styles.accent}>inspect.</span>
+          </h2>
+          <p className={styles.subtitle}>
+            Direct pathways into systems, architecture, selected works, and engineering philosophy.
+          </p>
         </header>
 
         <div ref={gridRef} className={styles.grid}>
@@ -309,15 +310,15 @@ const HomeGateway = () => {
               className={styles.cardShell}
             >
               <Link className={styles.card} to={to} aria-label={`Open ${title} page`}>
-                <span className={styles.icon} aria-hidden="true">
-                  {createElement(Icon, { size: 23 })}
-                </span>
+                <div className={styles.cardTop}>
+                  <span className={styles.icon} aria-hidden="true">
+                    {createElement(Icon, { size: 22 })}
+                  </span>
+                  <ArrowUpRight size={18} className={styles.cardArrow} aria-hidden="true" />
+                </div>
                 <span className={styles.label}>{label}</span>
                 <strong>{title}</strong>
                 <p>{text}</p>
-                <span className={styles.action}>
-                  Open page <ArrowUpRight size={17} />
-                </span>
               </Link>
             </div>
           ))}
@@ -326,7 +327,13 @@ const HomeGateway = () => {
 
       <div className={styles.mobileShell} aria-labelledby="site-gateway-title-mobile">
         <header className={styles.mobileHeader}>
-          <h2 id="site-gateway-title-mobile">Choose the part of the portfolio you want to inspect.</h2>
+          <span className={styles.eyebrow}>Exploration Index</span>
+          <h2 id="site-gateway-title-mobile">
+            Choose the part of the portfolio you want to <span className={styles.accent}>inspect.</span>
+          </h2>
+          <p className={styles.subtitle}>
+            Direct pathways into systems, architecture, and works.
+          </p>
         </header>
 
         <div className={styles.mobileExperience}>

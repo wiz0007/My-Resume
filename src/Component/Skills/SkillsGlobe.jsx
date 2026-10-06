@@ -5,7 +5,7 @@ import {
   GitBranch,
   Layers,
   Server,
-  Shield
+  Shield,
 } from "lucide-react";
 import { useNearViewport } from "../../hooks/useNearViewport";
 import { usePageVisibility } from "../../hooks/usePageVisibility";

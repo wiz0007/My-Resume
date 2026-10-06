@@ -215,36 +215,37 @@
 .dossierTitleInfo {
   h3 {
     margin: 0;
-    font-size: 1.35rem;
-    font-weight: 750;
+    font-size: 1.18rem;
+    font-weight: 800;
+    line-height: 1.25;
     color: #ffffff;
   }
 
   span {
-    font-size: 0.72rem;
-    font-weight: 800;
+    font-size: 0.70rem;
+    font-weight: 650;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--skill-color, #38bdf8);
+    color: rgba(148, 163, 184, 0.72);
   }
 }
 
 .levelBadge {
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.72rem;
-  font-weight: 750;
+  font-weight: 700;
   padding: 0.22rem 0.55rem;
   border-radius: 6px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
   color: #38bdf8;
 }
 
 .dossierDesc {
-  margin: 0.6rem 0 1.2rem;
-  font-size: 0.88rem;
-  color: rgba(226, 232, 240, 0.72);
-  line-height: 1.6;
+  margin: 0.5rem 0 1.1rem;
+  font-size: 0.84rem;
+  color: #94a3b8;
+  line-height: 1.55;
 }
 
 /* Related Ecosystem Box */
