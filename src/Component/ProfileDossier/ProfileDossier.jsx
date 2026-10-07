@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
+  ArrowDown,
   ArrowUpRight,
+  ChevronRight,
   GitCommit,
   Sparkles,
 } from "lucide-react";

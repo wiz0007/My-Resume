@@ -4,6 +4,8 @@ import {
   BriefcaseBusiness,
   Check,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   ChevronUp,
   ExternalLink,
   Gamepad2,
