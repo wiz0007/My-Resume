@@ -2,13 +2,18 @@ import { createElement, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
+  ArrowRight,
   ArrowUpRight,
   Blocks,
+  Braces,
   Code2,
+  Database,
   Fingerprint,
+  GitBranch,
   Layers3,
   Mail,
   Route,
+  ServerCog,
   Sparkles,
   UserRound,
   Workflow,
