@@ -7,63 +7,76 @@ import {
   Database,
   Layers3,
   Mail,
-  MessageSquareMore,
 } from "lucide-react";
 import styles from "./ProjectInquiry.module.scss";
 
-const orbitItems = [
-  { label: "Interfaces", icon: Layers3, className: styles.orbitItemOne },
-  { label: "Full-stack", icon: Boxes, className: styles.orbitItemTwo },
-  { label: "APIs", icon: Braces, className: styles.orbitItemThree },
-  { label: "Data", icon: Database, className: styles.orbitItemFour },
+const backgroundNodes = [
+  { label: "Interfaces", icon: Layers3, className: styles.bgNodeOne },
+  { label: "Full-Stack", icon: Boxes, className: styles.bgNodeTwo },
+  { label: "APIs & Cloud", icon: Braces, className: styles.bgNodeThree },
+  { label: "Data Architecture", icon: Database, className: styles.bgNodeFour },
+];
+
+const scopeTags = [
+  "Product UI / UX",
+  "Full-Stack Apps",
+  "Dashboards & Data",
+  "Interactive Web",
+  "APIs & Systems",
 ];
 
 const ProjectInquiry = () => (
   <section className={styles.inquiry} aria-label="Project enquiries">
-    <div className={styles.shell}>
-      <div className={styles.copy}>
-        <span className={styles.eyebrow}>Available for selected project work</span>
-        <p className={styles.lead}>Have a product, platform, or web experience in mind?</p>
+    <div className={styles.bannerShell}>
+      {/* 3D Atmospheric Depth Layer */}
+      <div className={styles.atmosphericCanvas} aria-hidden="true">
+        <div className={styles.bgRadialAura} />
+        <div className={styles.bgPerspectivePlane} />
+        <div className={`${styles.orbitCircle} ${styles.orbitCircleInner}`} />
+        <div className={`${styles.orbitCircle} ${styles.orbitCircleOuter}`} />
 
-        <div className={styles.offerRow} aria-label="Project capabilities">
-          <span>Product UI</span>
-          <span>Full-stack apps</span>
-          <span>Dashboards</span>
-          <span>Interactive web</span>
-        </div>
-
-        <div className={styles.actions}>
-          <Link to="/contact">
-            Discuss a project <ArrowUpRight size={17} />
-          </Link>
-          <a href="mailto:ayush8171wiz@gmail.com">
-            <Mail size={16} /> Email
-          </a>
-        </div>
+        {/* Ambient Peripheral Nodes in Depth */}
+        {backgroundNodes.map(({ label, icon: Icon, className }) => (
+          <div key={label} className={`${styles.ambientChip} ${className}`}>
+            {createElement(Icon, { size: 12, className: styles.ambientIcon })}
+            <span>{label}</span>
+          </div>
+        ))}
       </div>
 
-      <div className={styles.spatialBoard} aria-hidden="true">
-        <div className={styles.gridPlane} />
-        <span className={`${styles.ring} ${styles.ringOne}`} />
-        <span className={`${styles.ring} ${styles.ringTwo}`} />
-        <span className={`${styles.ring} ${styles.ringThree}`} />
-
-        <div className={styles.centerCard}>
-          <span className={styles.availability}><i /> Open</span>
-          <MessageSquareMore size={26} />
-          <strong>Let&apos;s build</strong>
-          <small>Design + engineering</small>
+      {/* Foreground Centered Content - Compact & High-Impact */}
+      <div className={styles.bannerCenterContent}>
+        <div className={styles.statusPill}>
+          <span className={styles.pulseDot} />
+          <span>Available for Selected Engagements</span>
         </div>
 
-        {orbitItems.map(({ label, icon: Icon, className }) => (
-          <span key={label} className={`${styles.orbitItem} ${className}`}>
-            {createElement(Icon, { size: 15 })} {label}
-          </span>
-        ))}
+        <h2 className={styles.bannerHeadline}>
+          Have a product, platform, or web experience in mind?
+        </h2>
 
-        <span className={`${styles.techPlate} ${styles.techPlateOne}`}>React / TypeScript</span>
-        <span className={`${styles.techPlate} ${styles.techPlateTwo}`}>Node / APIs</span>
-        <span className={`${styles.techPlate} ${styles.techPlateThree}`}>Motion / 3D</span>
+        <p className={styles.bannerSubhead}>
+          Partnering on ambitious web applications, high-performance interfaces, and modern full-stack architectures.
+        </p>
+
+        <div className={styles.scopeStrip} aria-label="Core services">
+          {scopeTags.map((tag) => (
+            <span key={tag} className={styles.scopeTag}>
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div className={styles.bannerActions}>
+          <Link to="/contact" className={styles.primaryAction}>
+            <span>Discuss a project</span>
+            <ArrowUpRight size={16} />
+          </Link>
+          <a href="mailto:ayush8171wiz@gmail.com" className={styles.secondaryAction}>
+            <Mail size={15} />
+            <span>Email directly</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>

@@ -26,11 +26,11 @@ const ProfileDossier = () => {
           </div>
 
           <h2 className={styles.mainTitle}>
-            Building From Screen{" "}
-            <span className={styles.accentGrad}>To Database.</span>
+            From screen{" "}
+            <span className={styles.accentGrad}>to database.</span>
           </h2>
           <p className={styles.subtitle}>
-            Full-lifecycle engineering execution across user interfaces, service contracts, data persistence, and verified deployment.
+            Full-lifecycle engineering from interface to persistence.
           </p>
         </div>
 
@@ -40,7 +40,7 @@ const ProfileDossier = () => {
           <div className={styles.circuitOrigin}>
             <div className={styles.originPill}>
               <span className={styles.originDot} aria-hidden="true" />
-              <span className={styles.originTitle}>System Execution Pipeline</span>
+              <span className={styles.originTitle}>Execution pipeline</span>
             </div>
           </div>
 
@@ -100,16 +100,6 @@ const ProfileDossier = () => {
                     {/* Title & Focused Summary */}
                     <h3 className={styles.circuitCardTitle}>{pillar.title}</h3>
                     <p className={styles.circuitCardLead}>{pillar.lead}</p>
-
-                    {/* Compact Specs Row */}
-                    <div className={styles.circuitSpecsRow}>
-                      {Object.entries(pillar.specs).map(([specKey, specVal]) => (
-                        <div key={specKey} className={styles.circuitSpecChip}>
-                          <span className={styles.specChipKey}>{specKey}:</span>
-                          <strong className={styles.specChipVal}>{specVal}</strong>
-                        </div>
-                      ))}
-                    </div>
 
                     {/* Stack Pills & Live Builds Bar */}
                     <div className={styles.circuitCardFooter}>

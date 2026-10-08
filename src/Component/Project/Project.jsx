@@ -231,7 +231,6 @@ const filterCategories = [
 
 const ProjectBentoCard = ({ project, index, isFiltered }) => {
   const Icon = project.icon;
-  const isFeatured = project.bentoSpan === "span7" || project.bentoSpan === "span5";
 
   return (
     <article
@@ -262,28 +261,6 @@ const ProjectBentoCard = ({ project, index, isFiltered }) => {
       </div>
 
       <p className={styles.bentoDesc}>{project.desc}</p>
-
-      <div className={styles.bentoOutcome}>
-        <div className={styles.bentoOutcomeLabel}>
-          <Sparkles size={13} className={styles.outcomeIcon} />
-          <span>Core Outcome</span>
-        </div>
-        <p>{project.outcome}</p>
-      </div>
-
-      {isFeatured && (
-        <div className={styles.bentoCapabilities}>
-          <span className={styles.bentoCapTitle}>Key Demonstrations</span>
-          <ul>
-            {project.capabilities.slice(0, 2).map((cap) => (
-              <li key={cap}>
-                <Check size={13} />
-                <span>{cap}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
 
       <div className={styles.bentoStackRow}>
         {project.stack.map((tech) => (

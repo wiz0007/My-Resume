@@ -15,10 +15,10 @@ const Skills = () => {
           <div>
             <span className={styles.eyebrow}>Domain Engine</span>
             <h2 id="skills-globe-title">
-              Explore the stack behind <span className={styles.accent}>how I build.</span>
+              The stack behind <span className={styles.accent}>how I build.</span>
             </h2>
             <p className={styles.subtitle}>
-              Interactive 3D domain map spanning client runtime, backend services, databases, and tooling.
+              Interactive map of tools and frameworks.
             </p>
           </div>
         </div>
