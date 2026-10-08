@@ -124,7 +124,6 @@ export const ProcessHero = () => {
                   }
                 }}
               >
-                <span className={styles.stepNum}>0{index + 1}</span>
                 <span>{step}</span>
               </button>
             ))}

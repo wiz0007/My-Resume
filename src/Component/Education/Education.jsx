@@ -10,16 +10,13 @@ const educationData = [
   {
     id: "intermediate",
     step: "01 / 02",
-    kicker: "Academic Foundation",
     title: "Intermediate (PCM)",
     school: "Shivalik Holy Mount Academy, Kashipur",
     location: "Kashipur, Uttarakhand",
     shortLocation: "Kashipur, UK",
     year: "2021",
-    gradeBadge: "96.0% Aggregate",
-    shortGrade: "96%",
-    desc: "Completed Intermediate in the Science (PCM) stream with 96% aggregate, establishing a strong mathematical and logical base that directly accelerates algorithmic problem solving and software architecture.",
-    shortDesc: "Completed Intermediate in the Science (PCM) stream with 96% aggregate.",
+    desc: "Rigorous mathematics, physics, and chemistry foundation establishing the analytical and logical problem-solving base for software engineering.",
+    shortDesc: "Class XII Science (PCM) with 96% aggregate.",
     link: "https://www.shivalikhma.com/",
     siteName: "shivalikhma.com",
     image: shivalikImg,
@@ -48,16 +45,13 @@ const educationData = [
   {
     id: "btech",
     step: "02 / 02",
-    kicker: "Higher Engineering Degree",
     title: "B.Tech in Computer Engineering",
     school: "College of Technology, Pantnagar",
     location: "Pantnagar, Uttarakhand",
     shortLocation: "Pantnagar, UK",
     year: "2022–2026",
-    gradeBadge: "Undergraduate Degree",
-    shortGrade: "Undergrad",
-    desc: "Completed Bachelor of Technology in Computer Engineering in June 2026 with a dedicated focus on full-stack architecture, distributed backend services, database design, and high-performance web applications.",
-    shortDesc: "Completed Bachelor of Technology in Computer Engineering in June 2026 with a full-stack and backend development focus.",
+    desc: "Comprehensive engineering curriculum focused on distributed systems, modern database architecture, data structures, and production web applications.",
+    shortDesc: "B.Tech in Computer Engineering with full-stack and systems focus.",
     link: "https://www.gbpuat.ac.in/",
     siteName: "gbpuat.ac.in",
     image: pantnagarImg,
@@ -67,17 +61,17 @@ const educationData = [
         icon: Award,
         label: "Degree Program",
         val: "Computer Engineering",
-        detail: "Full-Stack engineering & distributed systems",
+        detail: "Full-stack engineering & distributed systems",
       },
       {
         icon: BookOpen,
-        label: "Core Foundations",
+        label: "Core Disciplines",
         val: "DSA, DBMS & Networks",
-        detail: "Systems programming, REST APIs & cloud logic",
+        detail: "Operating systems & modern web stacks",
       },
       {
         icon: Building2,
-        label: "University Faculty",
+        label: "Institution",
         val: "GBPUAT Pantnagar",
         detail: "Premier state technology campus, Uttarakhand",
       },
@@ -141,12 +135,12 @@ const Education = () => {
         <div className={styles.contentWrap}>
           {/* Header */}
           <header className={styles.header}>
-            <span className={styles.eyebrow}>Academic Journey</span>
+            <span className={styles.eyebrow}>ACADEMIC FOUNDATION</span>
             <h2 className={styles.heading}>
-              Formal Education & <span className={styles.accent}>Degree Foundation</span>
+              Formal <span className={styles.accent}>education.</span>
             </h2>
             <p className={styles.subtitle}>
-              Institutional qualifications and comprehensive engineering curriculum.
+              Degrees, academic standings, and engineering coursework.
             </p>
           </header>
 
@@ -166,10 +160,7 @@ const Education = () => {
                 <div className={styles.mainCol}>
                   <div className={styles.metaRow}>
                     <span className={styles.stepBadge}>{educationData[0].step}</span>
-                    <span className={styles.kickerBadge}>{educationData[0].kicker}</span>
                     <span className={styles.yearBadge}>{educationData[0].year}</span>
-                    <span className={styles.gradeBadgeDesktop}>{educationData[0].gradeBadge}</span>
-                    <span className={styles.gradeBadgeMobile}>{educationData[0].shortGrade}</span>
                     <span className={styles.location}>
                       <MapPin size={13} className={styles.pinIcon} />
                       <span className={styles.locDesktop}>{educationData[0].location}</span>
@@ -230,10 +221,7 @@ const Education = () => {
                 <div className={styles.mainCol}>
                   <div className={styles.metaRow}>
                     <span className={styles.stepBadge}>{educationData[1].step}</span>
-                    <span className={styles.kickerBadge}>{educationData[1].kicker}</span>
                     <span className={styles.yearBadge}>{educationData[1].year}</span>
-                    <span className={styles.gradeBadgeDesktop}>{educationData[1].gradeBadge}</span>
-                    <span className={styles.gradeBadgeMobile}>{educationData[1].shortGrade}</span>
                     <span className={styles.location}>
                       <MapPin size={13} className={styles.pinIcon} />
                       <span className={styles.locDesktop}>{educationData[1].location}</span>

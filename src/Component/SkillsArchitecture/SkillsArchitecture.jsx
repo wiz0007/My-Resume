@@ -295,10 +295,10 @@ const AnimatedArchitecture = () => {
       <div className={styles.sectionHeader}>
         <span className={styles.eyebrow}>Architectural Layers</span>
         <h2 id="skills-architecture-title">
-          The stack grouped into <span className={styles.accent}>working layers.</span>
+          The stack in <span className={styles.accent}>layers.</span>
         </h2>
         <p className={styles.subtitle}>
-          End-to-end capabilities mapped across product interface, backend services, and reliable persistence.
+          Mapped across interface, services, and data.
         </p>
       </div>
 

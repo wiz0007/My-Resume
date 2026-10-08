@@ -2,7 +2,7 @@
 
 .skills {
   position: relative;
-  padding: clamp(3.5rem, 5.5vw, 5rem) 8%;
+  padding: clamp(2.5rem, 4vw, 3.5rem) 8% clamp(2.5rem, 4.5vw, 4rem);
   color: $text-primary;
   background:
     radial-gradient(circle at 88% 16%, rgba(56, 189, 248, 0.04), transparent 30%),
@@ -12,7 +12,7 @@
 
 .header {
   max-width: 1240px;
-  margin: 0 auto 2.2rem;
+  margin: 0 auto 1.35rem;
 
   .headerTop {
     display: flex;

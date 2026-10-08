@@ -16,23 +16,23 @@
 .desktopStage {
   box-sizing: border-box;
   width: 100%;
-  padding: clamp(3.5rem, 5vw, 5rem) max(1.25rem, calc((100vw - 1200px) / 2));
+  padding: clamp(2.5rem, 4vw, 3.5rem) max(1.25rem, calc((100vw - 1200px) / 2));
 }
 
 .desktopHeader {
   max-width: 720px;
-  margin: 0 auto clamp(2rem, 3.5vw, 3rem);
+  margin: 0 auto clamp(1.35rem, 2.5vw, 2rem);
   text-align: center;
 
   .eyebrow {
     @include sectionEyebrow;
     display: block;
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.35rem;
   }
 
   h2 {
     @include sectionHeading;
-    margin: 0 auto 0.75rem;
+    margin: 0 auto 0.65rem;
   }
 
   .subtitle {
@@ -44,7 +44,7 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 0.85rem;
+  gap: 0.8rem;
   isolation: isolate;
 }
 
@@ -59,18 +59,18 @@
 .card {
   position: relative;
   isolation: isolate;
-  min-height: 240px;
+  min-height: 195px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 1.15rem 1rem;
+  padding: 0.95rem 0.85rem;
   overflow: hidden;
   border: 1px solid $border-medium;
   border-radius: 12px;
   color: inherit;
   background: $bg-surface;
   box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.35),
+    0 16px 40px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   text-decoration: none;
   backdrop-filter: blur(14px);
@@ -160,9 +160,9 @@
 .label {
   position: relative;
   z-index: 1;
-  margin-top: 1rem;
+  margin-top: 0.65rem;
   color: rgba(148, 163, 184, 0.72);
-  font-size: 0.70rem;
+  font-size: 0.68rem;
   font-weight: 650;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -171,9 +171,9 @@
 .card strong {
   position: relative;
   z-index: 1;
-  margin-top: 0.3rem;
+  margin-top: 0.25rem;
   color: $text-primary;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 800;
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -183,10 +183,10 @@
 .card p {
   position: relative;
   z-index: 1;
-  margin: 0.55rem 0 0;
+  margin: 0.35rem 0 0;
   color: $text-secondary;
-  font-size: 0.84rem;
-  line-height: 1.55;
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
 
 .mobileShell {
@@ -195,7 +195,6 @@
 
 @media (min-width: 1101px) {
   .desktopStage {
-    min-height: calc(100svh - 6rem);
     display: flex;
     flex-direction: column;
     justify-content: center;

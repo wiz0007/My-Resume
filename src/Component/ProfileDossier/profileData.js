@@ -32,7 +32,7 @@ export const profilePillars = [
     tag: "Spring Boot + FastAPI + Node",
     title: "Backend Services & API Gateways",
     lead: "I care deeply about what happens after the button is clicked.",
-    stack: ["Spring Boot", "FastAPI", "Node.js", "Express", "REST APIs", "Python 3.11", "Java"],
+    stack: ["Spring Boot", "FastAPI", "Node.js", "Express", "REST APIs"],
     specs: {
       "Runtimes": "Node LTS / Python 3.11 / JVM",
       "Frameworks": "Spring Boot / FastAPI / Express",
@@ -52,7 +52,7 @@ export const profilePillars = [
     tag: "PostgreSQL + MongoDB + Web3",
     title: "Data Persistence, Security & Trust",
     lead: "Architecting reliable data models, access boundaries, and audit verification.",
-    stack: ["PostgreSQL", "MongoDB Atlas", "JWT Auth", "RBAC", "Polygon Amoy", "Security Guard"],
+    stack: ["PostgreSQL", "MongoDB Atlas", "JWT Auth", "RBAC", "Polygon Amoy"],
     specs: {
       "Relational": "PostgreSQL ACID RDBMS",
       "Document": "MongoDB Atlas BSON",
@@ -72,7 +72,7 @@ export const profilePillars = [
     tag: "Web + Desktop + Systems",
     title: "Engineering Range & Working Momentum",
     lead: "Bridging web experiences, visual tools, algorithms, and native desktop software.",
-    stack: ["DFS Algorithms", "Python GUI", "Core Java", "C / C++", "React Flow", "Desktop Apps"],
+    stack: ["DFS Algorithms", "Python GUI", "Core Java", "C / C++", "React Flow"],
     specs: {
       "Algorithms": "DFS Graph Cycle Detection",
       "Desktop Platforms": "Java Swing / Python GUI",
