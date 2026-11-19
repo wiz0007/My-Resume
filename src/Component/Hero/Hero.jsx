@@ -331,7 +331,7 @@ const Hero = () => {
           </Link>
 
           <a
-            href="/Ayushmaan_Mishra-Resume.pdf"
+            href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.resumeBtn}

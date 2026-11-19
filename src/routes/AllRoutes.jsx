@@ -12,7 +12,7 @@ const SkillsPage = lazyWithRetry(() => import("../pages/SkillsPage"));
 
 const ResumeRedirect = () => {
   useEffect(() => {
-    window.location.replace("/Ayushmaan_Mishra-Resume.pdf");
+    window.location.replace("/resume.pdf");
   }, []);
   return null;
 };
