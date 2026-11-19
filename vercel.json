@@ -56,7 +56,7 @@
   "redirects": [
     {
       "source": "/resume",
-      "destination": "/Ayushmaan_Mishra-Resume.pdf",
+      "destination": "/resume.pdf",
       "permanent": false
     }
   ],

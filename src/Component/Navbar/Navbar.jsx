@@ -136,7 +136,7 @@ const Navbar = () => {
           </NavLink>
         ))}
 
-        <a href="/Ayushmaan_Mishra-Resume.pdf" target="_blank" rel="noopener noreferrer">
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
           Resume
         </a>
       </nav>
@@ -194,7 +194,7 @@ const Navbar = () => {
               ))}
 
               <a
-                href="/Ayushmaan_Mishra-Resume.pdf"
+                href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.mobileResume}

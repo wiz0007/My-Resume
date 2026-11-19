@@ -47,7 +47,7 @@ const SiteFooter = () => {
         <div className={styles.cta}>
           <span>Open to fresher full-stack and software engineering roles.</span>
           <a
-            href="/Ayushmaan_Mishra-Resume.pdf"
+            href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="View Resume PDF (opens in new tab)"
